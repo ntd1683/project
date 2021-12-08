@@ -1,0 +1,104 @@
+/* reset css */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #c0e1d1;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+hr{
+    border: 1px solid #ccc;
+    opacity: 0.6;
+}
+
+/* nav */
+#nav {
+    position: fixed;
+    display: flex;
+    height: 42px;
+    color: rgba(0,0,0,.5);
+    line-height: 42px;
+    background-color: white;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+#nav i{
+    padding: 0px 24px 0px 24px;
+    line-height: 42px;
+    font-size: 18px;
+}
+
+#nav a{
+    padding: 0px 24px 0px 24px;
+    text-decoration: none;
+    color: rgba(0,0,0,0.5);
+}
+
+#nav a:hover,
+#nav i:hover{
+    color: rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+#nav-icon{
+    position: absolute;
+    right: 0;
+}
+
+#nav-icon>i{
+    
+}
+
+/* menu sidebar */
+#menu-sidebar{
+    position: fixed;
+    width: 20%;
+    height: 625px;
+    background-color: #42424A;
+    z-index: 2;
+    text-align: center;
+}
+
+#menu-sidebar .avatar{
+    margin: 10px;
+    float: left;
+    width: 56px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+#menu-sidebar .name-avatar{
+    margin-top: 25px;
+}
+/* search */
+#menu-sidebar .search-menu{
+    margin: 15px 0px 15px 0px;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 82%;
+    height: 25px;
+    color: gray;
+    opacity: 0.8;
+    text-align: center;
+}
+
+#button-search-menu{
+    width: 25px;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 16px;
+    height: 25px;
+    margin-left: -2px;
+}
+
+/* body contain */
+#body-contain{
+    height: 1000px;
+}
