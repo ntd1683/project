@@ -1,0 +1,100 @@
+/* reset css */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #c0e1d1;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+hr{
+    border: 1px solid #ccc;
+    opacity: 0.6;
+}
+
+table { 
+    border-collapse: collapse; 
+}
+
+/* body contain */
+#body-contain{
+    padding: 15px;
+    color: black;
+}
+#body-contain .hello{
+    padding-top: 42px;
+}
+
+/* infomation */
+#infomation{
+    margin: 15px 0px 15px 0px;
+    display: flex;
+}
+
+#infomation .info{
+    display: flex;
+    width: 260px;
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 15px 10px 0px 50px;
+}
+
+.info .icon-info{
+    margin: 25px;
+    padding: 5px;
+    color: white;
+    font-size: 80px;
+    background-color: #f79cb1;
+    border-radius: 12px;
+}
+
+.info .content-info{
+    text-align: center;
+    margin-top: 16px;
+    color: black;
+
+}
+
+.info .content-info h2{
+    font-size: 50px;
+}
+
+.info .content-info p{
+    opacity: 0.6;
+}
+
+/* table */
+#table-achive{
+    display: flex;
+    margin-top: 20px;
+}
+
+.table{
+    width: 50%;
+    background-color: white;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.table h2{
+    margin-left: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e5dfdf;
+}
+
+.table table{
+    width: 100%;
+}
+
+.table table tr{
+    padding: 5px;
+    border-bottom: 1px solid #e5dfdf;
+    text-align: center;
+}
+
+#selling-product{
+    margin-left: 15px;
+}
