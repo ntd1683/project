@@ -103,12 +103,8 @@ tr{
 /* content table */
 #content-table{
     text-align: center;
-    width: 98%;
+    width: 100%;
     border: 0.5px solid #e5dfdf;
-}
-
-#content-table img{
-    width: 30%;
 }
 
 #content-table .content-table-id{
@@ -119,22 +115,27 @@ tr{
     width: 15%;
 }
 
-#content-table .content-table-description{
-    width: 40%;
+#content-table .content-table-time{
+    width: 19%;
 }
 
-#content-table .content-table-img{
+#content-table .content-table-total-price{
+    width: 10%;
+}
+
+#content-table .content-table-status{
     width: 30%;
+}
+#content-table .content-table-adress{
+    width: 25%;
+}
+#content-table .content-table-phone{
+    width: 10%;
 }
 
 #content-table .content-table-fix{
     width: 5%;
 }
-
-#content-table .content-table-delete{
-    width: 5%;
-}
-
 .table-a-delete,
 .table-a-fix{
     color: #9c9c9c;
