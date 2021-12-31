@@ -10,7 +10,6 @@ html{
     font-family: 'Noto Sans', sans-serif;
 }
 
-
 hr{
     border: 1px solid #ccc;
     opacity: 0.6;
@@ -39,7 +38,6 @@ tr{
     padding: 15px;
     margin: 15px 0px 15px 0px;
     background-color: white;
-    border-radius: 5px;
 }
 
 .header{
@@ -51,8 +49,8 @@ tr{
 }
 
 /* search */
+
 .content-search{
-    position: relative;
     margin-top: 30px;
     width: 100%;
     text-align: center;
@@ -68,7 +66,7 @@ tr{
     border: 0px;
     border-bottom:  1px solid #e5dfdf;
     border-radius: 5px;
-    width: 600%;
+    width: 683%;
     height: 25px;
     color: gray;
     opacity: 0.8;
@@ -77,27 +75,6 @@ tr{
 
 .search:focus{
     outline: 0;
-}
-
-.content-search .add{
-    
-}
-
-.content-search .add a{
-    width: 15%;
-    border-bottom: 1px solid #e5dfdf;
-    display: flex;
-    position: absolute;
-    right: 0;
-}
-
-.content-search .add a:hover {
-    color: rgba(0,0,0,0.7);
-}
-
-.add a{
-    color: #9c9c9c;
-    text-decoration: none;
 }
 
 /* content table */
@@ -134,18 +111,6 @@ tr{
 #content-table .content-table-delete{
     width: 5%;
 }
-
-.table-a-delete,
-.table-a-fix{
-    color: #9c9c9c;
-    text-decoration: none;
-}
-
-.table-a-fix:hover,
-.table-a-delete:hover{
-    color: rgba(0,0,0,0.7);;
-}
-
 /* footer */
 #footer{
     display: flex;
