@@ -38,15 +38,15 @@
                         <input type="checkbox" id="check-user">
                         <div id="content-user" class="icon-description">
                             <div class="avatar">
-                                <img src="../asset/img/avatar/avatar_admin.jpg" alt="avatar">
-                                <h3 class="name-avatar">Tên Admin</h3>
+                                <img src="../asset/img/avatar/<?php echo $_SESSION['photos'] ?>" alt="avatar">
+                                <h3 class="name-avatar"><?php echo $_SESSION['name']?></h3>
                             </div>
                             <hr>
                             <div class="body-content-user">
-                                <a href="#" target="_blank">
+                                <a href="#">
                                     <div class="body-user hover-manage-user">Quản Lý Tài Khoản</div>
                                 </a>
-                                <a href="#" target="_blank">
+                                <a href="../process_signout.php">
                                     <div class="body-user hover-exit-user">Đăng Xuất</div>
                                 </a>
                             </div>
@@ -59,8 +59,8 @@
                 <i class="ti-close close-menu-sidebar" onclick="close_menu_sidebar()"></i>
                 <h1>admin</h1>
                 <hr>
-                <img src="../asset/img/avatar/avatar_admin.jpg" alt="avatar" class="avatar">
-                <h3 class="name-avatar">Tên Admin</h3>
+                <img src="../asset/img/avatar/<?php echo $_SESSION['photos'] ?>" alt="avatar" class="avatar">
+                <h3 class="name-avatar"><?php echo $_SESSION['name'] ?></h3>
                 <br>
                 <hr>
                 <div class="dashboard">
@@ -91,7 +91,7 @@
                     </a>
                 </div>
                 <div class="content-menu-sidebar">
-                    <a href="" target="_blank">
+                    <a href="../product" target="_blank">
                         <i class="ti-package"></i>
                         <h4 class="text-content-menu-sidebar">Quản Lý Sản Phẩm</h4>
                     </a>
@@ -99,7 +99,19 @@
                 <div class="content-menu-sidebar">
                     <a href="" target="_blank">
                         <i class="fas fa-users"></i>
-                        <h4 class="text-content-menu-sidebar">Khách Hàng</h4>
+                        <h4 class="text-content-menu-sidebar">Quản Lý Khách Hàng</h4>
+                    </a>
+                </div> 
+                <div class="content-menu-sidebar">
+                    <a href="../order" target="_blank">
+                        <i class="fas fa-users"></i>
+                        <h4 class="text-content-menu-sidebar">Quản Lý Đơn Hàng</h4>
+                    </a>
+                </div> 
+                <div class="content-menu-sidebar">
+                    <a href="" target="_blank">
+                        <i class="fas fa-users"></i>
+                        <h4 class="text-content-menu-sidebar">Quản Lý Nhân Viên</h4>
                     </a>
                 </div> 
             </div>
