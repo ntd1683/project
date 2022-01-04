@@ -38,8 +38,8 @@
                         <input type="checkbox" id="check-user">
                         <div id="content-user" class="icon-description">
                             <div class="avatar">
-                                <img src="../asset/img/avatar/<?php echo $_SESSION['photos'] ?>" alt="avatar">
-                                <h3 class="name-avatar"><?php echo $_SESSION['name']?></h3>
+                                <img src="../asset/img/avatar/<?php echo $_SESSION['photos']?>" alt="avatar">
+                                <h3 class="name-avatar"><?php echo $_SESSION['name'] ?></h3>
                             </div>
                             <hr>
                             <div class="body-content-user">
@@ -59,7 +59,7 @@
                 <i class="ti-close close-menu-sidebar" onclick="close_menu_sidebar()"></i>
                 <h1>admin</h1>
                 <hr>
-                <img src="../asset/img/avatar/<?php echo $_SESSION['photos'] ?>" alt="avatar" class="avatar">
+                <img src="../asset/img/avatar/<?php echo $_SESSION['photos']?>" alt="avatar" class="avatar">
                 <h3 class="name-avatar"><?php echo $_SESSION['name'] ?></h3>
                 <br>
                 <hr>
@@ -73,43 +73,43 @@
                 <br>
                 <!-- content menu sidebar -->
                 <div class="content-menu-sidebar">
-                    <a href="" target="_blank">
+                    <a href="">
                         <i class="ti-calendar"></i>
-                        <h4 class="text-content-menu-sidebar">Sự Kiện</h4>
+                        <h4 class="text-content-menu-sidebar">Thông Báo</h4>
                     </a>
                 </div>
                 <div class="content-menu-sidebar">
-                    <a href="" target="_blank">
+                    <a href="">
                         <i class="ti-money"></i>
                         <h4 class="text-content-menu-sidebar">Doanh Thu</h4>
                     </a>
                 </div>
                 <div class="content-menu-sidebar">
-                    <a href="../manufactor" target="_blank">
+                    <a href="../manufactor">
                         <i class="far fa-handshake"></i>
                         <h4 class="text-content-menu-sidebar">Quản Lý Nhà Sản Xuất</h4>
                     </a>
                 </div>
                 <div class="content-menu-sidebar">
-                    <a href="../product" target="_blank">
+                    <a href="../product">
                         <i class="ti-package"></i>
                         <h4 class="text-content-menu-sidebar">Quản Lý Sản Phẩm</h4>
                     </a>
                 </div>
                 <div class="content-menu-sidebar">
-                    <a href="" target="_blank">
+                    <a href="../order">
+                        <i class="far fa-clipboard"></i>
+                        <h4 class="text-content-menu-sidebar">Quản Lý Đơn Hàng</h4>
+                    </a>
+                </div> 
+                <div class="content-menu-sidebar">
+                    <a href="../customer">
                         <i class="fas fa-users"></i>
                         <h4 class="text-content-menu-sidebar">Quản Lý Khách Hàng</h4>
                     </a>
                 </div> 
                 <div class="content-menu-sidebar">
-                    <a href="../order" target="_blank">
-                        <i class="fas fa-users"></i>
-                        <h4 class="text-content-menu-sidebar">Quản Lý Đơn Hàng</h4>
-                    </a>
-                </div> 
-                <div class="content-menu-sidebar">
-                    <a href="" target="_blank">
+                    <a href="../staff">
                         <i class="fas fa-users"></i>
                         <h4 class="text-content-menu-sidebar">Quản Lý Nhân Viên</h4>
                     </a>

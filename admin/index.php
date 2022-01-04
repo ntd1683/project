@@ -1,3 +1,25 @@
+<?php session_start();
+require_once './connect.php';
+if(isset($_COOKIE['remember'])){
+$token = $_COOKIE['remember'];
+$sql = "select * from admin where token = '$token' limit 1";
+die($sql);
+$result = mysqli_query($connect,$sql);
+    if(mysqli_num_rows($result)==1){
+        $each = mysqli_fetch_array($result);
+        $id = $each['id'];
+        $_SESSION['id'] = $id;
+        $_SESSION['name'] = $each['name'];
+        $_SESSION['photos'] = $each['photos'];
+        $_SESSION['level'] = $each['level'];
+    }
+}
+if(isset($_SESSION['id'])){
+    $_SESSION['success']="Bạn đang đăng nhập";
+    header('location:root/index.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +42,7 @@
 <body>
     <div id="main">
         <div id="contain">
-            <form method="post" action="process_signin.php"  onsubmit="return false">
+            <form method="post" action="process_login.php"  onsubmit="return false">
                     <div id="email">
                         <input type="email" name="email" id="input_email" class="input" placeholder="Nhập email">
                         <i class="ti-info-alt" id="icon-email"></i>
@@ -50,8 +72,7 @@
                 ?>
                 </p>
             </div>
-            <?php 
-                    unset($_SESSION['error']); } ?>
+            <?php unset($_SESSION['error']);} ?>
         </div>
     </div>
 </body>

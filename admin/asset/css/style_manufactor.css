@@ -10,7 +10,6 @@ html{
     font-family: 'Noto Sans', sans-serif;
 }
 
-
 hr{
     border: 1px solid #ccc;
     opacity: 0.6;
@@ -20,17 +19,14 @@ table {
     border-collapse: collapse; 
 }
 
-tr{
-    border-bottom:  1px solid #e5dfdf;
-}
-
 /* body contain */
 #body-contain{
     padding: 15px;
+    color: black;
+    padding-top: 42px;
 }
 #body-contain .hello{
-    padding-top: 42px;
-    color : #333333;
+
 }
 
 /* content */
@@ -103,10 +99,12 @@ tr{
 /* content table */
 #content-table{
     text-align: center;
-    width: 98%;
+    width: 100%;
     border: 0.5px solid #e5dfdf;
 }
-
+tr{
+    width: 100%;
+}
 #content-table img{
     width: 30%;
 }
@@ -116,15 +114,11 @@ tr{
 }
 
 #content-table .content-table-name{
-    width: 15%;
-}
-
-#content-table .content-table-description{
-    width: 40%;
+    width: 45%;
 }
 
 #content-table .content-table-img{
-    width: 30%;
+    width: 45%;
 }
 
 #content-table .content-table-fix{
