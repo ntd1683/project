@@ -1,11 +1,13 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once '../check_admin.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Trang Chủ</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +18,18 @@
     <!-- css -->
     <link rel="stylesheet" href="../asset/css/style_admin.css">
     <link rel="stylesheet" href="../asset/css/menu.css">
+    <link rel="stylesheet" href="../asset/css/notifi.css">
+    <script defer src="../asset/js/notifi.js"></script>
 </head>
 <body>
     <div id="main">
+        
         <div id="contain">
             <?php include '../asset/php/menu.php' ?>
             <!-- body - contain -->
             <div id="body-contain">
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <?php include '../asset/php/notifi.php' ?>
+                <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , chào mừng bạn trở lại !!!</h2>
                 <div id="infomation">
                     <div class="info" id="info-user">
                         <i class="fas fa-users icon-info"></i>

@@ -1,4 +1,5 @@
 <?php session_start();
+require_once '../check_super_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,21 +8,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Nhà Sản Xuất</title>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- icon -->
     <link rel="stylesheet" href="../asset/font/themify-icons/themify-icons.css">
+    <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
     <link rel="stylesheet" href="../asset/css/insert_manufactors.css">
+    <link rel="stylesheet" href="../asset/css/menu_sidebar.css">
     <!-- js -->
+    <script defer src="../asset/js/menu_sidebar.js"></script>
     <script defer src="../asset/js/insert_manufactors.js"></script>
 </head>
 <body>
      <!-- nav -->
     <div id="nav">
+    <i class="ti-menu" onclick="open_menu_sidebar()" id="open_menu"></i>
         <a href="index.php">
             <img src="../asset/img/logo/logo.png" alt="logo" class="logo">
         </a>
         <h2 class="header"><i class="ti-pencil-alt"></i> Thêm Nhà Sản Xuất</h2>
     </div>
+    <?php require '../asset/php/menu_sidebar.php' ?>
     <div id="main">
         <div id="container">
             <div id="header">
@@ -37,14 +47,6 @@
                         <div id="error-name" class="error-hidden">Lưu ý khi nhập :
                             <br> Tên không được để trống 
                             <br> và đúng ngữ pháp tiếng việt</div>
-                    </span>
-                    <br>
-                    <label for="input_description" class="body-text-header">Mô tả ngắn</label>
-                    <input class="input-text" type="text" name="description" id="input_description">
-                    <span id="span-error-description">
-                        <i id="icon-description" class="ti-info-alt icon-size"></i>
-                        <div id="error-description" class="error-hidden">Lưu ý khi nhập :
-                            <br> Mô tả ngắn về nhà sản xuất <br>Gồm 250 Kí Tự <br> và không được bỏ trống</div>
                     </span>
                     <br>
                     <label for="input_picture" class="body-text-header">Logo nhà sản xuất</label>

@@ -1,4 +1,31 @@
 <?php session_start();
+require '../check_admin.php';
+require_once '../connect.php';
+
+$search ='';
+$page ='1';
+if(isset($_GET['search'])){
+    $search=$_GET['search'];
+}
+if(isset($_GET['page'])){
+    $page=$_GET['page'];
+}
+require_once '../connect.php';
+
+$sql_products = "select count(*) from products  where name like '%$search%'";
+$arr_products = mysqli_query($connect,$sql_products);
+$result_products = mysqli_fetch_array($arr_products);
+$total_products = $result_products['count(*)'];
+
+$product_in_page = 2;
+$total_page = ceil($total_products/$product_in_page);
+$skip_page = $product_in_page*($page-1);
+
+$sql = "select products.*,manufactors.name as name_manufactors from products
+join manufactors on products.id_manufactors = manufactors.id
+where products.name like '%$search%' limit $product_in_page offset $skip_page";
+$result = mysqli_query($connect,$sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,10 +61,10 @@
                     <div class="content-search">
                         <label for="input-search"><i class="ti-search"></i></label>
                         <form>
-                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Sản Phẩm" id="input-search" value="">
+                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Sản Phẩm" id="input-search" value="<?php echo $search ?>">
                         </form>
                         <div class="add">
-                            <a href="insert.php" target="_blank" id="a-add">
+                            <a href="insert.php" id="a-add">
                                 <i class="ti-plus"></i>
                                 <p>Thêm Sản Phẩm</p>
                             </a>
@@ -53,26 +80,28 @@
                                 <th class="content-table-fix">Sửa</th>
                                 <th class="content-table-delete">Xoá</th>
                             </tr>
+                            <?php foreach($result as $each) : ?>
                             <tr>
-                                <td>1</td>
-                                <td>Máy Tính BeagleBone Green Wireless (TI AM335x WiFi+BT) (Sale 30%)</td>
-                                <td>Seed Studio</td>
+                                <td><?php echo $each['id']?></td>
+                                <td><?php echo $each['name']?></td>
+                                <td><?php echo $each['name_manufactors']?></td>
                                 <td>
-                                    <a href="#" class="table-a-fix"><i class="ti-check-box"></i> Sửa</a>
+                                    <img src="img/<?php echo $each['photos']?>" alt="Ảnh sản phẩm" style="width:150px;">
                                 </td>
                                 <td>
-                                    <a href="#" class="table-a-delete"><i class="far fa-trash-alt"></i>Xoá</a>
+                                    <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix"><i class="ti-check-box"></i> Sửa</a>
+                                </td>
+                                <td>
+                                    <a href="delete.php?id=<?php echo $each['id']?>" class="table-a-delete"><i class="far fa-trash-alt"></i>Xoá</a>
                                 </td>
                             </tr>
+                            <?php endforeach ?>
                         </table>
                     </div>
-                    <div id="footer">                        
-                        <a href="#">
-                            <div class="page color-text">1</div>
-                        </a>
-                        <a href="#">
-                            <div class="page color-text">2</div>
-                        </a>
+                    <div id="footer">
+                        <?php for($i=1;$i<=$total_page;$i++){?>
+                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>"><div class="page color-text"><?php echo $i ?></div></a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,37 @@
+<?php
+session_start();
+include '../check_admin.php';
+include_once '../connect.php';
+
+$search ='';
+$page ='1';
+if(isset($_GET['search'])){
+    $search=$_GET['search'];
+}
+if(isset($_GET['page'])){
+    $page=$_GET['page'];
+}
+require_once '../connect.php';
+
+$sql_customers = "select count(*) from customers where name like '%$search%'";
+$arr_customers = mysqli_query($connect,$sql_customers);
+$result_customers = mysqli_fetch_array($arr_customers);
+$total_customers = $result_customers['count(*)'];
+
+$customer_in_page = 2;
+$total_page = ceil($total_customers/$customer_in_page);
+$skip_page = $customer_in_page*($page-1);
+
+$sql = "select * from customers where name like '%$search%' limit $customer_in_page offset $skip_page";
+$result = mysqli_query($connect,$sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Sản Phẩm</title>
+    <title>Quản Lý Khách Hàng</title>
         <!-- font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,21 +41,23 @@
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
     <link rel="stylesheet" href="../asset/css/menu.css">
-    <link rel="stylesheet" href="../asset/css/style_manufactor.css">
+    <link rel="stylesheet" href="../asset/css/notifi.css">
+    <link rel="stylesheet" href="../asset/css/style_customer.css">
 </head>
 <body>
     <div id="main">
         <div id="contain">
             <?php include '../asset/php/menu.php' ?>
             <div id="body-contain">
+            <?php include '../asset/php/notifi.php' ?>
                 <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
-                    <h3 class="header">Quản Lý Nhà Sản Xuất</h3>
-                    <p class="color-text">Quản lý các nhà sản xuất cung cấp hàng</p>
+                    <h3 class="header">Quản Lý Khách Hàng</h3>
+                    <p class="color-text">Quản lý các khách hàng đăng kí tài khoản</p>
                     <div class="content-search">
                         <i class="ti-search"></i>
                         <form>
-                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Nhà Sản Xuất" id="input-search">
+                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Khách Hàng" id="input-search" value="">
                         </form>
                     </div>
                     <div id="content-table">
@@ -36,58 +65,43 @@
                             <tr>
                                 <th class="content-table-id">Mã</th>
                                 <th class="content-table-name">Tên</th>
-                                <th class="content-table-description">Mô Tả Ngắn</th>
-                                <th class="content-table-img">Ảnh</th>
-                                <th class="content-table-fix">Sửa</th>
-                                <th class="content-table-delete">Xoá</th>
+                                <th class="content-table-gender">Giới tính</th>
+                                <th class="content-table-date">Ngày sinh </th>
+                                <th class="content-table-email">Số điện thoại</th>
+                                <th class="content-table-adress">Địa chỉ</th>
+                                <th class="content-table-amount-purchased">Số tiền đã mua</th>
+                                <th class="content-table-detail">Chi tiết</th>
                             </tr>
+                            <?php foreach($result as $each ) :?>
                             <tr>
-                                <td>1</td>
-                                <td>Nguyễn Tấn Dũng</td>
-                                <td>Bán Quạt Tản Nhiệt</td>
+                                <td><?php echo $each['id'] ?></td>
+                                <td><?php echo $each['name'] ?></td>
+                                <td><?php if($each['gender']==1){
+                                    echo 'Nam';
+                                }
+                                else{
+                                    echo 'Nữ';
+                                }
+                                ?></td>
                                 <td>
-                                    <img src="../asset/img/avatar/avatar_admin.jpg" alt="Logo Công ty">
+                                <?php echo date('d-m-Y',strtotime($each['date'])) ?>
                                 </td>
                                 <td>
-                                    <a href="#">Sửa</a>
+                                <?php echo $each['phone'] ?>
                                 </td>
+                                <td><?php echo $each['adress'] ?></td>
                                 <td>
-                                    <a href="#">Xoá</a>
+                                    <?php echo number_format($each['amount_purchased'], 0, ',', '.')?><span>đ</span>
                                 </td>
+                                <td><a href="detail.php?id=<?php echo $each['id']?>" class="table-a-detail"><i class="ti-new-window"></i></i> Chi tiết</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Xiaomi</td>
-                                <td>Bán Đồ Tầm Trung</td>
-                                <td>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8kFFPjHr_BtUTFpODxgdMWNUe_w355LKuIA&usqp=CAU" alt="logo">
-                                </td>
-                                <td>
-                                    <a href="#">Sửa</a>
-                                </td>
-                                <td>
-                                    <a href="#">Xoá</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>APPLE</td>
-                                <td>Bán Đồ Cao Cấp</td>
-                                <td>
-                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATYAAACjCAMAAAA3vsLfAAAAP1BMVEX///+msbegrLKfq7GjrrXi5efEy8+vub6ps7nv8fL29/istrzf4+XY3d/o6+y7w8jR1tm5wcbN09bCyc3y9PTNNlT3AAACUUlEQVR4nO3c6W6DMBBG0XpswhYIEN7/Wcu+tGnjqSrZSPdIlar8Gn0y48GBfHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID/dn9mWegaLqcy4kwZuoqLKVIxgzR0HdeSGzem5h6hC7mUYgptiK0JXcmlZHNqxuahK7mS57LYaG0atV0XWxK6lCtp187GhqCxLjZmXY1E5rVmitCVXEozj2wlqal0Q2xOutBlXEF+r6oqmddXYyXrxn/zZPyQ0e0HVWpFnHNis2aIq8jHzKpW5g9F2nvoCiPUyDrcjh3NPsZZrX7K4VMnrgpdZWT68hDaktH0dyYpG8RBLcaPM33oWuPhndoYHLktiq/X4m/sLXS5sWgVsVmO3haJfZ/WlhpDyKr0T02YQFaK/cDR1zY3/87GEdJOcYnS2Da9YkMIXWtEEu/WRmc7aLxbm+Ma3XXesQlHbjv/jVS4G90R258oYqtD1xoR/97GlnCg2EkZQHaV4tQodK0RUdzJc3O1KxQ3V9zK7/xTo7sdPBTNjWPKjWZPILeN5uRoyI3rdKH4LmHgMm4WJv4D74xvryaaEWRab6ELjsRTtdyYQha5arlZzo8WmtGNx+03veKJIxbbTnHoRmc7yN4HtsQWutKo1J67Aq9fnXVe7Y1L9KvUo7053pD8xme18Zz4N/375cbs8ULvTq9ulG2bnd7myFhrLy2/XmGMuNt8OlTcH2tw0gauLmKVsSL29HJVMb2KZUsmj9/k9YvnivKa6xMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsPoElgcQiyXfWy4AAAAASUVORK5CYII=" alt="logo">
-                                </td>
-                                <td>
-                                    <a href="#">Sửa</a>
-                                </td>
-                                <td>
-                                    <a href="#">Xoá</a>
-                                </td>
-                            </tr>
+                            <?php endforeach ?>
                         </table>
                     </div>
                     <div id="footer">
-                        <a href="#"><div class="page color-text">1</div></a>
-                        <a href="#"><div class="page color-text">2</div></a>
+                        <?php for($i=1;$i<=$total_page;$i++){?>
+                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>"><div class="page color-text"><?php echo $i ?></div></a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

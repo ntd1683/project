@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-    window.setTimeout(() => {
+   window.setTimeout(() => {
         document.getElementById('notifi').remove();;
-    }, 3000);
-  });
+     }, 3000);
+   });
   
