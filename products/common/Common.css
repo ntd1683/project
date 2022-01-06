@@ -1,0 +1,153 @@
+
+/* #menu_bar {
+    display: none;
+} */
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: rgb(236, 236, 236);
+}
+
+* { 
+    padding: 0; 
+    margin: 0; 
+    border: 0;
+    font-family: Montserrat-Regular;
+}
+
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+
+.column_2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.column_3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+.column_4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+/* box */
+.box_container > .column_2 {
+    height: 100%;
+}
+
+.box_container > .column_2 > .right_column {
+    height: 100%;
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1200px) {
+    body{background-color: violet;}
+    .column_2 { }
+    .column_3 { }
+    .column_4 { }
+}
+
+.box_container {
+    margin-left:auto;
+    margin-right:auto;
+    width: 1200px;
+    height: 100%;
+}
+
+/* content */
+.content {
+    padding: 30px;
+    position: relative;
+    text-align:center;
+    align-items: center;
+    background-color: #fff;
+}
+
+/* content */
+.below_menubar {
+    width: 100%;
+}
+
+
+/* .main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+} */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+/* menu bar */
+#menu_bar {
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: -3px 6px 6px 0 rgb(0 0 0 / 12%);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 80px;
+    padding: 10px;
+    z-index: 100;
+}
+
+.web_name {
+    display: grid;
+    grid-template-columns: 20px 100%;
+    grid-gap: 30px;
+
+}
+
+.web_name > .right_column {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.right_menu_bar {
+    padding-right: 0;
+    height: 100%;
+}
+
+.right_menu_bar > .column_3 {
+    margin-right: 0px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 20px;
+    height: 30px;
+    height: 100%;
+}
+
+.right_menu_bar > .column_3 > .first{
+    grid-column-start: 3;
+}
+
+.right_menu_bar > .column_3 > a > .child_column_3 {
+    height: 100%;
+    text-align: center;
+    line-height: 60px
+}
+
+/* footer */
+#footer {
+    text-align: center;
+    color: rgb(221, 221, 221);
+    background-color: rgb(63, 63, 63);
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    z-index: 100;
+}
+

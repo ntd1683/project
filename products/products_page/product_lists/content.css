@@ -1,0 +1,124 @@
+
+.article {
+    padding-top:30px;
+    padding-bottom: 60px;
+}
+
+.article_title {
+    padding-top:20px;
+    padding-bottom: 20px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.wrapper > .product_list {
+    grid-gap: 30px;
+}
+
+.products {
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+    transition: transform 0.15s, box-shadow 1s;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.products:hover {
+    box-shadow: 0 1px 3px rgb(7 255 40 / 90%);
+    transform: scale(1.015);
+
+}
+
+.products > .images {
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 190px;
+    height: 190px;
+    margin: 0 auto;
+}
+
+.products > .images > a > img {
+    box-sizing: border-box;
+    width: 190px;
+    height: 190px;
+}
+
+.products > a {
+    text-decoration: none;
+    color: black;
+}
+
+.products > a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.products > .price {
+    color: red;
+    bottom: 0;
+}
+
+.description > span {
+    text-align: end;
+    font-size: 12px;
+}
+
+/* nav bar */
+
+.navbar > .wrapper {
+    padding-top: 20px;
+    background-color: gray;
+    padding-bottom: 20px;
+}
+
+.navbar > .wrapper > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: gray;
+}
+
+.navbar > .wrapper > h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.navbar > .wrapper > ul > li > a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+.navbar > .wrapper > ul > li > a:hover {
+    background-color: white;
+    color: black;
+}
+
+/* pagination */
+.content > .pagination {
+    display: inline-block;
+}
+
+.content > .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.content > .pagination a.active {
+    background-color: #7c7c7c;
+    color: white;
+    border-radius: 5px;
+}
+
+.content > .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
