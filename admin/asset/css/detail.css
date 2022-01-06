@@ -1,0 +1,129 @@
+/* reset css */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.clear{
+    clear: both;
+}
+
+body{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* nav */
+#nav{
+    right: 0;
+    left: 0;
+    top: 0;
+    position: fixed;
+    height: 64px;
+    background-color: #fff;
+    line-height: 64px;
+    z-index: 1;
+}
+
+img.logo{
+    margin-left: 15%;
+    height: 64px;
+}
+
+h2.header {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    right: 15%;
+    color: orange;
+}
+
+i.ti-pencil-alt{
+    font-size: 30px;
+}
+
+/* form */
+#main{
+    margin-top: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+#container{
+    position: relative;
+    background: #fff;
+    width: 900px;
+    max-width: calc( 100% - 32px);
+    min-height: 200px;
+    border-radius: 20px;
+    top: 70px;
+}
+
+#avatar{
+    position: absolute;
+    text-align: center;
+    top: -70px;
+    width: 100%;
+}
+
+#avatar img{
+    width: 150px;
+    border-radius: 50%;
+}
+
+/* body */
+#body-container{
+    padding: 15px;
+    padding-top: 90px;
+}
+
+#body-container h1{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.body-text-header{
+    display: block;
+    margin-bottom: 6px;
+}
+
+.input-text{
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 95%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#button-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #009688;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #fff;
+    width: 30%;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+}
+#button-submit:hover{
+    opacity: 0.9;
+}
+    /* error */
+    .icon-size{
+    font-size: 20px;
+}

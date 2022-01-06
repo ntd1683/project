@@ -1,0 +1,194 @@
+/* reset css */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.clear{
+    clear: both;
+}
+
+body{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* nav */
+#nav{
+    right: 0;
+    left: 0;
+    top: 0;
+    position: fixed;
+    height: 64px;
+    background-color: #fff;
+    line-height: 64px;
+    z-index: 1;
+}
+
+img.logo{
+    margin-left: 15%;
+    height: 64px;
+}
+
+h2.header {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    right: 15%;
+    color: orange;
+}
+
+i.ti-pencil-alt{
+    font-size: 30px;
+}
+
+/* form */
+#main{
+    margin-top: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+#container{
+    position: relative;
+    background: #fff;
+    width: 900px;
+    max-width: calc( 100% - 32px);
+    min-height: 200px;
+    border-radius: 20px;
+}
+
+/* header */
+#header{
+    border-radius: 20px 20px 0px 0px;
+    background-color: #009688;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+.header-margin{
+    margin-right: 20px;
+}
+
+/* body */
+#body-container{
+    padding: 15px;
+}
+.body-text-header{
+    display: block;
+    margin-bottom: 6px;
+}
+
+.input-text{
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 95%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+#input_subject{
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 20%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+#button-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #009688;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #fff;
+    width: 30%;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+}
+#button-submit:hover{
+    opacity: 0.9;
+}
+    /* error */
+    .icon-size{
+    font-size: 20px;
+}
+
+#span-error-description,
+#span-error-price,
+#span-error-discount,
+#span-error-picture,
+#span-error-name{
+    position: relative;
+}
+
+#error-picture,
+#error-description,
+#error-price,
+#error-discount,
+#error-picture,
+#error-name{
+    visibility: hidden;
+    position: absolute;
+    visibility: hidden;
+    position: absolute;
+    right: 25px;
+    width: 203px;
+    text-align: right;
+    border: 2px solid #000;
+    padding: 4px;
+    background-color: #009688;
+    color: black;
+    top: 20px;
+}
+
+#error-description{
+    right: 25px;
+    top: 10px;
+}
+
+#span-error-picture:hover .error-hidden,
+#span-error-description:hover .error-hidden,
+#span-error-price:hover .error-hidden,
+#span-error-discount:hover .error-hidden,
+#span-error-picture:hover .error-hidden,
+#span-error-name:hover .error-hidden{
+    visibility: visible;
+}
+
+#id_manufactors{
+    width: 20%;
+}
+
+.text-select{
+    float: left;
+    margin: 10px 15px 0px 0px;
+}
+
+#id_category{
+    width: 20%;
+}
+
+.error{
+    margin-left: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 20px;
+}

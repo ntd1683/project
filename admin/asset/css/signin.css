@@ -1,0 +1,130 @@
+/* reset css */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background-color: #97e5db;
+    font-family: 'Noto Sans', sans-serif;  
+}
+
+/* contain */
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contain{
+    width: 55%;
+    position: fixed;
+    top: 15%;
+    background-color: #fff;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+}
+
+#remember{
+    width: 100%;
+    float: left;
+    display: flex;
+    margin: 10px 0px 10px 0px;
+    color: rgba(0,0,0,0.6);
+    flex-direction: row;
+}
+
+#remember:hover{
+    color: #000;
+}
+
+#input_checkbox {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.input{
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#password,
+#email{
+    position: relative;
+}
+
+#icon-email{
+    position: absolute;
+    right: -25px;
+    font-size: 18px;
+    top: 30px;
+    color: red;
+    visibility: hidden;
+}
+
+#icon-password{
+    position: absolute;
+    right: -25px;
+    font-size: 18px;
+    top: 40px;
+    color: red;
+    visibility: hidden;
+}
+
+#hidden{
+    position: absolute;
+    font-size: 18px;
+    right: -24px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#hidden:hover{
+    opacity: 1;
+}
+
+#span-error-email,
+#span-error-password{
+    float: left;
+    text-align: justify;
+    font-size: 10px;
+    opacity: 0.5;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+#button{
+    text-transform: uppercase;
+    outline: 0;
+    background: #55c5d1;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* error */
+#error{
+    display: flex;
+    color: red;
+    margin-top: 15px;
+}
+
+#error i{
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+#error p{
+    
+}
