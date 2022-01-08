@@ -106,7 +106,7 @@ i.ti-pencil-alt{
     font-size: 15px;
     margin-bottom: 10px;
 }
-#button-submit{
+.button-submit{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,11 +122,20 @@ i.ti-pencil-alt{
     margin-right: auto;
     margin-left: auto;
 }
-#button-submit:hover{
+.button-submit:hover{
     opacity: 0.9;
 }
-    /* error */
-    .icon-size{
+
+.delete:hover{
+    background-color: rgb(235, 34, 34);
+}
+
+.submit:hover{
+    background-color: rgb(90, 224, 90);
+}
+
+/* error */
+.icon-size{
     font-size: 20px;
 }
 

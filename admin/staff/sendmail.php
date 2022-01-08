@@ -19,20 +19,24 @@ else{
     $gender = 'chị';
 }
 $token = uniqid();
+$sql = "select * from admin where email = '$email'";
+$result = mysqli_query($connect,$sql);
+$id = mysqli_fetch_array($result)['id'];
+$sql = "insert into forgot_password (id_customers,token) values('$id','$token')";
+mysqli_query($connect,$sql);
+
 $link = current_url()."/change_password.php?token=$token";
-$file =  `../asset/img/file/thankyou.png`;
 $title = "Chúc mừng bạn trúng tuyển !!!";
 $desription="    Xin chào $gender $name,<br><br>
 
 Chúng tôi xin chúc mừng $gender đã trúng tuyển được nhận vào làm bên mình, <br>
 Để bắt đầu công việc của mình , $gender vui lòng click bên cạnh để đổi mật khẩu, <br>
-Email là email mà $gender đã cung cấp. <br>
 <a href='$link'>Click vào đây!!!</a><br>
 Cảm ơn $gender $name chúc bạn một ngày tốt lành
 <br>";
 
 require '../PHPMailer/mail.php';
-send_mail($email,$name,$title,$desription,$file);
+send_mail($email,$name,$title,$desription);
 unset($_SESSION['sign_up_name']);
 unset($_SESSION['sign_up_email']);
 unset($_SESSION['sign_up_gender']);

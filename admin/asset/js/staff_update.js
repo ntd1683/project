@@ -3,22 +3,16 @@ document.getElementById('input_name').onkeydown = function (a){
         push_button_submit();
     }
 };
-document.getElementById('input_phone').onkeydown = function (c){
+document.getElementById('input_phone').onkeydown = function (a){
+    if (a.keyCode==13){
+        push_button_submit();
+    }
+};
+document.getElementById('input_adress').onkeydown = function (c){
     if (c.keyCode==13){
         push_button_submit();
     }
 };
-document.getElementById('input_adress').onkeydown = function (d){
-    if (d.keyCode==13){
-        push_button_submit();
-    }
-};
-document.getElementById('input_note').onkeydown = function (e){
-    if (e.keyCode==13){
-        push_button_submit();
-    }
-};
-
 let check=0;
 function push_button_submit(){
     let check_error=false;
@@ -64,9 +58,9 @@ function push_button_submit(){
         check_error=true;
     }
     else{
-        let regex_phone=/^\d{10,15}$/;
-        if(regex_phone.test(input_phone)==false){
-            document.getElementById('error-phone').innerHTML='*Tên không hợp lệ';
+        let include_regex_phone=/^[\+|0]\d{1,13}$/;
+        if(include_regex_phone.test(input_phone)==false){
+            document.getElementById('error-phone').innerHTML='*bạn có xuất hiện kí tự < hoặc >';
             document.getElementById('span-error-phone').style.color= "red";
             document.getElementById('error-phone').style.borderColor= "red";
             document.getElementById('error-phone').style.backgroundColor= "white";
@@ -84,6 +78,37 @@ function push_button_submit(){
             }
         }
     }
+        // email
+        let input_email=document.getElementById('input_email').value;
+        if(input_email.length===0){
+            document.getElementById('error-email').innerHTML='*Bắt buộc - không được để trống';
+            document.getElementById('span-error-email').style.color= "red";
+            document.getElementById('error-email').style.borderColor= "red";
+            document.getElementById('error-email').style.backgroundColor= "white";
+            document.getElementById('error-email').style.color= "red";
+            check_error=true;
+        }
+        else{
+            let include_regex_email=/^[\w]{4,}(?:\_[\w])*\@\w{3,6}(?:\.\w{2,6})*$/;
+            if(include_regex_email.test(input_email)==false){
+                document.getElementById('error-email').innerHTML='*bạn có xuất hiện kí tự < hoặc >';
+                document.getElementById('span-error-email').style.color= "red";
+                document.getElementById('error-email').style.borderColor= "red";
+                document.getElementById('error-email').style.backgroundColor= "white";
+                document.getElementById('error-email').style.color= "red";
+                check_error=true;
+            }
+            else{
+            document.getElementById('icon-email').classList.remove("ti-info-alt");
+            document.getElementById('icon-email').classList.add("ti-check");
+            document.getElementById('span-error-email').style.color= "green";
+            if(document.getElementById('error-email')){
+                document.getElementById('error-email').remove();
+                check ++;
+                console.log(check);
+            }
+            }
+        }
     // adress
     let input_adress=document.getElementById('input_adress').value;
     if(input_adress.length===0){
@@ -95,9 +120,9 @@ function push_button_submit(){
         check_error=true;
     }
     else{
-        let regex_adress=/^(?:\d+|[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+|[A-Z]\d+)+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*(?:[\'\-][AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*$/;
-        if(regex_adress.test(input_adress)==false){
-            document.getElementById('error-adress').innerHTML='*Tên không hợp lệ';
+        let include_regex_adress=/^(?:\d+|[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+|[A-Z]\d+)+(?:[ ]*[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ\'\-\.\+\,][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵzAÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ\'\.\+\,]*)*$/;
+        if(include_regex_adress.test(input_adress)==false){
+            document.getElementById('error-adress').innerHTML='*bạn có xuất hiện kí tự < or >';
             document.getElementById('span-error-adress').style.color= "red";
             document.getElementById('error-adress').style.borderColor= "red";
             document.getElementById('error-adress').style.backgroundColor= "white";
@@ -113,27 +138,6 @@ function push_button_submit(){
                 check ++;
                 console.log(check);
             }
-        }
-    }
-    // note
-    let input_note=document.getElementById('input_note').value;
-        let regex_note=/^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZaàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵzaàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz\d]+(?:(?:[ \.\-\'\+\@\,\.\:\(\)\"])|[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZaàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵzaàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz\d]*)*$/;
-        if(regex_note.test(input_note)==false){
-        document.getElementById('error-note').innerHTML='*Tên không hợp lệ';
-        document.getElementById('span-error-note').style.color= "red";
-        document.getElementById('error-note').style.borderColor= "red";
-        document.getElementById('error-note').style.backgroundColor= "white";
-        document.getElementById('error-note').style.color= "red";
-        check_error=true;
-    }
-    else{
-        document.getElementById('icon-note').classList.remove("ti-info-alt");
-        document.getElementById('icon-note').classList.add("ti-check");
-        document.getElementById('span-error-note').style.color= "green";
-        if(document.getElementById('error-note')){
-            document.getElementById('error-note').remove();
-            check ++;
-            console.log(check);
         }
     }
 

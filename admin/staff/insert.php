@@ -32,7 +32,7 @@ require '../connect.php';
         </a>
         <h2 class="header"><i class="ti-pencil-alt"></i>Sửa Nhân Viên</h2>
     </div>
-    <?php require '../asset/php/menu_sidebar.php' ?>
+    <?php require '../asset/php/menu_sidebar.php'?>
     <div id="main">
         <div id="container">
             <div id="header">

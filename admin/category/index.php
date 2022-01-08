@@ -7,7 +7,7 @@ require_once '../check_super_admin.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Sản Phẩm</title>
+    <title>Quản Lý Thể Loại</title>
         <!-- font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@ require_once '../check_super_admin.php';
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
     <link rel="stylesheet" href="../asset/css/menu.css">
-    <link rel="stylesheet" href="../asset/css/style_manufactor.css">
+    <link rel="stylesheet" href="../asset/css/style_category.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
@@ -34,37 +34,37 @@ if(isset($_GET['page'])){
 }
 require_once '../connect.php';
 
-$sql_manufactors = "select count(*) from manufactors  where name like '%$search%'";
-$arr_manufactors = mysqli_query($connect,$sql_manufactors);
-$result_manufactors = mysqli_fetch_array($arr_manufactors);
-$total_manufactors = $result_manufactors['count(*)'];
+$sql_categorys = "select count(*) from categorys  where name like '%$search%'";
+$arr_categorys = mysqli_query($connect,$sql_categorys);
+$result_categorys = mysqli_fetch_array($arr_categorys);
+$total_categorys = $result_categorys['count(*)'];
 
-$manufactor_in_page = 5;
-$total_page = ceil($total_manufactors/$manufactor_in_page);
-$skip_page = $manufactor_in_page*($page-1);
+$category_in_page = 10;
+$total_page = ceil($total_categorys/$category_in_page);
+$skip_page = $category_in_page*($page-1);
 
-$sql = "select * from manufactors where name like '%$search%' limit $manufactor_in_page offset $skip_page";
+$sql = "select * from categorys where name like '%$search%' limit $category_in_page offset $skip_page";
 $result = mysqli_query($connect,$sql);
 ?>
     <div id="main">
         <div id="contain">
-        <?php include '../asset/php/nav.php'?>
+            <?php include '../asset/php/nav.php'?>
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
-                <?php include '../asset/php/notifi.php' ?>
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <?php include '../asset/php/notifi.php'?>
+                <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
-                    <h3 class="header">Quản Lý Nhà Sản Xuất</h3>
-                    <p class="color-text">Quản lý các nhà sản xuất cung cấp hàng</p>
+                    <h3 class="header">Quản Lý Thể Loại</h3>
+                    <p class="color-text">Quản lý các thể loại hàng</p>
                     <div class="content-search">
                         <i class="ti-search"></i>
                         <form>
-                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Nhà Sản Xuất" id="input-search" value="<?php echo $search ?>">
+                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Thể Loại" id="input-search" value="<?php echo $search ?>">
                         </form>
                         <div class="add">
                                 <a href="insert.php" id="a-add">
                                     <i class="ti-plus"></i>
-                                    <p>Thêm Nhà Sản Xuất</p>
+                                    <p>Thêm Thể Loại</p>
                                 </a>
                             </div>
                     </div>
@@ -73,7 +73,7 @@ $result = mysqli_query($connect,$sql);
                             <tr>
                                 <th class="content-table-id">Mã</th>
                                 <th class="content-table-name">Tên</th>
-                                <th class="content-table-img">Ảnh</th>
+                                <th class="content-table-img">Sản phẩm</th>
                                 <th class="content-table-fix">Sửa</th>
                                 <th class="content-table-delete">Xoá</th>
                             </tr>
@@ -82,7 +82,13 @@ $result = mysqli_query($connect,$sql);
                                 <td><?php echo $each['id']?></td>
                                 <td><?php echo $each['name']?></td>
                                 <td>
-                                    <img src="img/<?php echo $each['photos']?>" alt="Logo Công ty">
+                                    <?php
+                                    $id_categorys = $each['id'];
+                                    $sql_check = "select count(*) from products where id_categorys = '$id_categorys'";
+                                    $result = mysqli_query($connect,$sql_check);
+                                    $products = mysqli_fetch_array($result)['count(*)'];
+                                    echo $products;
+                                    ?>
                                 </td>
                                 <td>
                                     <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix"><i class="ti-check-box"></i>Sửa</a>

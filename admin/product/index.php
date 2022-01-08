@@ -17,7 +17,7 @@ $arr_products = mysqli_query($connect,$sql_products);
 $result_products = mysqli_fetch_array($arr_products);
 $total_products = $result_products['count(*)'];
 
-$product_in_page = 2;
+$product_in_page = 5;
 $total_page = ceil($total_products/$product_in_page);
 $skip_page = $product_in_page*($page-1);
 
@@ -51,7 +51,8 @@ $result = mysqli_query($connect,$sql);
 <body>
     <div id="main">
         <div id="contain">
-            <?php include '../asset/php/menu.php' ?>
+        <?php include '../asset/php/nav.php'?>
+            <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
                 <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
                 <?php include '../asset/php/notifi.php' ?>

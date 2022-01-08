@@ -130,19 +130,17 @@ i.ti-pencil-alt{
     font-size: 20px;
 }
 
-#span-error-description,
-#span-error-price,
-#span-error-discount,
-#span-error-picture,
+#span-error-phone,
+#span-error-adress,
+#span-error-note,
 #span-error-name{
     position: relative;
 }
 
 #error-picture,
-#error-description,
-#error-price,
-#error-discount,
-#error-picture,
+#error-phone,
+#error-adress,
+#error-note,
 #error-name{
     visibility: hidden;
     position: absolute;
@@ -158,16 +156,15 @@ i.ti-pencil-alt{
     top: 20px;
 }
 
-#error-description{
+#error-phone{
     right: 25px;
     top: 10px;
 }
 
 #span-error-picture:hover .error-hidden,
-#span-error-description:hover .error-hidden,
-#span-error-price:hover .error-hidden,
-#span-error-discount:hover .error-hidden,
-#span-error-picture:hover .error-hidden,
+#span-error-phone:hover .error-hidden,
+#span-error-adress:hover .error-hidden,
+#span-error-note:hover .error-hidden,
 #span-error-name:hover .error-hidden{
     visibility: visible;
 }

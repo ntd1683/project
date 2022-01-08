@@ -18,7 +18,7 @@ $arr_customers = mysqli_query($connect,$sql_customers);
 $result_customers = mysqli_fetch_array($arr_customers);
 $total_customers = $result_customers['count(*)'];
 
-$customer_in_page = 2;
+$customer_in_page = 5;
 $total_page = ceil($total_customers/$customer_in_page);
 $skip_page = $customer_in_page*($page-1);
 
@@ -43,6 +43,8 @@ $result = mysqli_query($connect,$sql);
     <link rel="stylesheet" href="../asset/css/menu.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
     <link rel="stylesheet" href="../asset/css/style_customer.css">
+    <!-- js -->
+    <script defer src="../asset/js/notifi.js"></script>
 </head>
 <body>
     <div id="main">
