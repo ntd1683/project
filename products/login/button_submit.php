@@ -4,7 +4,7 @@
 
 $post_array = filter_input_array(INPUT_POST);
 if(isset($post_array['register'])){
-    header("location:signup/signup.php");
+    header("location:signup/index.php");
 }
 elseif(isset($post_array['login'])){
     require_once "process_login.php";

@@ -11,4 +11,7 @@ if(isset($_POST['checkbox'])) {
 
 $query = "SELECT * FROM `customers`";
 
-mysqli_query($mysqli, "user_name_query");
+$result = mysqli_query($mysqli, $query);
+if (!$result){
+    die("false to query");
+}
