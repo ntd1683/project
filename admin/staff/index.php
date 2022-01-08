@@ -17,7 +17,7 @@ $sql_admin = "select count(*) from admin where name like '%$search%'";
 $arr_admin = mysqli_query($connect,$sql_admin);
 $result_admin = mysqli_fetch_array($arr_admin);
 $total_admin = $result_admin['count(*)'];
-$staff_in_page = 2;
+$staff_in_page = 10;
 $total_page = ceil($total_admin/$staff_in_page);
 $skip_page = $staff_in_page*($page-1);
 
@@ -32,8 +32,8 @@ $result = mysqli_query($connect,$sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Nhân Viên</title>
-        <!-- font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- icon -->
@@ -43,11 +43,14 @@ $result = mysqli_query($connect,$sql);
     <link rel="stylesheet" href="../asset/css/menu.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
     <link rel="stylesheet" href="../asset/css/style_staff.css">
+    <!-- js -->
+    <script defer src="../asset/js/notifi.js"></script>
 </head>
 <body>
     <div id="main">
         <div id="contain">
-            <?php include '../asset/php/menu.php' ?>
+        <?php include '../asset/php/nav.php'?>
+            <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
             <?php include '../asset/php/notifi.php' ?>
                 <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
@@ -75,8 +78,7 @@ $result = mysqli_query($connect,$sql);
                                 <th class="content-table-date">Ngày sinh </th>
                                 <th class="content-table-email">Email</th>
                                 <th class="content-table-adress">Địa chỉ</th>
-                                <th class="content-table-fix">Sửa</th>
-                                <th class="content-table-fix">Xoá</th>
+                                <th class="content-table-fix">Sửa và Xoá</th>
                             </tr>
                             <?php foreach($result as $each ) :?>
                             <tr>
@@ -96,7 +98,7 @@ $result = mysqli_query($connect,$sql);
                                 <?php echo $each['email'] ?>
                                 </td>
                                 <td><?php echo $each['adress'] ?></td>
-                                <td><a href="detail.php?id=<?php echo $each['id']?>" class="table-a-detail"><i class="ti-new-window"></i></i> Chi tiết</a></td>
+                                <td><a href="update.php?id=<?php echo $each['id']?>" class="table-a-detail"><i class="ti-new-window"></i></i>Sửa và Xoá</a></td>
                             </tr>
                             <?php endforeach ?>
                         </table>

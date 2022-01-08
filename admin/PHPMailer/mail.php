@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Create an instance; passing `true` enables exceptions
-function send_mail($email,$name,$title,$description,$file){
+function send_mail($email,$name,$title,$description){
 $mail = new PHPMailer(true);
 try {
     //Server settings
@@ -27,7 +27,7 @@ try {
     $mail->SMTPSecure = "tls";
     $mail -> CharSet = "UTF-8";                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     //Recipients
-    $mail->setFrom('spntd24h@gmail.com', 'Dũng');
+    $mail->setFrom('spntd24h@gmail.com', 'Công ty Hshop');
     $mail->addAddress("$email", "$name");     //Add a recipient
     //$mail->addAddress('ellen@example.com');               //Name is optional//ten dia chi
     //$mail->addReplyTo('info@example.com', 'Information');

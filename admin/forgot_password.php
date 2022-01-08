@@ -35,14 +35,14 @@ if(isset($_SESSION['id'])){
     <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
-    <link rel="stylesheet" href="./asset/css/signin.css">
+    <link rel="stylesheet" href="./asset/css/forgot_password.css">
     <!-- js -->
-    <script defer src="./asset/js/signin.js"></script>
+    <script defer src="./asset/js/forgot_password.js"></script>
 </head>
 <body>
     <div id="main">
         <div id="contain">
-            <form method="post" action="process_login.php"  onsubmit="return false">
+            <form method="post" action="process_forgot_password.php"  onsubmit="return false">
                     <div id="email">
                         <input type="email" name="email" id="input_email" class="input" placeholder="Nhập email">
                         <i class="ti-info-alt" id="icon-email"></i>
@@ -50,20 +50,7 @@ if(isset($_SESSION['id'])){
                             Nhập email bạn đã cung cấp cho quản lý
                         </span>
                     </div>
-                    <div id="password">
-                        <input type="password" name="password" id="input_password" class="input" placeholder="Nhập mật khẩu">
-                        <i class="ti-eye" id="hidden" onclick="hidden_password()"></i>
-                        <i class="ti-info-alt" id="icon-password"></i>
-                        <span id="span-error-password">
-                            Mật khẩu sử dụng trên 8 kí tự có chữ cái in hoa, chữ thường và kí tự đặc biệt
-                        </span>
-                    </div>
-                <div id="remember">
-                    <input type="checkbox" name="remember" id="input_checkbox">
-                    <label for="input_checkbox" class="text"> Ghi nhớ đăng nhập</label><br>
-                </div>
-                <button type="submit" onclick="return signin()" id="button">Đăng Nhập</button>
-                <a href="forgot_password.php" class="forgot_pw">Quên Mật Khẩu ? </a>
+                <button type="submit" onclick="return signin()" id="button">Quên Mật Khẩu</button>
             </form>
             <?php if(isset($_SESSION['error'])){?>
             <div id="error">
@@ -74,15 +61,6 @@ if(isset($_SESSION['id'])){
                 </p>
             </div>
             <?php unset($_SESSION['error']);} ?>
-            <?php if(isset($_SESSION['success'])){?>
-            <div id="error" class="success">
-                <i class="ti-info-alt"></i>
-                <p> 
-                <?php echo $_SESSION['success'];
-                ?>
-                </p>
-            </div>
-            <?php unset($_SESSION['success']);} ?>
         </div>
     </div>
 </body>

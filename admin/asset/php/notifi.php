@@ -9,7 +9,7 @@
                     <?php if(isset($_SESSION['error'])){?>
                     <div class="close">
                         <i class="ti-close"></i>
-                        <p> Lỗi : <?php echo $_SESSION['error']?></p>
+                        <p style="color: black;opacity:0.6;"> Lỗi : <?php echo $_SESSION['error']?></p>
                     </div>
                     <?php unset($_SESSION['error']) ?>
                     <?php }?>

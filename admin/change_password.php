@@ -19,6 +19,20 @@ if(isset($_SESSION['id'])){
     header('location:root/index.php');
     exit;
 }
+if(empty($_GET['token'])){
+    $_SESSION['error'] = 'Lỗi chưa nhập email !!!';
+    header('location:index.php');
+    exit;
+}
+$token = $_GET['token'];
+$sql = "select * from forgot_password where token ='$token'";
+$result = mysqli_query($connect,$sql);
+$num_rows = mysqli_num_rows($result);
+if($num_rows == 0){
+    $_SESSION['error'] = 'Lỗi chưa xác định , thử lại sau!!!';
+    header('location:index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,22 +49,16 @@ if(isset($_SESSION['id'])){
     <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
-    <link rel="stylesheet" href="./asset/css/signin.css">
+    <link rel="stylesheet" href="./asset/css/change_password.css">
     <!-- js -->
-    <script defer src="./asset/js/signin.js"></script>
+    <script defer src="./asset/js/change_password.js"></script>
 </head>
 <body>
     <div id="main">
         <div id="contain">
-            <form method="post" action="process_login.php"  onsubmit="return false">
-                    <div id="email">
-                        <input type="email" name="email" id="input_email" class="input" placeholder="Nhập email">
-                        <i class="ti-info-alt" id="icon-email"></i>
-                        <span id="span-error-email">
-                            Nhập email bạn đã cung cấp cho quản lý
-                        </span>
-                    </div>
+            <form method="post" action="process_change_password.php"  onsubmit="return false">
                     <div id="password">
+                        <input type="hidden" name="token" value="<?php echo $token?>">
                         <input type="password" name="password" id="input_password" class="input" placeholder="Nhập mật khẩu">
                         <i class="ti-eye" id="hidden" onclick="hidden_password()"></i>
                         <i class="ti-info-alt" id="icon-password"></i>
@@ -58,12 +66,7 @@ if(isset($_SESSION['id'])){
                             Mật khẩu sử dụng trên 8 kí tự có chữ cái in hoa, chữ thường và kí tự đặc biệt
                         </span>
                     </div>
-                <div id="remember">
-                    <input type="checkbox" name="remember" id="input_checkbox">
-                    <label for="input_checkbox" class="text"> Ghi nhớ đăng nhập</label><br>
-                </div>
-                <button type="submit" onclick="return signin()" id="button">Đăng Nhập</button>
-                <a href="forgot_password.php" class="forgot_pw">Quên Mật Khẩu ? </a>
+                <button type="submit" onclick="return signin()" id="button">Đổi Mật Khẩu</button>
             </form>
             <?php if(isset($_SESSION['error'])){?>
             <div id="error">
@@ -78,7 +81,7 @@ if(isset($_SESSION['id'])){
             <div id="error" class="success">
                 <i class="ti-info-alt"></i>
                 <p> 
-                <?php echo $_SESSION['success'];
+                Lỗi : <?php echo $_SESSION['success'];
                 ?>
                 </p>
             </div>
