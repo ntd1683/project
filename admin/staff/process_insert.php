@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../connect.php';
-if(empty($_POST['name'])|empty($_POST['gender'])|empty($_POST['adress'])|empty($_POST['level'])|$_FILES['photos']['size']==0|empty($_POST['email'])|empty($_POST['phone'])|empty($_POST['date'])){
+if(empty($_POST['name'])|!isset($_POST['gender'])|empty($_POST['adress'])|!isset($_POST['level'])|$_FILES['photos']['size']==0|empty($_POST['email'])|empty($_POST['phone'])|empty($_POST['date'])){
     $_SESSION['error'] = "Bạn nhập thiếu thông tin nhân viên rồi !!!";
     header('location:insert.php');
     exit;

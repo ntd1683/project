@@ -1,4 +1,28 @@
 <?php session_start();
+require '../check_admin.php';
+require_once '../connect.php';
+
+$search ='';
+$page ='1';
+if(isset($_GET['search'])){
+    $search=$_GET['search'];
+}
+if(isset($_GET['page'])){
+    $page=$_GET['page'];
+}
+require_once '../connect.php';
+
+$sql_orders = "select count(*) from orders where name_receiver like '%$search%'";
+$arr_orders = mysqli_query($connect,$sql_orders);
+$result_orders = mysqli_fetch_array($arr_orders);
+$total_orders = $result_orders['count(*)'];
+
+$order_in_page = 5;
+$total_page = ceil($total_orders/$order_in_page);
+$skip_page = $order_in_page*($page-1);
+
+$sql = "select * from orders where name_receiver like '%$search%' limit $order_in_page offset $skip_page";
+$result = mysqli_query($connect,$sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +30,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Sản Phẩm</title>
+    <title>Quản Lý Đơn Hàng</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,17 +48,18 @@
 <body>
     <div id="main">
         <div id="contain">
-            <?php include '../asset/php/menu.php' ?>
+        <?php include '../asset/php/nav.php'?>
+            <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
-                <h2 class="hello">Chào admin, Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name'] ?>, Chào mừng bạn trở lại !!!</h2>
                 <?php include '../asset/php/notifi.php' ?>
                 <div id="content">
-                    <h3 class="header">Quản Lý Sản Phẩm</h3>
-                    <p class="color-text">Quản lý các sản phẩm tiêu dùng</p>
+                    <h3 class="header">Quản Lý Đơn Hàng</h3>
+                    <p class="color-text">Quản lý các đơn hàng tiêu dùng</p>
                     <div class="content-search">
                         <label for="input-search"><i class="ti-search"></i></label>
                         <form>
-                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Đơn Hàng" id="input-search" value="">
+                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Đơn Hàng Theo Tên Người Nhận " id="input-search" value="<?php echo $search ?>">
                         </form>
                     </div>
                     <div id="content-table">
@@ -50,28 +75,39 @@
                                 <th class="content-table-status">Tình trạng đơn</th>
                                 <th class="content-table-fix">Sửa</th>
                             </tr>
+                                <?php foreach($result as $each): ?>
                                 <tr>
-                                    <td><a class="table-a-fix" href="#"><i class="ti-new-window"></i></a></td>
-                                    <td>1</td>           
-                                    <td>Nguyễn Tấn Dũng</td>
-                                    <td>26/12/2021</td>
-                                    <td>0329817809</td>
-                                    <td>Buôn Ma Thuột, Đắk Lắk</td>
-                                    <td>52.000.000</td>
-                                    <td>Đang chờ duyệt</td>
+                                    <td><a class="table-a-fix" href="detail.php?id=<?php echo $each['id']?>"><i class="ti-new-window"></i></a></td>
+                                    <td><?php echo $each['id']?></td>           
+                                    <td><?php echo $each['name_receiver'] ?></td>
+                                    <td><?php echo $each['time_order'] ?></td>
+                                    <td><?php echo $each['phone_receiver']?></td>
+                                    <td><?php echo $each['adress_receiver']?></td>
+                                    <td><?php echo $each['total_price']?></td>
                                     <td>
-                                        <a href="#"class="table-a-fix"><i class="ti-check-box"></i>Sửa</a>
+                                        <?php
+                                        if($each['status']==0){
+                                            echo 'Đang chờ duyệt';
+                                        }
+                                        else if($each['status']==1){
+                                            echo 'Đã Duyệt';
+                                        }
+                                        else{
+                                            echo 'Đã Huỷ';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <a href="update.php?id=<?php echo $each['id'] ?>"class="table-a-fix"><i class="ti-check-box"></i>Sửa</a>
                                     </td>
                                 </tr>
+                                <?php endforeach ?>
                         </table>
                     </div>
                     <div id="footer">
-                        <a href="#">
-                            <div class="page color-text">1</div>
-                        </a>
-                        <a href="#">
-                            <div class="page color-text">2</div>
-                        </a>
+                        <?php for($i=1;$i<=$total_page;$i++){?>
+                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>"><div class="page color-text"><?php echo $i ?></div></a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

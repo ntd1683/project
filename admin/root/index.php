@@ -1,5 +1,24 @@
 <?php session_start();
 require_once '../check_admin.php';
+require '../connect.php';
+$sql = "select count(*) from customers";
+$result = mysqli_query($connect,$sql);
+$users = mysqli_fetch_array($result)['count(*)'];
+$sql = "select count(*) from products";
+$result = mysqli_query($connect,$sql);
+$products = mysqli_fetch_array($result)['count(*)'];
+$sql = "select count(*) from orders";
+$result = mysqli_query($connect,$sql);
+$orders = mysqli_fetch_array($result)['count(*)'];
+$sql = "select sum(total_price) as total_money from orders where status = 1";
+$result = mysqli_query($connect,$sql);
+$total_money = mysqli_fetch_array($result)['total_money'];
+if($total_money > 1000000){
+    $money = round($total_money/1000000).'M';
+}
+else if($total_money >1000){
+    $money = round($total_money/1000).'K';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,13 +38,15 @@ require_once '../check_admin.php';
     <link rel="stylesheet" href="../asset/css/style_admin.css">
     <link rel="stylesheet" href="../asset/css/menu.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
+    <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
 </head>
 <body>
     <div id="main">
         
         <div id="contain">
-            <?php include '../asset/php/menu.php' ?>
+        <?php include '../asset/php/nav.php'?>
+        <?php include '../asset/php/menu_sidebar.php'?>
             <!-- body - contain -->
             <div id="body-contain">
                 <?php include '../asset/php/notifi.php' ?>
@@ -34,29 +55,29 @@ require_once '../check_admin.php';
                     <div class="info" id="info-user">
                         <i class="fas fa-users icon-info"></i>
                         <div class="content-info">
-                            <h2>2</h2>
+                            <h2><?php echo $users ?></h2>
                             <p>USERS</p>
                         </div>
                     </div>
                     <div class="info" id="info-products">
                         <i class="ti-package icon-info"></i>
                         <div class="content-info">
-                            <h2>10</h2>
+                            <h2><?php echo $products ?></h2>
                             <p>Products</p>
                         </div>
                     </div>
                     <div class="info" id="info-manufacters">
-                        <i class="far fa-handshake icon-info"></i>
+                        <i class="far fa-clipboard icon-info"></i>
                         <div class="content-info">
-                            <h2>3</h2>
-                            <p>Manufacters</p>
+                            <h2><?php echo $orders ?></h2>
+                            <p>Orders</p>
                         </div>
                     </div>
                     <div class="info" id="info-user">
                         <i class="ti-money icon-info"></i>
                         <div class="content-info">
-                            <h2>1M</h2>
-                            <p>Dollar</p>
+                            <h2 style="font-size: 28px;margin-top:30px;">~<?php echo $money ?></h2>
+                            <p>VNĐ</p>
                         </div>
                     </div>
                 </div>
