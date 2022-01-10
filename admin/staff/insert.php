@@ -111,5 +111,6 @@ require '../connect.php';
             </div>
         </div>
     </div>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

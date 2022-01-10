@@ -77,10 +77,12 @@ if ($number_rows==1){
             send_mail($email,$name,$title,$description);
             $_SESSION['success'] = 'Kiểm tra cả thư mục spam nha bạn ^^';
             header('location:index.php');
+            mysqli_close($connect);
             exit;
         }else{
             $_SESSION['error'] = 'Bạn đã vượt mức quên mật khẩu trong một ngày !!!';
             header('location:index.php');
+            mysqli_close($connect);
             exit;
         }
     }
@@ -88,5 +90,6 @@ if ($number_rows==1){
 else {
     $_SESSION['error'] = 'Email không tồn tại trong hệ thống';
     header('location:index.php');
+    mysqli_close($connect);
     exit;
 }

@@ -40,3 +40,4 @@ if($error){
     die();
 }
 header('location:sendmail.php');
+mysqli_close($connect);

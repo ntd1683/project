@@ -70,5 +70,6 @@ require_once '../check_super_admin.php';
             </div>
         </div>
     </div>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

@@ -1,18 +1,23 @@
 <?php session_start();
 require '../check_admin.php';
 require '../connect.php';
-if(empty($_GET['id'])){
+if(empty($_GET['id'])&empty($_SESSION['id'])){
     $_SESSION['error'] = 'Chức năng bị lỗi vui lòng thử lại sau';
     header('loaction:index.php');
     exit;
 }
-$id = $_GET['id'];
+if(isset($_GET['id'])){
+    $id = $_SESSION['id'];
+}
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+}
 $sql = "select * from admin where id = '$id'";
 $result = mysqli_query($connect,$sql);
 $each = mysqli_fetch_array($result);
 $error = mysqli_num_rows($result);
 if($error == 0){
-    $_SESSION['error'] = 'Không tồn tại nhân viên với id vừa nhập';
+    $_SESSION['error'] = 'Không tồn tại nhân viên này';
     header('location:index.php');
     exit;
 }
@@ -121,7 +126,9 @@ if($error == 0){
                     </select>
                     <div class="clear"></div>
                     <button class="button-submit submit" onclick="return push_button_submit()">Sửa nhân viên</button>
+                    <?php if($_SESSION['level']==1 & $each['level']==0){?>
                     <button class="button-submit delete" onclick="return push_delete()">Xoá nhân viên</button>
+                    <?php } ?>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
                             <i id="icon-name" class="ti-info-alt icon-size"></i>  Lỗi : <?php echo $_SESSION['error'] ?>
@@ -142,5 +149,6 @@ if($error == 0){
             }
         }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

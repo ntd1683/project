@@ -88,5 +88,6 @@ if($num_rows == 0){
             <?php unset($_SESSION['success']);} ?>
         </div>
     </div>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

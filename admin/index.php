@@ -14,7 +14,7 @@ $result = mysqli_query($connect,$sql);
         $_SESSION['level'] = $each['level'];
     }
 }
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['id'])|isset($_SESSION['name'])|isset($_SESSION['photos'])||isset($_SESSION['level'])){
     $_SESSION['success']="Bạn đang đăng nhập";
     header('location:root/index.php');
     exit;
@@ -85,5 +85,6 @@ if(isset($_SESSION['id'])){
             <?php unset($_SESSION['success']);} ?>
         </div>
     </div>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

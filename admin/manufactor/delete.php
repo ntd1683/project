@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../check_super_admin.php';
 if(empty($_GET['id'])){
     $_SESSION['error'] = "Xoá bị lỗi vui lòng thử lại sau !!!";
     header('location:index.php');

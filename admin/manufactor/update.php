@@ -80,5 +80,6 @@ $each = mysqli_fetch_array($result);
             </div>
         </div>
     </div>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

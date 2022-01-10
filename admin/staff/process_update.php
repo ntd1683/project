@@ -58,3 +58,4 @@ if($error){
 }
 $_SESSION['success']="Sửa thông tin thành công";
 header('location:index.php');
+mysqli_close($connect);

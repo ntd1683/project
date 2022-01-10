@@ -132,5 +132,6 @@ $result = mysqli_query($connect,$sql);
             input_search.style.width='';  
         }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

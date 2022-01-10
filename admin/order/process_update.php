@@ -22,4 +22,4 @@ note ='$note' where id ='$id'";
 mysqli_query($connect,$sql);
 $_SESSION['success']="Cập nhập đơn hàng thành công!!!";
 header('location:index.php');
-exit;
+mysqli_close($connect);
