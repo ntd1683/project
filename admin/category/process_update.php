@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../check_super_admin.php';
 if(empty($_POST['name'])){
     $_SESSION['error'] = "Bạn nhập thiếu tên thể loại rồi !!!";
     header('location:update.php');
@@ -17,3 +18,4 @@ if($error){
 }
 $_SESSION['success'] = "Sửa thể loại thành công !!!";
 header('location:index.php');
+mysqli_close($connect);

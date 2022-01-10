@@ -1,5 +1,5 @@
 <?php session_start();
-require_once '../check_admin.php';
+require_once '../check_super_admin.php';
 require_once '../connect.php';
 if(empty($_GET['id'])){
     $_SESSION['error']="Chức năng này đang lỗi vui lòng thử lại sau";
@@ -7,9 +7,10 @@ if(empty($_GET['id'])){
     exit;
 }
 $id = $_GET['id'];
-$sql = "select * from customers where id = '$id'";
+$sql = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders FROM customers LEFT JOIN orders on customers.id = orders.id_customers where customers.id = '$id' and orders.status = 1 or orders.id_customers is null group by customers.id ORDER by total_paid DESC";
 $result = mysqli_query($connect,$sql);
 $each = mysqli_fetch_array($result);
+// die(mysqli_error($connect));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,9 +63,11 @@ $each = mysqli_fetch_array($result);
                     <input class="input-text" type="text" value="<?php echo $each['email'] ?>" readonly>
                     <label class="body-text-header">Địa Chỉ</label>
                     <input class="input-text" type="text" value="<?php echo $each['adress'] ?>" readonly>
+                    <label class="body-text-header">Số đơn đã đặt</label>
+                    <input class="input-text" type="text" value="<?php echo $each['quantity_orders'] ?>" readonly>
                     <label class="body-text-header">Tổng số tiền đã mua</label>
-                    <input class="input-text" type="text" value="<?php echo number_format($each['amount_purchased'], 0, ',', '.') ?> đ" readonly="" style="font-size: 25px;text-align: center;color:red;">
-                        <button id="button-submit" onclick="return push_button_submit()">Xoá</button>
+                    <input class="input-text" type="text" value="<?php echo number_format($each['total_paid'], 0, ',', '.') ?> đ" readonly="" style="font-size: 25px;text-align: center;color:red;">
+                    <button id="button-submit" onclick="return push_button_submit()">Xoá</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
                             <i id="icon-name" class="ti-info-alt icon-size"></i>  Lỗi : <?php echo $_SESSION['error'] ?>
@@ -89,5 +92,6 @@ $each = mysqli_fetch_array($result);
             }
         }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

@@ -52,82 +52,95 @@ else if($total_money >1000){
                 <?php include '../asset/php/notifi.php' ?>
                 <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , chào mừng bạn trở lại !!!</h2>
                 <div id="infomation">
-                    <div class="info" id="info-user">
-                        <i class="fas fa-users icon-info"></i>
-                        <div class="content-info">
-                            <h2><?php echo $users ?></h2>
-                            <p>USERS</p>
+                    <a href="../customer/">
+                        <div class="info" id="info-user">
+                            <i class="fas fa-users icon-info"></i>
+                            <div class="content-info">
+                                <h2><?php echo $users ?></h2>
+                                <p>USERS</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info" id="info-products">
-                        <i class="ti-package icon-info"></i>
-                        <div class="content-info">
-                            <h2><?php echo $products ?></h2>
-                            <p>Products</p>
+                    </a>
+                    <a href="../product/">
+                        <div class="info" id="info-products">
+                            <i class="ti-package icon-info"></i>
+                            <div class="content-info">
+                                <h2><?php echo $products ?></h2>
+                                <p>Products</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info" id="info-manufacters">
-                        <i class="far fa-clipboard icon-info"></i>
-                        <div class="content-info">
-                            <h2><?php echo $orders ?></h2>
-                            <p>Orders</p>
+                    </a>
+                    <a href="../manufactor/">
+                        <div class="info" id="info-manufacters">
+                            <i class="far fa-clipboard icon-info"></i>
+                            <div class="content-info">
+                                <h2><?php echo $orders ?></h2>
+                                <p>Orders</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info" id="info-user">
-                        <i class="ti-money icon-info"></i>
-                        <div class="content-info">
-                            <h2 style="font-size: 28px;margin-top:30px;">~<?php echo $money ?></h2>
-                            <p>VNĐ</p>
+                    </a>
+                    <a href="../order/">
+                        <div class="info" id="info-user">
+                            <i class="ti-money icon-info"></i>
+                            <div class="content-info">
+                                <h2 style="font-size: 28px;margin-top:30px;">~<?php echo $money ?></h2>
+                                <p>VNĐ</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div id="table-achive">
                     <div id="vip-customer" class="table">
+                        <!-- sql customers -->
+                        <?php
+                        $sql_customers = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders FROM customers LEFT JOIN orders on customers.id = orders.id_customers WHERE orders.status = 1 group by customers.id ORDER by total_paid DESC limit 5";
+                        $result = mysqli_query($connect,$sql_customers);
+                        ?>
                         <h2>Khách Hàng Vip</h2>
                         <table>
                             <tr>
                                 <th style="width: 30%;">Tên</th>
                                 <th>Ngày Sinh </th>
                                 <th>Số Điện Thoại</th>
+                                <th>Số đơn đã đặt</th>
                                 <th>Đã Mua</th>
                             </tr>
+                            <?php foreach($result as $each) :?>
                             <tr>
-                                <td>Nguyễn Tấn Dũng</td>
-                                <td>16/08/2003</td>
-                                <td>0329817809</td>
-                                <td>2.000.000$</td>
+                                <td><?php echo $each['name'] ?></td>
+                                <td><?php echo $each['date'] ?></td>
+                                <td><?php echo $each['phone'] ?></td>
+                                <td><?php echo $each['quantity_orders'] ?></td>
+                                <td><?php echo number_format($each['total_paid'], 0, ',', '.')?> VNĐ</td>
                             </tr>
-                            <tr>
-                                <td>Quang Pham</td>
-                                <td>2002</td>
-                                <td>none</td>
-                                <td>none</td>
-                            </tr>
+                            <?php endforeach ?>
                         </table>
                     </div>
                     <div id="selling-product" class="table">
+                    <!-- sql sản phẩm bán chạy -->
+                    <?php
+                    $sql_products = "select products.name,products.id,manufactors.name as name_manufactors,ifnull(sum(quantity),0) as quantity_sales from products join manufactors on products.id_manufactors = manufactors.id left join orders_products on orders_products.id_products = products.id left join orders on orders.id = orders_products.id_orders where orders.status = 1 group by products.id ORDER by quantity_sales DESC limit 5";
+                    $result = mysqli_query($connect,$sql_products);
+                    ?>
                         <h2>Sản Phẩm Bán Chạy</h2>
                         <table>
                             <tr>
-                                <th style="width: 30%;">Mã Sản Xuất</th>
-                                <th>Tên</th>
-                                <th>Ngày bán</th>
-                                <th>Giá</th>
+                                <th>Mã sản phẩm</th>
+                                <th style="width: 30%;">Tên nhà sản xuất</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng đã bán</th>
                             </tr>
+                            <?php foreach ($result as $each):?>
                             <tr>
-                                <td>1</td>
-                                <td>Xiaomi</td>
-                                <td>08/12/2021</td>
-                                <td>12.000$</td>
+                                <td><?php echo $each['id'] ?></td>
+                                <td><?php echo $each['name_manufactors'] ?></td>
+                                <td><?php echo $each['name'] ?></td>
+                                <td><?php echo $each['quantity_sales'] ?></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Apple</td>
-                                <td>08/12/2021</td>
-                                <td>30.000$</td>
-                            </tr>
+                            <?php endforeach ?>
                         </table>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
@@ -140,7 +153,7 @@ else if($total_money >1000){
             let info = document.getElementsByClassName("info");
             for(let i=0;i<info.length;i++){
                 info[i].style.marginLeft="15px";
-            }       
+            }
         }
        function close_menu_sidebar(){
             document.getElementById('menu-sidebar').style.visibility = "hidden";
@@ -149,8 +162,9 @@ else if($total_money >1000){
             let info = document.getElementsByClassName("info");
             for(let i=0;i<info.length;i++){
                 info[i].style.marginLeft="50px";
-            }  
+            }
         }
     </script>
+<?php mysqli_close($connect) ?>
 </body>
 </html>

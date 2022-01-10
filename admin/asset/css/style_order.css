@@ -24,6 +24,10 @@ tr{
     border-bottom:  1px solid #e5dfdf;
 }
 
+.clear {
+    clear: both;
+}
+
 /* body contain */
 #body-contain{
     padding: 15px;
@@ -68,7 +72,7 @@ tr{
     border: 0px;
     border-bottom:  1px solid #e5dfdf;
     border-radius: 5px;
-    width: 600%;
+    width: 685%;
     height: 25px;
     color: gray;
     opacity: 0.8;
@@ -98,6 +102,53 @@ tr{
 .add a{
     color: #9c9c9c;
     text-decoration: none;
+}
+
+#filter{
+    position: absolute;
+    right: 1%;
+    color: white;
+    background: #86DDF3;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* form */
+.date{
+    position: relative;
+    float: left;
+}
+
+.input_date{
+    margin-left: 30px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 0.5px solid #ccc;
+    padding: 5px;
+}
+
+.text-date{
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    left: 50px;
+    font-size: 14px;
+}
+
+#button-submit{
+    margin-left: 30px;
+    height: 30px;
+    text-align: center;
+    width: 100px;
+    background-color: #8bdbe3;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#button-submit:hover{
+    cursor: pointer;
+    background-color: #51aeae;
 }
 
 /* content table */

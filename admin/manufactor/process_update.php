@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../connect.php';
+require_once '../check_super_admin.php';
 if(empty($_POST['name'])){
     $_SESSION['error'] = "Bạn nhập thiếu tên nhà sản xuất rồi !!!";
     header('location:update.php');
@@ -32,3 +33,4 @@ if($error){
 }
 $_SESSION['success'] = "Sửa nhà sản xuất thành công !!!";
 header('location:index.php');
+mysqli_close($connect);

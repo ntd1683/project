@@ -30,3 +30,4 @@ $sql = "update forgot_password set token = '$set_token' where token ='$token'";
 
 $_SESSION['success']='Đổi mật khẩu thành công';
 header('location:index.php');
+mysqli_close($connect);
