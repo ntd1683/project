@@ -7,18 +7,20 @@ require_once '../check_super_admin.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Mặt Hàng</title>
+    <title>Thêm Thông Báo</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- icon -->
     <link rel="stylesheet" href="../asset/font/themify-icons/themify-icons.css">
+    <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
-    <link rel="stylesheet" href="../asset/css/insert_manufactors.css">
+    <link rel="stylesheet" href="../asset/css/insert_notifi.css">
     <link rel="stylesheet" href="../asset/css/menu_sidebar.css">
     <!-- js -->
     <script defer src="../asset/js/menu_sidebar.js"></script>
+    <script defer src="../asset/js/insert_notifi.js"></script>
 </head>
 <body>
      <!-- nav -->
@@ -27,24 +29,27 @@ require_once '../check_super_admin.php';
         <a href="index.php">
             <img src="../asset/img/logo/logo.png" alt="logo" class="logo">
         </a>
-        <h2 class="header"><i class="ti-pencil-alt"></i> Thêm Mặt Hàng</h2>
+        <h2 class="header"><i class="ti-pencil-alt"></i> Thêm Thông Báo</h2>
     </div>
     <?php require '../asset/php/menu_sidebar.php' ?>
     <div id="main">
         <div id="container">
             <div id="header">
                 <i class="ti-pencil-alt header-margin"></i>
-                Thêm Mặt Hàng
+                Thêm Thông Báo
             </div>
             <div id="body-container">
                 <form method="post" action="process_insert.php" onsubmit="return false" enctype="multipart/form-data">
-                    <label for="input_name" class="body-text-header">Tên</label>
-                    <input class="input-text" type="text" name="name" id="input_name">
-                    <span id="span-error-name">
-                        <i id="icon-name" class="ti-info-alt icon-size"></i>
-                        <div id="error-name" class="error-hidden">Lưu ý khi nhập :
-                            <br> Tên không được để trống </div>
+                    <label for="input_detail" class="body-text-header">Thông Báo</label>
+                    <input class="input-text" type="text" name="detail" id="input_detail">
+                    <span id="span-error-detail">
+                        <i id="icon-detail" class="ti-info-alt icon-size"></i>
+                        <div id="error-detail" class="error-hidden">Lưu ý khi nhập :
+                            <br>Không được bỏ trống</div>
                     </span>
+                    <br>
+                    <input type="checkbox" name="pin" id="check_pin">
+                    <label for="check_pin" class="check">Bạn có muốn ghim thông báo không</label>
                     <br>
                     <button id="button-submit" onclick="return push_button_submit()">Thêm</button>
                     <?php if(isset($_SESSION['error'])) {?>
@@ -64,38 +69,5 @@ require_once '../check_super_admin.php';
             </div>
         </div>
     </div>
-<script>
-    let check=0;
-    function push_button_submit(){
-        let check_error=false;
-        //name
-        let input_name=document.getElementById('input_name').value;
-        if(input_name.length===0){
-            document.getElementById('error-name').innerHTML='*Bắt buộc - không được để trống';
-            document.getElementById('span-error-name').style.color= "red";
-            document.getElementById('error-name').style.borderColor= "red";
-            document.getElementById('error-name').style.backgroundColor= "white";
-            document.getElementById('error-name').style.color= "red";
-            check_error=true;
-        }
-        else{
-            document.getElementById('icon-name').classList.remove("ti-info-alt");
-            document.getElementById('icon-name').classList.add("ti-check");
-            document.getElementById('span-error-name').style.color= "green";
-            if(document.getElementById('error-name')){
-                document.getElementById('error-name').remove();
-                check ++;
-                console.log(check);
-            }
-        }
-        if(check===1){
-            document.getElementsByTagName("form")[0].setAttribute("onsubmit","return true");
-        }
-
-        if(check_error==true){
-            return false;
-        }
-    }
-</script>
 </body>
 </html>

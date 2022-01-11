@@ -65,6 +65,13 @@ table {
     visibility: visible;
 }
 
+.nav-avatar{
+    height: 30px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
 /* menu sidebar */
 #menu-sidebar{
     position: fixed;

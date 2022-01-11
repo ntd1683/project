@@ -54,7 +54,7 @@ $result = mysqli_query($connect,$sql);
         <?php include '../asset/php/nav.php'?>
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name']?> , Chào mừng bạn trở lại !!!</h2>
                 <?php include '../asset/php/notifi.php' ?>
                 <div id="content">
                     <h3 class="header">Quản Lý Sản Phẩm</h3>
