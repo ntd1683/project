@@ -22,7 +22,7 @@
                 <br>
                 <!-- content menu sidebar -->
                 <div class="content-menu-sidebar">
-                    <a href="">
+                    <a href="../notifi">
                         <i class="ti-calendar"></i>
                         <h4 class="text-content-menu-sidebar">Thông Báo</h4>
                     </a>

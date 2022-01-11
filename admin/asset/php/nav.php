@@ -7,6 +7,11 @@
                 <a href="#">
                     <p>Liên Hệ</p>
                 </a>
+                <?php
+                require_once '../connect.php';
+                $sql = "SELECT * FROM `notifi` WHERE `pin` = 1 ORDER by pin DESC";
+                $result = mysqli_query($connect,$sql);
+                ?>
                 <div id="nav-icon">
                     <label for="check-notification"  id="announcement"><i class="ti-announcement"></i>
                         <input type="checkbox" id="check-notification">
@@ -14,21 +19,19 @@
                             <div class="header-notification">
                                 <h3>Thông Báo</h3>
                             </div>
+                            <!-- notifi -->
                             <div class="content-notificaton">
                                 <hr>
-                                <p>Chuẩn bị nhập hàng</p>
+                                <?php foreach($result as $each):?>
+                                <img src="../staff/img/<?php echo $each['photos'] ?>" alt="avatar <?php echo $each['name'] ?>" class="nav-avatar" title="Do <?php echo $each['name']?> đăng">
+                                <p><?php echo $each['detail'] ?></p>
                                 <hr>
-                                <p>Ngày 24/12 ký hợp đồng với j2team</p>
-                                <hr>
-                                <p>Ngày 25/12 tuyển dụng nhân viên</p>
-                                <hr>
-                                <p>Ngày 1/1 Tổng hợp lại 1 năm</p>
-                                <hr>
+                                <?php endforeach ?>
                                 <p>...</p>
                                 <hr>
                             </div>
                             <div class="footer-notification">
-                                <a href="#">Xem Tất Cả</a>
+                                <a href="../notifi">Xem Tất Cả</a>
                             </div>
                         </div>
 

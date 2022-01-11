@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../check_super_admin.php';
+include '../check_admin.php';
 include_once '../connect.php';
 
 $search ='';
@@ -13,16 +13,15 @@ if(isset($_GET['page'])){
 }
 require_once '../connect.php';
 
-$sql_admin = "select count(*) from admin where name like '%$search%'";
-$arr_admin = mysqli_query($connect,$sql_admin);
-$result_admin = mysqli_fetch_array($arr_admin);
-$total_admin = $result_admin['count(*)'];
-$staff_in_page = 10;
-$total_page = ceil($total_admin/$staff_in_page);
-$skip_page = $staff_in_page*($page-1);
+$sql_notifi = "select count(*) from notifi where detail like '%$search%'";
+$arr_notifi = mysqli_query($connect,$sql_notifi);
+$result_notifi = mysqli_fetch_array($arr_notifi);
+$total_notifi = $result_notifi['count(*)'];
+$notifi_in_page = 10;
+$total_page = ceil($total_notifi/$notifi_in_page);
+$skip_page = $notifi_in_page*($page-1);
 
-
-$sql = "select * from admin where name like '%$search%' limit $staff_in_page offset $skip_page";
+$sql = "select * from notifi where detail like '%$search%' order by pin DESC limit $notifi_in_page offset $skip_page ";
 $result = mysqli_query($connect,$sql);
 ?>
 <!DOCTYPE html>
@@ -31,7 +30,7 @@ $result = mysqli_query($connect,$sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Nhân Viên</title>
+    <title>Quản Lý Thông báo</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +41,7 @@ $result = mysqli_query($connect,$sql);
     <!-- css -->
     <link rel="stylesheet" href="../asset/css/menu.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
-    <link rel="stylesheet" href="../asset/css/style_staff.css">
+    <link rel="stylesheet" href="../asset/css/style_notifi.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
 </head>
@@ -55,50 +54,57 @@ $result = mysqli_query($connect,$sql);
             <?php include '../asset/php/notifi.php' ?>
                 <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
-                    <h3 class="header">Quản Lý Nhân Viên</h3>
-                    <p class="color-text">Quản lý các nhân viên đăng kí tài khoản</p>
+                    <h3 class="header">Quản Lý Thông Báo</h3>
+                    <p class="color-text">Quản lý các thông báo mà mọi người đăng</p>
                     <div class="content-search">
                         <i class="ti-search"></i>
                         <form>
-                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Nhân Viên" id="input-search" value="<?php echo $search?>">
+                            <input type="search" name="search" class="search" placeholder="Tìm Kiếm Thông Báo" id="input-search" value="<?php echo $search ?>">
                         </form>
                         <div class="add">
                                 <a href="insert.php" id="a-add">
                                     <i class="ti-plus"></i>
-                                    <p>Thêm Nhân Viên</p>
+                                    <p>Thêm Thông Báo</p>
                                 </a>
                             </div>
                     </div>
                     <div id="content-table">
                         <table>
                             <tr>
-                                <th class="content-table-id">Mã</th>
-                                <th class="content-table-name">Tên</th>
-                                <th class="content-table-gender">Giới tính</th>
-                                <th class="content-table-date">Ngày sinh </th>
-                                <th class="content-table-email">Email</th>
-                                <th class="content-table-adress">Địa chỉ</th>
-                                <th class="content-table-fix">Sửa và Xoá</th>
+                                <th class="content-table-pin"></th>
+                                <th class="content-table-img"></th>
+                                <th class="content-table-detail">Nội Dung</th>
+                                <?php if($_SESSION['level']==1){ ?>
+                                <th class="content-table-fix">Sửa</th>
+                                <th class="content-table-delete">Xoá</th>
+                                <?php } ?>
                             </tr>
-                            <?php foreach($result as $each ) :?>
+                            <?php foreach($result as $each): ?>
                             <tr>
-                                <td><?php echo $each['id'] ?></td>
-                                <td><?php echo $each['name'] ?></td>
-                                <td><?php if($each['gender']==1){
-                                    echo 'Nam';
-                                }
-                                else{
-                                    echo 'Nữ';
-                                }
-                                ?></td>
                                 <td>
-                                <?php echo date('d-m-Y',strtotime($each['date'])) ?>
+                                    <?php if($each['pin']==1) {?>
+                                        <t class="ti-pin-alt"></t>
+                                    <?php }?>
+                                </td>
+                                <td class="td-img">
+                                    <img src="../staff/img/<?php echo $each['photos']?>" alt="avatar <?php echo $each['name']?>" style="float: left;">
+                                    <p style="line-height: 50px;">
+                                        <?php echo $each['name']?>    : 
+                                    </p>
+                                </td>
+                                <td><?php echo $each['detail'] ?></td>
+                                <?php if($_SESSION['level']==1){ ?>
+                                <td>
+                                    <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix">
+                                        <i class="ti-pencil-alt"></i>Sửa
+                                    </a>
                                 </td>
                                 <td>
-                                <?php echo $each['email'] ?>
+                                    <a href="delete.php?id=<?php echo $each['id']?>" class="table-a-delete">
+                                        <i class="ti-trash"></i>Xoá
+                                    </a>
                                 </td>
-                                <td><?php echo $each['adress'] ?></td>
-                                <td><a href="update.php?id=<?php echo $each['id']?>" class="table-a-detail"><i class="ti-new-window"></i></i>Sửa và Xoá</a></td>
+                                <?php } ?>
                             </tr>
                             <?php endforeach ?>
                         </table>

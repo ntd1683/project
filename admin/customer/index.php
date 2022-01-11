@@ -56,7 +56,7 @@ $result = mysqli_query($connect,$sql);
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
             <?php include '../asset/php/notifi.php' ?>
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
                     <h3 class="header">Quản Lý Khách Hàng</h3>
                     <p class="color-text">Quản lý các khách hàng đăng kí tài khoản</p>
