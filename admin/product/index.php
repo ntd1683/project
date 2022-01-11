@@ -54,7 +54,7 @@ $result = mysqli_query($connect,$sql);
         <?php include '../asset/php/nav.php'?>
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name']?> , Chào mừng bạn trở lại !!!</h2>
                 <?php include '../asset/php/notifi.php' ?>
                 <div id="content">
                     <h3 class="header">Quản Lý Sản Phẩm</h3>
@@ -79,7 +79,9 @@ $result = mysqli_query($connect,$sql);
                                 <th class="content-table-manufactor">Tên Nhà Sản Xuất</th>
                                 <th class="content-table-img">Ảnh</th>
                                 <th class="content-table-fix">Sửa</th>
+                                <?php if($_SESSION['level']==1){?>
                                 <th class="content-table-delete">Xoá</th>
+                                <?php }?>
                             </tr>
                             <?php foreach($result as $each) : ?>
                             <tr>
@@ -90,11 +92,13 @@ $result = mysqli_query($connect,$sql);
                                     <img src="img/<?php echo $each['photos']?>" alt="Ảnh sản phẩm" style="width:150px;">
                                 </td>
                                 <td>
-                                    <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix"><i class="ti-check-box"></i> Sửa</a>
-                                </td>
+                                    <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix"><i class="ti-check-box"></i> Sửa</a>                              
+                              </td>
+                                <?php if($_SESSION['level']==1){?>
                                 <td>
                                     <a href="delete.php?id=<?php echo $each['id']?>" class="table-a-delete"><i class="far fa-trash-alt"></i>Xoá</a>
                                 </td>
+                                <?php }?>
                             </tr>
                             <?php endforeach ?>
                         </table>

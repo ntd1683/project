@@ -1,10 +1,5 @@
 <?php session_start();
 require_once '../check_super_admin.php';
-require_once '../connect.php';
-$id = $_GET['id'];
-$sql = "select * from manufactors where id = '$id'";
-$result = mysqli_query($connect,$sql);
-$each = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +7,7 @@ $each = mysqli_fetch_array($result);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa Nhà Sản Xuất</title>
+    <title>Thêm Thông Báo</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +16,11 @@ $each = mysqli_fetch_array($result);
     <link rel="stylesheet" href="../asset/font/themify-icons/themify-icons.css">
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
-    <link rel="stylesheet" href="../asset/css/insert_manufactors.css">
+    <link rel="stylesheet" href="../asset/css/insert_notifi.css">
     <link rel="stylesheet" href="../asset/css/menu_sidebar.css">
     <!-- js -->
     <script defer src="../asset/js/menu_sidebar.js"></script>
-    <script defer src="../asset/js/insert_manufactors.js"></script>
+    <script defer src="../asset/js/insert_notifi.js"></script>
 </head>
 <body>
      <!-- nav -->
@@ -34,33 +29,27 @@ $each = mysqli_fetch_array($result);
         <a href="index.php">
             <img src="../asset/img/logo/logo.png" alt="logo" class="logo">
         </a>
-        <h2 class="header"><i class="ti-pencil-alt"></i> Sửa Nhà Sản Xuất </h2>
+        <h2 class="header"><i class="ti-pencil-alt"></i> Thêm Thông Báo</h2>
     </div>
     <?php require '../asset/php/menu_sidebar.php' ?>
     <div id="main">
         <div id="container">
             <div id="header">
                 <i class="ti-pencil-alt header-margin"></i>
-                Sửa nhà sản xuất
+                Thêm Thông Báo
             </div>
             <div id="body-container">
-                <form method="post" action="process_update.php" onsubmit="return false" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?php echo $each['id']?>">
-                    <label for="input_name" class="body-text-header">Tên</label>
-                    <input class="input-text" type="text" name="name" id="input_name" value="<?php echo $each['name']?>">
-                    <span id="span-error-name">
-                        <i id="icon-name" class="ti-info-alt icon-size"></i>
-                        <div id="error-name" class="error-hidden">Lưu ý khi nhập :
-                            <br> Tên không được để trống 
-                            <br> và đúng ngữ pháp tiếng việt</div>
+                <form method="post" action="process_insert.php" onsubmit="return false" enctype="multipart/form-data">
+                    <label for="input_detail" class="body-text-header">Thông Báo</label>
+                    <input class="input-text" type="text" name="detail" id="input_detail">
+                    <span id="span-error-detail">
+                        <i id="icon-detail" class="ti-info-alt icon-size"></i>
+                        <div id="error-detail" class="error-hidden">Lưu ý khi nhập :
+                            <br>Không được bỏ trống</div>
                     </span>
                     <br>
-                    <label for="input_picture" class="body-text-header">Logo nhà sản xuất</label>
-                    <input class="input-text" type="file" name="photos_new" id="input_picture">
-                    <br>
-                    <label for="input_picture" class="body-text-header">Logo cũ </label>
-                    <img src="img/<?php echo $each['photos']?>" alt="logo cũ" width="150px" style="border:1px solid #000;border-radius:5px;">
-                    <input class="input-text" type="hidden" name="photos_old" id="input_picture" value="">
+                    <input type="checkbox" name="pin" id="check_pin">
+                    <label for="check_pin" class="check">Bạn có muốn ghim thông báo không</label>
                     <br>
                     <button id="button-submit" onclick="return push_button_submit()">Thêm</button>
                     <?php if(isset($_SESSION['error'])) {?>
@@ -80,6 +69,5 @@ $each = mysqli_fetch_array($result);
             </div>
         </div>
     </div>
-    <?php mysqli_close($connect) ?>
 </body>
 </html>

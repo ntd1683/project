@@ -8,9 +8,9 @@ if(empty($_GET['id'])){
 }
 $id = $_GET['id'];
 include '../connect.php';
-$sql = "delete from manufactors where id='$id'";
+$sql = "delete from notifi where id='$id'";
 mysqli_query($connect,$sql);
-$_SESSION['success'] = "Xoá nhà sản xuất thành công !!!";
+$_SESSION['success'] = "Xoá thông báo thành công !!!";
 header('location:index.php');
 
 mysqli_close($connect);

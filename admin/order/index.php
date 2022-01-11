@@ -11,8 +11,15 @@ if(isset($_GET['page'])){
     $page=$_GET['page'];
 }
 require_once '../connect.php';
-
-$sql_orders = "select count(*) from orders where name_receiver like '%$search%'";
+$from_date = '2022-01-01';
+if(isset($_GET['from_date'])){
+    $from_date = $_GET['from_date'];
+}
+$to_date = date('Y-m-d');
+if(isset($_GET['to_date'])){
+    $to_date = $_GET['to_date'];;
+}
+$sql_orders = "select count(*) from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date'";
 $arr_orders = mysqli_query($connect,$sql_orders);
 $result_orders = mysqli_fetch_array($arr_orders);
 $total_orders = $result_orders['count(*)'];
@@ -21,7 +28,7 @@ $order_in_page = 5;
 $total_page = ceil($total_orders/$order_in_page);
 $skip_page = $order_in_page*($page-1);
 
-$sql = "select * from orders where name_receiver like '%$search%' limit $order_in_page offset $skip_page";
+$sql = "select * from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date' limit $order_in_page offset $skip_page";
 $result = mysqli_query($connect,$sql);
 ?>
 <!DOCTYPE html>
@@ -61,7 +68,26 @@ $result = mysqli_query($connect,$sql);
                         <form>
                             <input type="search" name="search" class="search" placeholder="Tìm Kiếm Đơn Hàng Theo Tên Người Nhận " id="input-search" value="<?php echo $search ?>">
                         </form>
+                        <i class="ti-filter" id="filter" onclick="push_filter()"></i>
                     </div>
+                    <div id="statistical" style="display: none;">
+                        <form method="GET">
+                            <div class="date">
+                                <p class="text-date">FROM</p>
+                                <input type="date" name="from_date" class="input_date"
+                                <?php if(isset($_GET['from_date'])){?>
+                                    value="<?php echo $from_date ?>"
+                                <?php } ?>
+                                >
+                            </div>
+                            <div class="date">
+                                <p class="text-date">TO</p>
+                                <input type="date" name="to_date" class="input_date" value="<?php echo $to_date?>">
+                            </div>
+                            <button id="button-submit">Lọc Kết Quả</button>
+                        </form>
+                    </div>
+                    <div class="clear"></div>
                     <div id="content-table">
                         <table>
                             <tr>
@@ -75,7 +101,7 @@ $result = mysqli_query($connect,$sql);
                                 <th class="content-table-status">Tình trạng đơn</th>
                                 <th class="content-table-fix">Sửa</th>
                             </tr>
-                                <?php foreach($result as $each): ?>
+                                <?php foreach($result as $each):?>
                                 <tr>
                                     <td><a class="table-a-fix" href="detail.php?id=<?php echo $each['id']?>"><i class="ti-new-window"></i></a></td>
                                     <td><?php echo $each['id']?></td>           
@@ -83,7 +109,7 @@ $result = mysqli_query($connect,$sql);
                                     <td><?php echo $each['time_order'] ?></td>
                                     <td><?php echo $each['phone_receiver']?></td>
                                     <td><?php echo $each['adress_receiver']?></td>
-                                    <td><?php echo $each['total_price']?></td>
+                                    <td><?php echo $each['total_price']?> VNĐ</td>
                                     <td>
                                         <?php
                                         if($each['status']==0){
@@ -121,7 +147,7 @@ $result = mysqli_query($connect,$sql);
             body_contain.style.marginLeft='20%';
             body_contain.style.width='80%';
             let input_search = document.getElementById('input-search');
-            input_search.style.width='460%';
+            input_search.style.width='535%';
             let a_add = document.getElementById('a-add');
             a_add.style.fontSize='13px';
         }
@@ -136,6 +162,16 @@ $result = mysqli_query($connect,$sql);
             let a_add = document.getElementById('a-add');
             a_add.style.fontSize=''; 
         }
+        function push_filter(){
+            let filter = document.getElementById('statistical');
+            if(filter.style.display == "none"){
+                filter.style.display = "block";
+            }
+            else{
+                filter.style.display = "none";
+            }
+        }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

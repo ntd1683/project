@@ -142,9 +142,10 @@ else{
     function push_button_delete(){
         let text = "Bạn có chắc chắn muốn xoá không ??? Nếu xoá bạn sẽ không thể khôi phục";
         if (confirm(text) == true) {
-            window.open("delete.php?id=<?php echo $_GET['id']?>");
+            window.open("delete.php?id=<?php echo $_GET['id']?>","_self");
         }
     }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

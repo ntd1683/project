@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../check_super_admin.php';
 if(empty($_SESSION['sign_up_email'])|empty($_SESSION['sign_up_name'])|empty($_SESSION['sign_up_gender'])){
     $_SESSION['error'] = 'Điền thiếu thông tin vui lòng điền lại !!!'; 
     header('location:insert.php');

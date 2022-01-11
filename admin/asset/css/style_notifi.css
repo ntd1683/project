@@ -10,7 +10,6 @@ html{
     font-family: 'Noto Sans', sans-serif;
 }
 
-
 hr{
     border: 1px solid #ccc;
     opacity: 0.6;
@@ -20,21 +19,14 @@ table {
     border-collapse: collapse; 
 }
 
-tr{
-    border-bottom:  1px solid #e5dfdf;
-}
-
-.clear {
-    clear: both;
-}
-
 /* body contain */
 #body-contain{
     padding: 15px;
+    color: black;
+    padding-top: 42px;
 }
 #body-contain .hello{
-    padding-top: 42px;
-    color : #333333;
+
 }
 
 /* content */
@@ -72,7 +64,7 @@ tr{
     border: 0px;
     border-bottom:  1px solid #e5dfdf;
     border-radius: 5px;
-    width: 685%;
+    width: 600%;
     height: 25px;
     color: gray;
     opacity: 0.8;
@@ -104,89 +96,54 @@ tr{
     text-decoration: none;
 }
 
-#filter{
-    position: absolute;
-    right: 1%;
-    color: white;
-    background: #86DDF3;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* form */
-.date{
-    position: relative;
-    float: left;
-}
-
-.input_date{
-    margin-left: 30px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 0.5px solid #ccc;
-    padding: 5px;
-}
-
-.text-date{
-    position: absolute;
-    top: -10px;
-    background-color: white;
-    left: 50px;
-    font-size: 14px;
-}
-
-#button-submit{
-    margin-left: 30px;
-    height: 30px;
-    text-align: center;
-    width: 100px;
-    background-color: #8bdbe3;
-    border: 0px;
-    border-radius: 10px;
-}
-
-#button-submit:hover{
-    cursor: pointer;
-    background-color: #51aeae;
-}
-
 /* content table */
 #content-table{
     text-align: center;
     width: 100%;
     border: 0.5px solid #e5dfdf;
 }
-
-#content-table .content-table-id{
-    width: 5%;
+tr{
+    width: 100%;
+}
+#content-table img{
+    height: 50px;
 }
 
-#content-table .content-table-name{
-    width: 15%;
+#content-table .content-table-pin{
+    width: 3%;
 }
 
-#content-table .content-table-time{
-    width: 19%;
+#content-table .content-table-img{
+    width: 20%;
 }
 
-#content-table .content-table-total-price{
-    width: 10%;
-}
-
-#content-table .content-table-status{
-    width: 30%;
-}
-#content-table .content-table-adress{
-    width: 25%;
-}
-#content-table .content-table-phone{
-    width: 10%;
+#content-table .content-table-detail{
+    width: 70%;
 }
 
 #content-table .content-table-fix{
     width: 5%;
+    right: 0;
 }
+
+#content-table .content-table-delete{
+    width: 5%;
+    right: 0;
+}
+
+.table-a-detail{
+    color: #9c9c9c;
+    text-decoration: none;
+}
+
+.table-a-detail:hover{
+    color: rgba(0,0,0,1);;
+}
+
+.td-img::before{
+    
+}
+
 .table-a-delete,
 .table-a-fix{
     color: #9c9c9c;

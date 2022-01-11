@@ -110,6 +110,6 @@ require '../connect.php';
                 </form>
             </div>
         </div>
-    </div>
+    </div> 
 </body>
 </html>

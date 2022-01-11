@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../check_admin.php';
+include '../check_super_admin.php';
 include_once '../connect.php';
 
 $search ='';
@@ -22,7 +22,10 @@ $customer_in_page = 5;
 $total_page = ceil($total_customers/$customer_in_page);
 $skip_page = $customer_in_page*($page-1);
 
-$sql = "select * from customers where name like '%$search%' limit $customer_in_page offset $skip_page";
+$sql = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders 
+FROM customers LEFT JOIN orders on customers.id = orders.id_customers
+where name like '%$search%' and orders.status = 1 or orders.id_customers is null group by customers.id
+limit $customer_in_page offset $skip_page";
 $result = mysqli_query($connect,$sql);
 ?>
 <!DOCTYPE html>
@@ -49,10 +52,11 @@ $result = mysqli_query($connect,$sql);
 <body>
     <div id="main">
         <div id="contain">
-            <?php include '../asset/php/menu.php' ?>
+        <?php include '../asset/php/nav.php'?>
+            <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
             <?php include '../asset/php/notifi.php' ?>
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
                     <h3 class="header">Quản Lý Khách Hàng</h3>
                     <p class="color-text">Quản lý các khách hàng đăng kí tài khoản</p>
@@ -93,7 +97,7 @@ $result = mysqli_query($connect,$sql);
                                 </td>
                                 <td><?php echo $each['adress'] ?></td>
                                 <td>
-                                    <?php echo number_format($each['amount_purchased'], 0, ',', '.')?><span>đ</span>
+                                    <?php echo number_format($each['total_paid'], 0, ',', '.')?><span>đ</span>
                                 </td>
                                 <td><a href="detail.php?id=<?php echo $each['id']?>" class="table-a-detail"><i class="ti-new-window"></i></i> Chi tiết</a></td>
                             </tr>
@@ -129,5 +133,6 @@ $result = mysqli_query($connect,$sql);
             input_search.style.width='';  
         }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

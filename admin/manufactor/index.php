@@ -52,7 +52,7 @@ $result = mysqli_query($connect,$sql);
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
                 <?php include '../asset/php/notifi.php' ?>
-                <h2 class="hello">Chào Admin , Chào mừng bạn trở lại !!!</h2>
+                <h2 class="hello">Chào <?php echo $_SESSION['name']?> , Chào mừng bạn trở lại !!!</h2>
                 <div id="content">
                     <h3 class="header">Quản Lý Nhà Sản Xuất</h3>
                     <p class="color-text">Quản lý các nhà sản xuất cung cấp hàng</p>
@@ -61,12 +61,14 @@ $result = mysqli_query($connect,$sql);
                         <form>
                             <input type="search" name="search" class="search" placeholder="Tìm Kiếm Nhà Sản Xuất" id="input-search" value="<?php echo $search ?>">
                         </form>
+                        <?php if($_SESSION['level']==1){?>
                         <div class="add">
                                 <a href="insert.php" id="a-add">
                                     <i class="ti-plus"></i>
                                     <p>Thêm Nhà Sản Xuất</p>
                                 </a>
                             </div>
+                            <?php }?>
                     </div>
                     <div id="content-table">
                         <table>
@@ -74,8 +76,10 @@ $result = mysqli_query($connect,$sql);
                                 <th class="content-table-id">Mã</th>
                                 <th class="content-table-name">Tên</th>
                                 <th class="content-table-img">Ảnh</th>
+                                <?php if($_SESSION['level']==1){?>
                                 <th class="content-table-fix">Sửa</th>
                                 <th class="content-table-delete">Xoá</th>
+                                <?php } ?>
                             </tr>
                         <?php foreach($result as $each):?>
                             <tr>
@@ -84,12 +88,14 @@ $result = mysqli_query($connect,$sql);
                                 <td>
                                     <img src="img/<?php echo $each['photos']?>" alt="Logo Công ty">
                                 </td>
+                                <?php if($_SESSION['level']==1){?>
                                 <td>
                                     <a href="update.php?id=<?php echo $each['id']?>" class="table-a-fix"><i class="ti-check-box"></i>Sửa</a>
                                 </td>
                                 <td>
                                     <a href="delete.php?id=<?php echo $each['id']?>" class="table-a-delete"><i class="far fa-trash-alt"></i>Xoá</a>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <?php endforeach ?>
                         </table>
@@ -127,5 +133,6 @@ $result = mysqli_query($connect,$sql);
             a_add.style.fontSize=''; 
         }
     </script>
+    <?php mysqli_close($connect) ?>
 </body>
 </html>

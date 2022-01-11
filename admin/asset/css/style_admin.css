@@ -19,6 +19,10 @@ table {
     border-collapse: collapse; 
 }
 
+a{
+    text-decoration: none;
+}
+
 /* body contain */
 #body-contain{
     padding: 15px;
@@ -48,7 +52,7 @@ table {
     padding: 5px;
     color: white;
     font-size: 80px;
-    background-color: #f79cb1;
+    background-color: #86DDF3;
     border-radius: 12px;
 }
 
@@ -84,6 +88,7 @@ table {
     margin-left: 5px;
     margin-bottom: 10px;
     border-bottom: 1px solid #e5dfdf;
+    text-align: center;
 }
 
 .table table{

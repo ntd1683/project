@@ -103,5 +103,6 @@ $each = mysqli_fetch_array($result);
         }
     }
 </script>
+<?php mysqli_close($connect) ?>
 </body>
 </html>
