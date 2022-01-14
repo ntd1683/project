@@ -1,0 +1,166 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.main-content > .title {
+    text-align: left;
+    margin-bottom: 25px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    border-bottom: 1px solid black;
+}
+
+.main-content > .column_2 > .gallery {
+    box-shadow: 0px 0px 6px 0 rgb(0 0 0 / 12%);
+    border-radius: 15px;
+}
+
+.main-content > .column_2 > .right_column {
+    padding-top: 50px;
+    padding-left: 80px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.main-content > .column_2 > .right_column > .product_name {
+    padding-bottom: 10px;
+}
+
+.main-content > .column_2 > .right_column > .summary {
+    padding-bottom: 10px;
+}
+
+.main-content > .description {
+    margin-top: 10px;
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+.main-content > .description > #descriptive_details > p {
+
+    text-align: left;
+}
+
+.main-content > .description > #descriptive_details > h2 {
+    padding-bottom: 30px;
+}
+
+.description > #table_desc > .table_description {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description > #table_desc > .table_description td, .description > #table_desc > .table_description th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.description > #table_desc > .table_description tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.description > #table_desc > .table_description tr:hover {
+    background-color: #ddd;
+}
+
+
+/* img-zoom */
+.img-zoom-container {
+    position: relative;
+}
+
+.img-zoom-lens {
+    position: absolute;
+    /*set the size of the lens:*/
+    width: 100px;
+    height: 100px;
+}
+
+.img-zoom-result {
+    border: 0px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 0px;
+    height: 350px;
+    position: relative;
+    transition: width 0.3s;
+    padding-top: 10px;
+}
+
+.gallery>.column_2:hover .img-zoom-result {
+    border: 1px solid #d4d4d4;
+    width: 350px;
+}
+
+.gallery>.column_2:hover .img-zoom-lens {
+    border: 1px solid #d4d4d4;
+}
+
+.img-zoom-container > #image {
+}
+
+.gallery > .column_2 > .child_column_2 {
+    padding: 15px;
+}
+
+.gallery > .column_2 > .right_column {
+    padding: 30px;
+    margin: auto;
+}
+
+.gallery > .column_2 {
+    display: grid;
+    grid-template-columns: 1fr 0fr;
+    grid-gap: 0px;
+}
+
+/* button */
+.btn_group {
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.btnlinks {
+    background-color: aqua;
+    border: 1px solid #0e0e0e;
+}
+
+/* Style the buttons inside the tab */
+.btn_group > button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.btn_group > button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.btn_group > button.active {
+    background-color: #ddd;
+}
+
+.btn_group > button:focus {
+    background-color: #ddd;
+}
+
+/* Style the tab content */
+.tabcontent {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 40px;
+}

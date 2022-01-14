@@ -1,5 +1,4 @@
 
-
 .article {
     padding-top:30px;
     padding-bottom: 60px;
@@ -12,10 +11,25 @@
     margin-left: 10px;
 }
 
+.wrapper > .product_list {
+    grid-gap: 30px;
+}
+
 .products {
     align-items: center;
     justify-content: center;
-    margin: 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+    transition: transform 0.15s, box-shadow 1s;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.products:hover {
+    box-shadow: 0 1px 3px rgb(7 255 40 / 90%);
+    transform: scale(1.015);
+
 }
 
 .products > .images {
@@ -45,14 +59,6 @@
 .products > .price {
     color: red;
     bottom: 0;
-}
-
-.child_column_4 {
-    box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
-}
-
-.child_column_4:hover {
-    box-shadow: 0 1px 3px rgb(7 255 40 / 70%);
 }
 
 .description > span {
@@ -92,4 +98,27 @@
 .navbar > .wrapper > ul > li > a:hover {
     background-color: white;
     color: black;
+}
+
+/* pagination */
+.content > .pagination {
+    display: inline-block;
+}
+
+.content > .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.content > .pagination a.active {
+    background-color: #7c7c7c;
+    color: white;
+    border-radius: 5px;
+}
+
+.content > .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
 }

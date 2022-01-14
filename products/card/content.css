@@ -1,0 +1,90 @@
+
+.below_menubar {
+    margin: auto;
+}
+
+.box_container {
+    margin-left:auto;
+    margin-right:auto;
+    width: 1200px;
+    height: 100%;
+}
+
+.main_content {
+}
+
+.size_bar {
+}
+
+.below_menubar > .column_2 {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-gap: 20px;
+}
+
+.column_ > .column_4 {
+    display: grid;
+    grid-template-columns: 4fr 12fr 2fr 2fr;
+    grid-gap: 0px;
+}
+
+.header {
+    background-color: white;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.title > .column_4 {
+    background-color: rgb(236, 236, 236);
+    padding: 15px;
+}
+
+.column_product > .column_4 {
+    background-color: white;
+    padding: 15px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+
+.column_product > .column_4 > .child_1 {
+    padding: 10px;
+    margin: auto;
+}
+
+.column_product > .column_4 > .child_2 {
+    position: relative;
+}
+
+.child_column_4 > .remove_and_add_wish_list {
+    position: absolute;
+    bottom: 0;
+}
+
+.right_column > .size_bar {
+    background-color: white;
+    padding: 20px;
+}
+
+.size_bar > .costs {
+    margin-bottom: 15px;
+}
+
+.submit_button {
+    background-color: #4e995b;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.submit_button:active {
+    background-color: #3f7a49;
+}
