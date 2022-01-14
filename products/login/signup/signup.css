@@ -87,3 +87,27 @@ input {
 .login_button:hover {
     background-color: #4CAF50;
 }
+
+.gender {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.radio_inline {
+    width: 50%;
+}
+
+.radio_input {
+    font-size: 8px;
+    font-weight: bold;
+    width: 20px;
+    padding: 0px;
+    height: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgb(173, 173, 173);
+    border-radius: 8px;
+    transition: 0.5s;
+}

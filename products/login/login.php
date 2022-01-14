@@ -15,7 +15,7 @@
             <div class="logo">
                 <img src="<?php echo ROOT_URL; ?>products/assets/images/mona-loading-dimmed.gif" alt="logo" width="150" height="150" style="background-color: while">
             </div>
-            <form method="post" action="button_submit.php">
+            <form method="post" action="button_submit.php" autocomplete="off">
                 <div class="login_form">
                     <div class="user_name">
                         <h3>user name</h3>
@@ -36,7 +36,15 @@
                     </div>
                 </div>
             </form>
-            <p id="response" style="color:red;font-size:20px;visibility:visible">đăng nhập thất bại</p>
+            <?php 
+                session_start();
+                if(isset($_SESSION["error"]) == true) {
+                    if($_SESSION["error"] == true) {
+                        echo '<p id="response" style="color:red;font-size:20px;visibility:visible">tài khoản hoặc mật khẩu sai</p>';
+                        unset($_SESSION["error"]);
+                    }
+                }
+            ?>
         </div>
     </div>
 </body>
