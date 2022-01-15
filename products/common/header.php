@@ -8,7 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-
     <!-- menu bar -->
     <div id="menu_bar" >
         <div class="box_container">
