@@ -37,7 +37,6 @@
                 </div>
             </form>
             <?php 
-                session_start();
                 if(isset($_SESSION["error"]) == true) {
                     if($_SESSION["error"] == true) {
                         echo '<p id="response" style="color:red;font-size:20px;visibility:visible">tài khoản hoặc mật khẩu sai</p>';

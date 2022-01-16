@@ -8,6 +8,12 @@
     <title>Document</title>
 </head>
 <body>
+    <?php 
+        session_start();
+        if(!isset($_SESSION["logged_in"])) {
+            require_once ROOT_PATH . "products/common/set_login_session.php";
+        }
+    ?>
     <!-- menu bar -->
     <div id="menu_bar" >
         <div class="box_container">
@@ -32,14 +38,22 @@
                             </a>
                             <a href="#">
                                 <div class="center_column child_column_3">
-                                    <b>giỏ hàng</b>
+                                    <b>giỏ hàng(<?php echo 0; ?>)</b>
                                 </div>
                             </a>
-                            <a href="#">
-                                <div class="right_column child_column_3">
-                                    <b>đăng kí / đăng nhập</b>
-                                </div>
-                            </a>
+                            <?php if($_SESSION["logged_in"] == true): ?>
+                                <a href=<?php echo ROOT_URL . "products/login/process_logout.php"; ?>>
+                                    <div class="right_column child_column_3">
+                                        <b>đăng xuất</b>
+                                    </div>
+                                </a>
+                            <?php else: ?>
+                                <a href=<?php echo ROOT_URL . "products/login/index.php"; ?>>
+                                    <div class="right_column child_column_3">
+                                        <b>đăng kí / đăng nhập</b>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

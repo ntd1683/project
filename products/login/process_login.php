@@ -25,6 +25,7 @@ if (isset($result)){
 
             $_SESSION["email"] = $user["email"];
             $_SESSION["name"] = $user["name"];
+            $_SESSION["logged_in"] = true;
 
             if(isset($_POST['checkbox']) && !isset($_COOKIE["token"])) {
                 $token = uniqid("user_", true);
