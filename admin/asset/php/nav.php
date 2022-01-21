@@ -1,4 +1,6 @@
             <!-- nav -->
+            
+    <script defer src="../asset/js/menu.js"></script>
             <div id="nav">
                 <i class="ti-menu" onclick="open_menu_sidebar()"></i>
                 <a href="../root">
@@ -9,11 +11,14 @@
                 </a>
                 <?php
                 require_once '../connect.php';
-                $sql = "SELECT * FROM `notifi` WHERE `pin` = 1 ORDER by pin DESC";
-                $result = mysqli_query($connect,$sql);
+                $sql_notifi = "SELECT * FROM `notifi` WHERE `pin` = 1 ORDER by pin DESC";
+                $result_notifi = mysqli_query($connect,$sql_notifi);
+                $sql_count_notifi ="SELECT count(*) as count FROM `notifi` WHERE pin = 1";
+                $result_count_notifi = mysqli_query($connect,$sql_count_notifi);
+                $count_notifi = mysqli_fetch_array($result_count_notifi)['count'];
                 ?>
                 <div id="nav-icon">
-                    <label for="check-notification"  id="announcement"><i class="ti-announcement"></i>
+                    <label for="check-notification"  id="announcement"><i class="ti-announcement" id="icon_announcement" style="position: relative;" onclick="btn_announcement()"><span class="count_notifi"><?php echo $count_notifi ?></span></i>
                         <input type="checkbox" id="check-notification">
                         <div class="icon-description" id="content-announcement">
                             <div class="header-notification">
@@ -22,9 +27,9 @@
                             <!-- notifi -->
                             <div class="content-notificaton">
                                 <hr>
-                                <?php foreach($result as $each):?>
-                                <img src="../staff/img/<?php echo $each['photos'] ?>" alt="avatar <?php echo $each['name'] ?>" class="nav-avatar" title="Do <?php echo $each['name']?> đăng">
-                                <p><?php echo $each['detail'] ?></p>
+                                <?php foreach($result_notifi as $each_notifi):?>
+                                <img src="../staff/img/<?php echo $each_notifi['photos'] ?>" alt="avatar <?php echo $each_notifi['name'] ?>" class="nav-avatar" title="Do <?php echo $each_notifi['name']?> đăng">
+                                <p><?php echo $each_notifi['detail'] ?></p>
                                 <hr>
                                 <?php endforeach ?>
                                 <p>...</p>

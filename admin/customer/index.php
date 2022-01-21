@@ -48,6 +48,13 @@ $result = mysqli_query($connect,$sql);
     <link rel="stylesheet" href="../asset/css/style_customer.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
+        <!-- css livesearch -->
+        <style>
+  .ui-autocomplete-loading {
+    background: white url("img/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 <body>
     <div id="main">
@@ -113,6 +120,33 @@ $result = mysqli_query($connect,$sql);
             </div>
         </div>
     </div>
+        <!-- js live search -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () { 
+            $( "#input-search" ).autocomplete({
+                minLength: 0,
+                source: 'search.php',
+                focus: function( event, ui ) {
+                    $( "#project" ).val( ui.item.label );
+                    return false;
+                },
+                select: function( event, ui ) {
+                    window.location.href = `detail.php?id=${ui.item.value}`;
+                    return false;
+                }
+                })
+            .autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .append(`
+                <div>${item.label}<br>
+                <img src="photos/${item.icon}" height="50px">
+                `)
+                .appendTo( ul );
+            };
+        });
+  </script>
     <script>
         function open_menu_sidebar(){
             document.getElementById('menu-sidebar').style.visibility = "visible";
