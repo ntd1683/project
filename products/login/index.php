@@ -7,7 +7,7 @@ if(!isset($_SESSION["logged_in"])) {
 }
 
 if($_SESSION["logged_in"] == true) {
-    header("location:./../products_page/product_lists/index.php");
+    header("location:./../product_page/product_list/index.php");
 }
 else {
     require_once "login.php";

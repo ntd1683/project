@@ -1,6 +1,56 @@
+<?php 
+    require_once ROOT_PATH . "products/db/connect.php";
+    // get product
+    if(isset($_GET["product"])) {
+        $id = $_GET["product"];
+        $query = "SELECT * FROM `products` WHERE id='$id'";
+        $result = mysqli_query($mysqli, $query);
+        $number_row = mysqli_num_rows($result);
+        if (isset($result)){
+            if($number_row == 1) {
+                $GLOBALS['product'] = mysqli_fetch_array($result);
+            }
+            else {
+                echo 404;
+                exit;
+            }
+        }
+        else {
+            echo 404;
+            exit;
+        }
+    }
+    else {
+        echo 404;
+        exit;
+    }
+
+    // add to card
+    if(isset($_POST["add_to_card"])) {
+        if(isset($_COOKIE['card']) && $_COOKIE['card'] != null) {
+            $card = json_decode($_COOKIE['card'], true);
+            if(isset($card[$_GET["product"]])) {
+                $card[$_GET["product"]][0]++;
+            }
+            else {
+                $card[$_GET["product"]] = array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']);
+            }
+        }
+        else {
+            // set cookie
+            // quantity, name, price, image
+            $card = array($_GET["product"] => array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']));
+        }
+
+        _setCookie('card', json_encode($card), time()+3600*24*5);
+
+        header("location: ./../../card/index.php");
+    }
+
+?>
 
 
-    <link rel="stylesheet" href=<?php echo ROOT_URL . "products/products_page/product_detail/product_content.css"; ?>>
+    <link rel="stylesheet" href=<?php echo ROOT_URL . "products/product_page/product_detail/product_content.css"; ?>>
     <!-- content -->
     <div>
         <div id="below_menubar" style="padding-top:75px;">
@@ -15,7 +65,7 @@
                                 <div class="column_2">
                                     <div class="left_column child_column_2">
                                         <div class="img-zoom-container">
-                                            <img id="image" width="400" height="400" src="https://bizweb.dktcdn.net/thumb/medium/100/329/122/products/ram-laptop-samsung-ddr4-16gb-3200mhz-1-2v-m471a2k43db1-cwe-b32576e6-9145-4f29-abed-09ea8afc7f14.jpg?v=1637074541000" alt="samsung-ddr4-16gb">
+                                            <img id="image" width="400" height="400" src="<?php echo ROOT_URL . "admin/product/img/" . $product['photos']; ?>" alt="<?php echo $product['name'];?>">
                                         </div>
                                     </div>
                                     <div class="right_column child_column_2">
@@ -25,7 +75,7 @@
                             </div>
                             <div class="right_column child_column_2">
                                 <div class="product_name">
-                                    <h2>tên sản phẩm</h2>
+                                    <h2><?php echo $product["name"]; ?></h2>
                                 </div>
                                 <div class="summary">
                                     <ul>
@@ -36,8 +86,20 @@
                                 </div>
                                 <div class="price">
                                     <span style="display:inline;">giá: </span>
-                                    <span style="display:inline; color: red;font-size:24px;">10.000.000đ</span>
+                                    <span style="display:inline; color: red;font-size:24px;"><?php echo number_format($product['price'], 0, '.', '.') . " vnđ"; ?></span>
                                 </div>
+
+                                <form method="post" action="">
+                                    <div class="wrap_quantity">
+                                        số lượng:
+                                        <input type="number" id="quantity" name="quantity" min="1" max="200" value="1">
+                                    </div>
+                                    <div class="wrap_button">
+                                        <div class="bar">
+                                            <button name="add_to_card" type="submit" class="button add_to_card_button">thêm vào giỏ hàng</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <script>
                                 function imageZoom(imgID, resultID) {

@@ -21,10 +21,10 @@
                 <div class="left_column child_column_2">
                     <div class="column_2 web_name">
                         <div class="left_column child_column_2">
-                            <a href="#"><img src="<?php echo ROOT_URL; ?>products/assets/images/mona-loading-dimmed.gif" alt="icon"width="50" height="50"></a>
+                            <a href="<?php echo ROOT_URL . "products/product_page/product_list/index.php"; ?>"><img src="<?php echo ROOT_URL; ?>products/assets/images/mona-loading-dimmed.gif" alt="icon"width="50" height="50"></a>
                         </div>
                         <div class="right_column child_column_2">
-                            <a href="#" style="font-size:30px;margin-left:10px;font-weight:bold">trang chủ</a>
+                            <a href="<?php echo ROOT_URL . "products/product_page/product_list/index.php"; ?>" style="font-size:30px;margin-left:10px;font-weight:bold">trang chủ</a>
                         </div>
                     </div>
                 </div>
@@ -36,9 +36,17 @@
                                     <b>sản phẩm</b> 
                                 </div>
                             </a>
-                            <a href="#">
+                            <a href="<?php echo ROOT_URL . "products/card/index.php"; ?>">
                                 <div class="center_column child_column_3">
-                                    <b>giỏ hàng(<?php echo 0; ?>)</b>
+                                    <b>giỏ hàng(<?php 
+                                            if(isset($_COOKIE['card']) && $_COOKIE['card'] != null) {
+                                                echo sizeof(json_decode($_COOKIE["card"], true));
+                                            }
+                                            else {
+                                                echo "0";
+                                            }
+                                        ?>)
+                                    </b>
                                 </div>
                             </a>
                             <?php if($_SESSION["logged_in"] == true): ?>

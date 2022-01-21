@@ -33,9 +33,9 @@ if (isset($result)){
                 echo $id;
                 $sql = "UPDATE customers SET token = '$token' WHERE id ='$id'";
                 $result = mysqli_query($mysqli, $sql);
-                setcookie("token", $token, time() + (86400 * 30));
+                _setCookie("token", $token, time() + (86400 * 30));
             }
-            header("location:./../products_page/product_lists/index.php");
+            header("location:./../product_page/product_list/index.php");
         }
         else {
             session_start();

@@ -13,4 +13,8 @@ function url(){
 
 define('ROOT_URL', strstr(url(), 'products', true));
 
+function _setCookie(string $name, $value = "", $expires_or_options = 0) {
+    setcookie($name, $value, $expires_or_options, strstr($_SERVER['REQUEST_URI'], "products", true) . "products");
+}
+
 ?>
