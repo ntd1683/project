@@ -19,7 +19,7 @@ $to_date = date('Y-m-d');
 if(isset($_GET['to_date'])){
     $to_date = $_GET['to_date'];;
 }
-$sql_orders = "select count(*) from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date'";
+$sql_orders = "select count(*) from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date' ORDER BY time_order DESC";
 $arr_orders = mysqli_query($connect,$sql_orders);
 $result_orders = mysqli_fetch_array($arr_orders);
 $total_orders = $result_orders['count(*)'];
@@ -28,7 +28,7 @@ $order_in_page = 5;
 $total_page = ceil($total_orders/$order_in_page);
 $skip_page = $order_in_page*($page-1);
 
-$sql = "select * from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date' limit $order_in_page offset $skip_page";
+$sql = "select * from orders where name_receiver like '%$search%' and time_order > '$from_date'and time_order <= '$to_date' ORDER BY time_order DESC limit $order_in_page offset $skip_page";
 $result = mysqli_query($connect,$sql);
 ?>
 <!DOCTYPE html>
@@ -51,6 +51,13 @@ $result = mysqli_query($connect,$sql);
     <link rel="stylesheet" href="../asset/css/style_order.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
+        <!-- css livesearch -->
+        <style>
+  .ui-autocomplete-loading {
+    background: white url("img/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 <body>
     <div id="main">
@@ -106,7 +113,7 @@ $result = mysqli_query($connect,$sql);
                                     <td><a class="table-a-fix" href="detail.php?id=<?php echo $each['id']?>"><i class="ti-new-window"></i></a></td>
                                     <td><?php echo $each['id']?></td>           
                                     <td><?php echo $each['name_receiver'] ?></td>
-                                    <td><?php echo $each['time_order'] ?></td>
+                                    <td><?php echo $each['time_order']?></td>
                                     <td><?php echo $each['phone_receiver']?></td>
                                     <td><?php echo $each['adress_receiver']?></td>
                                     <td><?php echo $each['total_price']?> VNĐ</td>
@@ -139,6 +146,32 @@ $result = mysqli_query($connect,$sql);
             </div>
         </div>
     </div>
+    <!-- js live search -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () { 
+            $( "#input-search" ).autocomplete({
+                minLength: 0,
+                source: 'search.php',
+                focus: function( event, ui ) {
+                    $( "#project" ).val( ui.item.label );
+                    return false;
+                },
+                select: function( event, ui ) {
+                    window.location.href = `update.php?id=${ui.item.value}`;
+                    return false;
+                }
+                })
+            .autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .append(`
+                <div>${item.time} / ${item.label} / ${item.total_price}
+                `)
+                .appendTo( ul );
+            };
+        });
+  </script>
     <script>
         function open_menu_sidebar(){
             document.getElementById('menu-sidebar').style.visibility = "visible";

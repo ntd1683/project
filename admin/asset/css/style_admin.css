@@ -104,3 +104,30 @@ a{
 #selling-product{
     margin-left: 15px;
 }
+/* highchart */
+.class-statistical{
+    padding: 5px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: #86DDF3;
+    opacity: 0.8;
+}
+
+.class-statistical:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#form_statistical {
+    position: absolute;
+    z-index: 99;
+    top: 5px;
+    left: 10px;
+}
+
+#form_statistical_2 {
+    position: absolute;
+    z-index: 99;
+    top: 5px;
+    left: 10px;
+}

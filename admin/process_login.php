@@ -1,18 +1,18 @@
 <?php
+session_start();
 require_once 'connect.php';
 if(empty($_POST['email'])&&empty($_POST['password'])){
     $_SESSION['error']="Vui lòng điền đầy đủ thông tin !!!";
     header('location:index.php');
     exit;
 }
-
 $email = $_POST['email'];
 $password = $_POST['password'];
 if(isset($_POST['remember'])){
     $remember = true;
 }
 else{
-    $remember = true;
+    $remember = false;
 }
 $check = false;
 $sql = "select * from admin where email = '$email' and password = '$password'";
@@ -55,4 +55,3 @@ if ($number_rows==1){
 }
 $_SESSION['error']= "Đăng nhập thất bại - sai tài khoản hoặc mật khẩu";
 header('location:index.php');
-mysqli_close($connect);
