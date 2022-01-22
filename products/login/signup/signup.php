@@ -28,7 +28,16 @@
                     <button type="submit" class="button login_button">signup</button>
                 </form>
             </div>
-            
+            <?php 
+                session_start();
+                if(isset($_SESSION["error"]) == true) {
+                    if($_SESSION["error"] == true) {
+                        echo '<p id="response" style="color:red;font-size:20px;visibility:visible">đăng kí thất bại</p>';
+                        $_SESSION["error"] = false;
+                        unset($_SESSION["error"]);
+                    }
+                }
+            ?>
         </div>
     </div>
 </body>

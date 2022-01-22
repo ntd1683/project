@@ -1,7 +1,6 @@
 <?php
 
 if(isset($_COOKIE["token"])) {
-    require_once "../url.php";
     require_once ROOT_PATH . "products/db/connect.php";
 
     $token = $_COOKIE["token"];

@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once "../url.php";
+
 $_SESSION["logged_in"] = false;
 $_SESSION["email"] = null;
 $_SESSION["name"] = null;

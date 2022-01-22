@@ -3,9 +3,34 @@
 require_once "../url.php";
 require_once ROOT_PATH . "products/db/connect.php";
 
+session_start();
 
 $username = $_POST["user_name"];
 $password = $_POST["password"];
+
+// Validate
+if (empty($_POST["user_name"])) {
+    $_SESSION["error"] = true;
+}
+else {
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION["error"] = true;
+        header("location:index.php");
+    }
+}
+if (empty($_POST["name"])) {
+    $_SESSION["error"] = true;
+    header("location:index.php");
+}
+else {
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z0-9-@_]*$/",$name)) {
+        $_SESSION["error"] = true;
+        header("location:index.php");
+    }
+}
+
 
 $query = "SELECT * FROM `customers` 
             WHERE email = '$username'
@@ -19,8 +44,6 @@ if (isset($result)){
     if($number_row == 1) {
         $user = mysqli_fetch_array($result);
         if($user["password"] == $password) {
-            session_start();
-
             $id = $user["id"];
 
             $_SESSION["email"] = $user["email"];
@@ -38,19 +61,16 @@ if (isset($result)){
             header("location:./../product_page/product_list/index.php");
         }
         else {
-            session_start();
             $_SESSION["error"] = true;
             header('location:index.php');
         }
     }
     else {
-        session_start();
         $_SESSION["error"] = true;
         header("location:index.php");
     }
 }
 else {
-    session_start();
     $_SESSION["error"] = true;
     header("location:index.php");
 }
