@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database:3306
--- Generation Time: Jan 21, 2022 at 06:25 PM
+-- Generation Time: Jan 22, 2022 at 05:11 AM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.20
 
@@ -29,17 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `adress` text NOT NULL,
+  `name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(12) COLLATE utf8mb4_general_ci NOT NULL,
+  `adress` text COLLATE utf8mb4_general_ci NOT NULL,
   `gender` int NOT NULL,
   `date` date NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `photos` varchar(150) NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `photos` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `level` int NOT NULL,
-  `token` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `token` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -57,8 +57,8 @@ INSERT INTO `admin` (`id`, `name`, `phone`, `adress`, `gender`, `date`, `email`,
 
 CREATE TABLE `categorys` (
   `id` int NOT NULL,
-  `name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` text COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categorys`
@@ -80,7 +80,7 @@ INSERT INTO `categorys` (`id`, `name`) VALUES
 CREATE TABLE `classify_products` (
   `id_products` int NOT NULL,
   `id_category` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `classify_products`
@@ -100,16 +100,16 @@ INSERT INTO `classify_products` (`id_products`, `id_category`) VALUES
 
 CREATE TABLE `customers` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `gender` int NOT NULL,
   `date` date DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `photos` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `adress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `token` varchar(100) DEFAULT NULL,
-  `phone` varchar(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `photos` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `adress` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `token` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `phone` varchar(12) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
@@ -134,10 +134,10 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `date`, `email`, `password`, `p
 CREATE TABLE `forgot_password` (
   `id_admin` int DEFAULT NULL,
   `id_customers` int DEFAULT NULL,
-  `token` varchar(250) NOT NULL,
+  `token` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
   `created at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quantity` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -147,9 +147,9 @@ CREATE TABLE `forgot_password` (
 
 CREATE TABLE `manufactors` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `photos` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `photos` varchar(150) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `manufactors`
@@ -169,11 +169,11 @@ INSERT INTO `manufactors` (`id`, `name`, `photos`) VALUES
 
 CREATE TABLE `notifi` (
   `id` int NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `photos` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `photos` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `pin` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `notifi`
@@ -193,13 +193,13 @@ CREATE TABLE `orders` (
   `id` int NOT NULL,
   `id_customers` int DEFAULT NULL,
   `time_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `name_receiver` varchar(150) NOT NULL,
-  `phone_receiver` varchar(12) NOT NULL,
-  `adress_receiver` text NOT NULL,
-  `note` text NOT NULL,
+  `name_receiver` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone_receiver` varchar(12) COLLATE utf8mb4_general_ci NOT NULL,
+  `adress_receiver` text COLLATE utf8mb4_general_ci NOT NULL,
+  `note` text COLLATE utf8mb4_general_ci NOT NULL,
   `status` int NOT NULL,
   `total_price` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
@@ -221,7 +221,7 @@ CREATE TABLE `orders_products` (
   `id_orders` int NOT NULL,
   `id_products` int NOT NULL,
   `quantity` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders_products`
@@ -249,14 +249,14 @@ INSERT INTO `orders_products` (`id_orders`, `id_products`, `quantity`) VALUES
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL,
+  `name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
   `discount` int DEFAULT NULL,
   `id_manufactors` int NOT NULL,
   `id_categorys` int NOT NULL,
-  `photos` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `photos` varchar(150) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
