@@ -30,7 +30,7 @@
         if(isset($_COOKIE['card']) && $_COOKIE['card'] != null) {
             $card = json_decode($_COOKIE['card'], true);
             if(isset($card[$_GET["product"]])) {
-                $card[$_GET["product"]][0]++;
+                $card[$_GET["product"]][0] += $_POST["quantity"];
             }
             else {
                 $card[$_GET["product"]] = array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']);
