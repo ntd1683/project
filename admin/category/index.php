@@ -91,7 +91,7 @@ $result = mysqli_query($connect,$sql);
                                 <td>
                                     <?php
                                     $id_categorys = $each['id'];
-                                    $sql_check = "select count(*) from products where id_categorys = '$id_categorys'";
+                                    $sql_check = "SELECT count(*) FROM `classify_products` where id_category = '$id_categorys'";
                                     $result = mysqli_query($connect,$sql_check);
                                     $products = mysqli_fetch_array($result)['count(*)'];
                                     echo $products;

@@ -78,6 +78,37 @@ function push_button_submit(){
             check_error=true;
         }
     }
+    // specifications
+    let input_specifications=document.getElementById('input_specifications').value;
+    if(input_specifications.length===0){
+        document.getElementById('error-specifications').innerHTML='*Bắt buộc - không được để trống';
+        document.getElementById('span-error-specifications').style.color= "red";
+        document.getElementById('error-specifications').style.borderColor= "red";
+        document.getElementById('error-specifications').style.backgroundColor= "white";
+        document.getElementById('error-specifications').style.color= "red";
+        check_error=true;
+    }
+    else{
+        let include_regex_specifications=/^[<](?:[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZaàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz\w]|[.]|>)*/;
+        if(include_regex_specifications.test(input_specifications)==false){
+            document.getElementById('icon-specifications').classList.remove("ti-info-alt");
+            document.getElementById('icon-specifications').classList.add("ti-check");
+            document.getElementById('span-error-specifications').style.color= "green";
+            if(document.getElementById('error-specifications')){
+                document.getElementById('error-specifications').remove();
+                check ++;
+                console.log(check);
+            }
+        }
+        else{
+            document.getElementById('error-specifications').innerHTML='*bạn có xuất hiện kí tự < or >';
+            document.getElementById('span-error-specifications').style.color= "red";
+            document.getElementById('error-specifications').style.borderColor= "red";
+            document.getElementById('error-specifications').style.backgroundColor= "white";
+            document.getElementById('error-specifications').style.color= "red";
+            check_error=true;
+        }
+    }
     // price
     let input_price=document.getElementById('input_price').value;
     if(input_price.length===0){
@@ -99,7 +130,7 @@ function push_button_submit(){
         }
     }
 
-    if(check===3){
+    if(check===4){
         document.getElementsByTagName("form")[0].setAttribute("onsubmit","return true");
     }
 

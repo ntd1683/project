@@ -1,9 +1,6 @@
 <?php session_start();
 require_once '../check_admin.php';
 require '../connect.php';
-$sql = "select * from categorys";
-$result_categorys = mysqli_query($connect,$sql);
-
 $sql = "select * from manufactors";
 $result_manufactors = mysqli_query($connect,$sql);
 ?>
@@ -27,6 +24,11 @@ $result_manufactors = mysqli_query($connect,$sql);
     <!-- js -->
     <script defer src="../asset/js/menu_sidebar.js"></script>
     <script defer src="../asset/js/insert_products.js"></script>
+    <!-- category input -->
+    <link rel="stylesheet" href="bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
 </head>
 <body>
      <!-- nav -->
@@ -55,11 +57,20 @@ $result_manufactors = mysqli_query($connect,$sql);
                         </div>
                     </span>
                     <br>
-                    <label for="input_description" class="body-text-header">Mô Tả Sản Phẩm</label>
+                    <label for="input_description" class="body-text-header" style="margin-top:10px;">Mô Tả Sản Phẩm</label>
                     <textarea name="description" id="input_description" class="input-text" rows="15"></textarea>
                     <span id="span-error-description">
                         <i id="icon-description" class="ti-info-alt icon-size"></i>
                         <div id="error-description" class="error-hidden">Lưu ý khi nhập :
+                            <br> Nhập chi tiết sản phẩm
+                        </div>
+                    </span>
+                    <br>
+                    <label for="input_specifications" class="body-text-header">Thông Số Kỹ Thuật</label>
+                    <textarea name="specifications" id="input_specifications" class="input-text" rows="15"></textarea>
+                    <span id="span-error-specifications">
+                        <i id="icon-specifications" class="ti-info-alt icon-size"></i>
+                        <div id="error-specifications" class="error-hidden">Lưu ý khi nhập :
                             <br> Nhập chi tiết sản phẩm
                         </div>
                     </span>
@@ -97,13 +108,9 @@ $result_manufactors = mysqli_query($connect,$sql);
                         <?php endforeach ?>
                     </select>
                     <div class="clear"></div>
-                    <label for="id_category" class="body-text-header text-select">Tên Loại Mặt Hàng</label>
-                    <select name="id_categorys" id="id_category" class="input-text">
-                        <?php foreach($result_categorys as $each_category):?>
-                        <option value="<?php echo $each_category['id'] ?>"><?php echo $each_category['name'] ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <div class="clear"></div>
+                    <label for="name_category" class="body-text-header">Tên loai mặt hàng</label>
+                    <input class="input-text" type="text" name="name_categorys" id="name_category" style="margin-bottom: 0;">
+                    <br>
                     <button id="button-submit" onclick="return push_button_submit()">Thêm sản phẩm</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
@@ -116,6 +123,36 @@ $result_manufactors = mysqli_query($connect,$sql);
                 </form>
             </div>
         </div>
-    </div>
+    </div>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js"></script>   
+    <script type="text/javascript" src="bootstrap-tagsinput-latest/typeahead.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").keypress(function(event){
+                if(event.keyCode==13){
+                    event.preventDefault();
+                }
+            });
+            var categorys = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                    url: 'list_category.php?q=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            categorys.initialize();
+            $('#name_category').tagsinput({
+            typeaheadjs: {
+                name: 'citynames',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: categorys.ttAdapter()
+            },
+            freeInput: true
+            });
+        });
+    </script>
 </body>
 </html>

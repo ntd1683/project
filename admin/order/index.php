@@ -14,6 +14,9 @@ require_once '../connect.php';
 $from_date = '2022-01-01';
 if(isset($_GET['from_date'])){
     $from_date = $_GET['from_date'];
+    if($from_date==''){
+        $from_date = '2022-01-01';
+    }
 }
 $to_date = date('Y-m-d');
 if(isset($_GET['to_date'])){
@@ -66,7 +69,6 @@ $result = mysqli_query($connect,$sql);
             <?php include '../asset/php/menu_sidebar.php'?>
             <div id="body-contain">
                 <h2 class="hello">Chào <?php echo $_SESSION['name'] ?>, Chào mừng bạn trở lại !!!</h2>
-                <?php include '../asset/php/notifi.php' ?>
                 <div id="content">
                     <h3 class="header">Quản Lý Đơn Hàng</h3>
                     <p class="color-text">Quản lý các đơn hàng tiêu dùng</p>
@@ -81,16 +83,15 @@ $result = mysqli_query($connect,$sql);
                         <form method="GET">
                             <div class="date">
                                 <p class="text-date">FROM</p>
-                                <input type="date" name="from_date" class="input_date"
-                                <?php if(isset($_GET['from_date'])){?>
-                                    value="<?php echo $from_date ?>"
-                                <?php } ?>
+                                <input type="date" name="from_date" class="input_date" value="<?php echo $from_date ?>"
                                 >
                             </div>
                             <div class="date">
                                 <p class="text-date">TO</p>
                                 <input type="date" name="to_date" class="input_date" value="<?php echo $to_date?>">
                             </div>
+                            <input type="hidden" name="page" value="<?php echo $page?>">                          
+                            <input type="hidden" name="search" value="<?php echo $search?>">
                             <button id="button-submit">Lọc Kết Quả</button>
                         </form>
                     </div>
@@ -139,13 +140,14 @@ $result = mysqli_query($connect,$sql);
                     </div>
                     <div id="footer">
                         <?php for($i=1;$i<=$total_page;$i++){?>
-                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>"><div class="page color-text"><?php echo $i ?></div></a>
+                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>&from_date=<?php echo $from_date?>&to_date=<?php echo $to_date?>"><div class="page color-text"><?php echo $i ?></div></a>
                         <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
+    <?php include '../asset/php/notifi.php' ?>
     <!-- js live search -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>

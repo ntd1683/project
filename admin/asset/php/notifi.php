@@ -1,16 +1,21 @@
-                <div id="notifi">
+
+                <script>
                     <?php if(isset($_SESSION['success'])){ ?>
-                    <div class="check">
-                        <i class="ti-check"></i>
-                        <p> Thông báo : <?php echo $_SESSION['success']?></p>
-                    </div>
+                    var check = `<?php echo $_SESSION['success'] ?>`;
+                    $(document).ready(function () {
+                        console.log(1);
+                            console.log(check);
+                            $.notify(check, "success");
+                    });                   
                     <?php unset($_SESSION['success']) ?>
                     <?php }?>
-                    <?php if(isset($_SESSION['error'])){?>
-                    <div class="close">
-                        <i class="ti-close"></i>
-                        <p style="color: black;opacity:0.6;"> Lỗi : <?php echo $_SESSION['error']?></p>
-                    </div>
+                    <?php if(isset($_SESSION['error'])){ ?>
+                    var check = `<?php echo $_SESSION['error'] ?>`;
+                    $(document).ready(function () {
+                        console.log(1);
+                            console.log(check);
+                            $.notify(check, "error");
+                    });                   
                     <?php unset($_SESSION['error']) ?>
                     <?php }?>
-                </div>
+                </script>

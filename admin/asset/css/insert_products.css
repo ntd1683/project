@@ -6,18 +6,15 @@
     font-size: 16px;
 }
 
-html{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: rgba(0, 0, 0, 0.4);
-}
-
 .clear{
     clear: both;
 }
 
 body{
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    background: rgba(0, 0, 0, 0.4) !important;
 }
 
 /* nav */
@@ -131,6 +128,7 @@ i.ti-pencil-alt{
 }
 
 #span-error-description,
+#span-error-specifications,
 #span-error-price,
 #span-error-discount,
 #span-error-picture,
@@ -139,6 +137,7 @@ i.ti-pencil-alt{
 }
 
 #error-picture,
+#error-specifications,
 #error-description,
 #error-price,
 #error-discount,
@@ -158,7 +157,7 @@ i.ti-pencil-alt{
     top: 20px;
 }
 
-#error-description{
+#error-description,#error-specifications{
     right: 25px;
     top: 10px;
 }
@@ -167,7 +166,7 @@ i.ti-pencil-alt{
 #span-error-description:hover .error-hidden,
 #span-error-price:hover .error-hidden,
 #span-error-discount:hover .error-hidden,
-#span-error-picture:hover .error-hidden,
+#span-error-specifications:hover .error-hidden,
 #span-error-name:hover .error-hidden{
     visibility: visible;
 }
@@ -181,14 +180,28 @@ i.ti-pencil-alt{
     margin: 10px 15px 0px 0px;
 }
 
-#id_category{
-    width: 20%;
-}
-
 .error{
     margin-left: 20%;
     margin-top: 10px;
     margin-bottom: 10px;
     color: red;
     font-size: 20px;
+}
+
+.tt-menu{
+    background-color: white;
+    box-shadow: 0px 0px 5px grey;
+    width: 350%;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.tt-selectable:hover{
+    background-color: #009688;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-clip: border-box;
+}
+.tt-dataset{
 }

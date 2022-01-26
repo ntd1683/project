@@ -125,7 +125,7 @@ else{
                     <?php if($_SESSION['level']==1) {?>
                     <button id="button-delete" onclick="push_button_delete()">Xoá Đơn</button>
                     <?php } ?>
-                    <button id="button-submit" onclick="return push_button_submit()">Đăng kí</button>
+                    <button id="button-submit" onclick="return push_button_submit()">Sửa Đơn</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
                             <i id="icon-name" class="ti-info-alt icon-size"></i>  Lỗi : <?php echo $_SESSION['error'] ?>

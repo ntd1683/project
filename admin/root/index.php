@@ -51,7 +51,6 @@ else if($total_money >1000){
         <?php include '../asset/php/menu_sidebar.php'?>
             <!-- body - contain -->
             <div id="body-contain">
-                <?php include '../asset/php/notifi.php' ?>
                 <h2 class="hello">Chào <?php echo $_SESSION['name'] ?> , chào mừng bạn trở lại !!!</h2>
                 <div id="infomation">
                     <a href="../customer/">
@@ -173,7 +172,8 @@ else if($total_money >1000){
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>  
+    <?php include '../asset/php/notifi.php' ?>
     <script>
         var statistical_days = 7;
         function btn_statistical(){
@@ -200,7 +200,6 @@ else if($total_money >1000){
                 success: function (response) {
                     const arrX = Object.keys(response);
                     const arrY = Object.values(response);
-                    console.log(response);
                     let title_hightchart = "Doanh thu " + statistical_days + " ngày gần nhất" ;
                     Highcharts.chart('container', {
                     title: {

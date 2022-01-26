@@ -3,7 +3,7 @@ require_once '../connect.php';
     $max_date = $_POST['days'];
     $sql_highchart = "SELECT DATE_FORMAT(time_order,'%e-%m') as day,
     sum(total_price) as sales FROM `orders`
-    WHERE DATE(time_order) >= CURDATE() - INTERVAL $max_date DAY
+    WHERE DATE(time_order) >= CURDATE() - INTERVAL $max_date DAY and status = 1
     GROUP BY DATE_FORMAT(time_order,'%e-%m')";
     $result = mysqli_query($connect,$sql_highchart);
     $arr = [];
