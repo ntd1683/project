@@ -5,8 +5,9 @@ if(isset($_COOKIE["token"])) {
 
     $token = $_COOKIE["token"];
     
-    $query = "SELECT token FROM customers WHERE token='$token'";
+    $query = "SELECT * FROM customers WHERE token='$token'";
     $result = mysqli_query($mysqli, $query);
+    $user = mysqli_fetch_array($result);
 
     if(isset($result)) {
         $number_row = mysqli_num_rows($result);
@@ -14,6 +15,10 @@ if(isset($_COOKIE["token"])) {
             $dbtoken = mysqli_fetch_array($result);
             if($dbtoken["token"] == $token) {
                 $_SESSION["logged_in"] = true;
+                $_SESSION["userID"] = $user["id"];
+                $_SESSION["name"] = $user["name"];
+                $_SESSION["phone"] = $user["phone"];
+                $_SESSION["adress"] = $user["adress"];
             }
             else {
                 unset($_COOKIE["token"]);

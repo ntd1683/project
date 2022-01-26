@@ -34,7 +34,7 @@
                 <div class="content">
                     <article id="article1" class="article">
                         <div class="article_title">
-                            <h2>loại sản phẩm</h2>
+                            <h2>sản phẩm</h2>
                         </div>
                         <div class="wrapper">
                             <div class="column_4 product_list">

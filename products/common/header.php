@@ -31,7 +31,7 @@
                 <div class="right_column child_column_2">
                     <div class="right_menu_bar">
                         <div class="column_3">
-                            <a href="#" class="first">
+                            <a href="<?php echo ROOT_URL . "products/product_page/product_list/index.php"; ?>" class="first">
                                 <div class="left_column child_column_3">
                                     <b>sản phẩm</b> 
                                 </div>

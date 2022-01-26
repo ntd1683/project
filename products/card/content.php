@@ -1,4 +1,7 @@
 <?php 
+
+    require_once ROOT_PATH . "products/db/connect.php";
+
     if(isset($_COOKIE['card']) && $_COOKIE['card'] != null) {
         $GLOBALS["card"] = json_decode($_COOKIE["card"], true);
 
@@ -7,13 +10,13 @@
             foreach($card as $productID => $element) {
                 if($_POST["delete_product"] == $productID) {
                     echo $_POST["delete_product"];
-                    echo "fasdfsdf ";
                     unset($card["$productID"]);
                     _setCookie('card', json_encode($card), time()+3600*24*5);
                 }
             }
         }
     }
+
 
 ?>
 <link rel="stylesheet" href="content.css">
@@ -82,15 +85,46 @@
             <div class="size_bar">
                 <div class="costs">
                     tổng tiền:
-                    <?php 
-                        $Price = 0;
-                        foreach($card as $price) {
-                            $Price += $price[2] * $price[0];
-                        } 
-                        echo number_format($Price, 0, '.', '.');
-                    ?> 
+                    <span style="color:#c50d0d;">
+                        <?php 
+                            $Price = 0;
+                            foreach($card as $price) {
+                                $Price += $price[2] * $price[0];
+                            } 
+                            echo number_format($Price, 0, '.', '.');
+                            $_SESSION["total_price"] = $Price;
+                        ?>
+                    </span>
+
                 </div>
-                <form action="">
+                <form action="purchase.php" method="post">
+                    <?php if($_SESSION["logged_in"] == true): ?>
+                        <?php
+                            if(isset($_SESSION['userID'])) {
+                                $id = $_SESSION['userID'];
+                                $query = "SELECT adress, phone FROM `customers` 
+                                    WHERE id = '$id'";
+                                $result = mysqli_query($mysqli, $query);
+                                $user = mysqli_fetch_array($result);
+                            }
+                            else {
+                                echo "<p>lỗi! xin vui lòng đăng nhập lại</p>";
+                                exit;
+                            }
+                        ?>
+                        <?php if(isset($user["adress"])): ?>
+                            <p>địa chỉ: <?php echo $user["adress"]; ?></p>
+                            <p>điện thoại: <?php echo $user["phone"]; ?></p>
+                        <?php else: ?>
+                            <p>bạn chưa có địa chỉ nhận hàng</p>
+                            <p>nhập địa chỉ</p>
+                            <input type="text" name="adress" id="">
+                        <?php endif; ?>
+                        <p>ghi chú: </p>
+                        <input type="text" name="note">
+                    <?php else: ?>
+                        <p>bạn chưa đăng nhập! hãy đăng nhập để mua hàng</p>
+                    <?php endif; ?>
                     <button name="submit_button" type="submit" class="submit_button">
                         mua hàng
                     </button>

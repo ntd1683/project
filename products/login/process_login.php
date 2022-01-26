@@ -45,15 +45,14 @@ if (isset($result)){
         $user = mysqli_fetch_array($result);
         if($user["password"] == $password) {
             $id = $user["id"];
-
-            $_SESSION["email"] = $user["email"];
+            $_SESSION["userID"] = $id;
             $_SESSION["name"] = $user["name"];
+            $_SESSION["phone"] = $user["phone"];
+            $_SESSION["adress"] = $user["adress"];
             $_SESSION["logged_in"] = true;
 
             if(isset($_POST['checkbox']) && !isset($_COOKIE["token"])) {
                 $token = uniqid("user_", true);
-                echo $token;
-                echo $id;
                 $sql = "UPDATE customers SET token = '$token' WHERE id ='$id'";
                 $result = mysqli_query($mysqli, $sql);
                 _setCookie("token", $token, time() + (86400 * 30));

@@ -88,3 +88,14 @@
 .submit_button:active {
     background-color: #3f7a49;
 }
+
+input[type='text'] {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 5px;
+    width: 95%;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+}
