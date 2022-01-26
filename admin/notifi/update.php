@@ -45,6 +45,8 @@ $each = mysqli_fetch_array($result);
             </div>
             <div id="body-container">
                 <form method="post" action="process_update.php" onsubmit="return false" enctype="multipart/form-data">
+                    <label class="body-text-header">Người thêm thông báo </label>
+                    <input class="input-text" type="text" value="<?php echo $each['name'] ?>" readonly>
                     <input type="hidden" name="id" value="<?php echo $each['id'] ?>">
                     <label for="input_detail" class="body-text-header">Thông Báo</label>
                     <input class="input-text" type="text" name="detail" id="input_detail" value="<?php echo $each['detail'] ?>">
@@ -53,6 +55,7 @@ $each = mysqli_fetch_array($result);
                         <div id="error-detail" class="error-hidden">Lưu ý khi nhập :
                             <br>Không được bỏ trống</div>
                     </span>
+                    <br>
                     <br>
                     <input type="checkbox" name="pin" id="check_pin" <?php if($each['pin']==1){echo 'checked';} ?>>
                     <label for="check_pin" class="check">Bạn có muốn ghim thông báo không</label>

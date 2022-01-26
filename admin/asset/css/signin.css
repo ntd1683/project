@@ -91,14 +91,15 @@ html{
     opacity: 1;
 }
 
-#span-error-email,
-#span-error-password{
+#input_password-error,
+#input_email-error{
     float: left;
     text-align: justify;
-    font-size: 10px;
-    opacity: 0.5;
+    font-size: 14px;
+    opacity: 0.7;
     margin-top: -10px;
     margin-bottom: 10px;
+    color: black;
 }
 
 #button{
@@ -144,4 +145,8 @@ html{
 
 .success {
     color: greenyellow !important;
+}
+
+.error {
+    color: red !important;
 }

@@ -38,6 +38,8 @@ else if($total_money >1000){
     <link rel="stylesheet" href="../asset/css/style_admin.css">
     <link rel="stylesheet" href="../asset/css/menu.css">
     <link rel="stylesheet" href="../asset/css/notifi.css">
+    <link rel="stylesheet" href="../asset/css/highchart.css">
+    <link rel="stylesheet" href="../asset/css/highchart2.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
 </head>
@@ -142,9 +144,209 @@ else if($total_money >1000){
                     </div>
                     <br>
                 </div>
+                <figure class="highcharts-figure" style="position: relative;">
+                        <form id="form_statistical"  onsubmit="return false">
+                            <select id="statistical" class="class-statistical">
+                                <option value="1" selected>7 Ngày</option>
+                                <option value="2">30 Ngày</option>
+                            </select>
+                            <button onclick="btn_statistical()" class="class-statistical">Duyệt</button>
+                        </form>
+                        <div id="container"></div>
+                </figure>
+                <figure class="highcharts-figure" style="position: relative;">
+                        <form id="form_statistical_2"  onsubmit="return false">
+                            <select id="statistical_2" class="class-statistical">
+                                <option value="1" >7 Ngày</option>
+                                <option value="2" selected>30 Ngày</option>
+                            </select>
+                            <button onclick="btn_statistical_2()" class="class-statistical">Duyệt</button>
+                        </form>
+                        <div id="container2"></div>
+                </figure>
             </div>
         </div>
     </div>
+    <!-- highchart -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+        var statistical_days = 7;
+        function btn_statistical(){
+            var statistical_select = document.getElementById('statistical');
+            statistical_days = statistical_select.options[statistical_select.selectedIndex].value;
+            console.log('1');
+
+            if(statistical_days==1){
+                console.log('1');
+                statistical_days = 7;
+                ajax_statistical()
+            }
+            else if(statistical_days==2){
+                statistical_days = 30;
+                ajax_statistical()
+            }
+        }
+        function ajax_statistical(){
+            $.ajax({
+                type:"POST",
+                url: "../order/get_sales.php",
+                data: {days:statistical_days},
+                dataType: "json",
+                success: function (response) {
+                    const arrX = Object.keys(response);
+                    const arrY = Object.values(response);
+                    console.log(response);
+                    let title_hightchart = "Doanh thu " + statistical_days + " ngày gần nhất" ;
+                    Highcharts.chart('container', {
+                    title: {
+                    text: title_hightchart
+                    },
+
+                    yAxis: {
+                    title: {
+                        text: 'Doanh Thu'
+                    }
+                    },
+
+                    xAxis: {
+                    categories: arrX
+                    },
+
+                    legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                    },
+
+                    plotOptions: {
+                    series: {
+                        label: {
+                        connectorAllowed: false
+                        },
+                    }
+                    },
+
+                    series: [{
+                    name: 'Doanh thu',
+                    data: arrY
+                    }],
+
+                    responsive: {
+                    rules: [{
+                        condition: {
+                        maxWidth: 500
+                        },
+                        chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                        }
+                    }]
+                    }
+
+                    });
+                }
+            });
+        }
+    </script>
+    <!-- highchart 2 -->
+    <script>
+        var statistical_days_1 = 30;
+        function btn_statistical_2(){
+            var statistical_select_2 = document.getElementById('statistical_2');
+            statistical_days_1 = statistical_select_2.options[statistical_select_2.selectedIndex].value;
+            console.log('1');
+
+            if(statistical_days_1==1){
+                console.log('1');
+                statistical_days_1 = 7;
+                ajax_statistical_1()
+            }
+            else if(statistical_days_1==2){
+                statistical_days_1 = 30;
+                ajax_statistical_1()
+            }
+        }
+    // Radialize the colors
+    Highcharts.setOptions({
+    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+        radialGradient: {
+            cx: 0.5,
+            cy: 0.3,
+            r: 0.7
+        },
+        stops: [
+            [0, color],
+            [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+        };
+    })
+    });
+    function ajax_statistical_1(){
+        $.ajax({
+            type: "POST",
+            url: "../order/get_status_product.php",
+            data: {days:statistical_days_1},
+            dataType: "json",
+            success: function (response) {
+                console.log
+                const arrY = Object.values(response);
+                console.log(arrY[-1]);
+                let title_hightchart2 = "Thống kê sản phẩm trong " + statistical_days_1 + " ngày gần nhất" ;
+                Highcharts.chart('container2', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: title_hightchart2
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b>'
+                },
+                accessibility: {
+                    point: {
+                    valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        connectorColor: 'silver'
+                    }
+                    }
+                },
+                series: [{
+                    name: 'Share',
+                    data: [
+                    { name: 'Hoàn tất', y:arrY[1] },
+                    { name: 'Huỷ bỏ', y: arrY[2] },
+                    { name: 'Đang chờ duyệt', y: arrY[0] }
+                    ]
+                }]
+                }); 
+            }
+        });
+    }
+    // Build the chart
+
+    
+    </script>
+    <!-- menu-sidebar -->
     <script>
        function open_menu_sidebar(){
             document.getElementById('menu-sidebar').style.visibility = "visible";
@@ -164,7 +366,12 @@ else if($total_money >1000){
                 info[i].style.marginLeft="50px";
             }
         }
+        $(document).ready(function(){
+            ajax_statistical();
+            ajax_statistical_1();
+        });
     </script>
+    
 <?php mysqli_close($connect) ?>
 </body>
 </html>

@@ -191,6 +191,18 @@ table {
     font-weight: bold;
 }
 
+.count_notifi{
+    background-color: red;
+    top: -10px;
+    line-height: initial !important;
+    position: absolute;
+    border-radius: 50%;
+    width: 15px;
+    text-align: center;
+    color: white;
+    right: 15px;
+}
+
 /* user */
 #check-user{
     display: none;

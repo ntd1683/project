@@ -7,7 +7,7 @@ if(empty($_GET['id'])){
     exit;
 }
 $id = $_GET['id'];
-$sql = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders FROM customers LEFT JOIN orders on customers.id = orders.id_customers where customers.id = '$id' and orders.status = 1 or orders.id_customers is null group by customers.id ORDER by total_paid DESC";
+$sql = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders FROM customers LEFT JOIN orders on customers.id = orders.id_customers where customers.id = '$id' group by customers.id";
 $result = mysqli_query($connect,$sql);
 $each = mysqli_fetch_array($result);
 // die(mysqli_error($connect));
