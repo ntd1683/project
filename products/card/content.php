@@ -7,11 +7,17 @@
 
         // delete button
         if(isset($_POST["delete_product"])) {
-            foreach($card as $productID => $element) {
-                if($_POST["delete_product"] == $productID) {
-                    echo $_POST["delete_product"];
-                    unset($card["$productID"]);
-                    _setCookie('card', json_encode($card), time()+3600*24*5);
+            if(sizeof($card) == 1) {
+                _setCookie("card", null, time()-60);
+                unset($_COOKIE["card"]);
+            }
+            else {
+                foreach($card as $productID => $element) {
+                    if($_POST["delete_product"] == $productID) {
+                        echo $_POST["delete_product"];
+                        unset($card["$productID"]);
+                        _setCookie('card', json_encode($card), time()+3600*24*5);
+                    }
                 }
             }
         }
@@ -77,7 +83,7 @@
                         <?php endforeach; ?>
                     </div>
                     <?php else: ?>
-                        không có sản phẩm trong giỏ hàng
+                        <h3 style="padding-top:30px;margin:auto;">không có sản phẩm trong giỏ hàng</h3>
                     <?php endif ?>
             </div>
         </div>
@@ -87,12 +93,14 @@
                     tổng tiền:
                     <span style="color:#c50d0d;">
                         <?php 
-                            $Price = 0;
-                            foreach($card as $price) {
-                                $Price += $price[2] * $price[0];
-                            } 
-                            echo number_format($Price, 0, '.', '.');
-                            $_SESSION["total_price"] = $Price;
+                            if(isset($card)) {
+                                $Price = 0;
+                                foreach($card as $price) {
+                                    $Price += $price[2] * $price[0];
+                                } 
+                                echo number_format($Price, 0, '.', '.');
+                                $_SESSION["total_price"] = $Price;
+                            }
                         ?>
                     </span>
 
@@ -125,9 +133,11 @@
                     <?php else: ?>
                         <p>bạn chưa đăng nhập! hãy đăng nhập để mua hàng</p>
                     <?php endif; ?>
-                    <button name="submit_button" type="submit" class="submit_button">
-                        mua hàng
-                    </button>
+                    <?php if($_SESSION["logged_in"] == true): ?>
+                        <button name="submit_button" type="submit" class="submit_button">
+                            mua hàng
+                        </button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

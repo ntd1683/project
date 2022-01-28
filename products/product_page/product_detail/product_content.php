@@ -30,16 +30,16 @@
         if(isset($_COOKIE['card']) && $_COOKIE['card'] != null) {
             $card = json_decode($_COOKIE['card'], true);
             if(isset($card[$_GET["product"]])) {
-                $card[$_GET["product"]][0] += $_POST["quantity"];
+                $card[$product['id']][0] += $_POST["quantity"];
             }
             else {
-                $card[$_GET["product"]] = array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']);
+                $card[$product['id']] = array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']);
             }
         }
         else {
             // set cookie
             // quantity, name, price, image
-            $card = array($_GET["product"] => array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']));
+            $card = array($product['id'] => array($_POST["quantity"], $product["name"], $product["price"], ROOT_URL . "admin/product/img/" . $product['photos']));
         }
 
         _setCookie('card', json_encode($card), time()+3600*24*5);
@@ -79,9 +79,10 @@
                                 </div>
                                 <div class="summary">
                                     <ul>
-                                        <li>Loại sản phẩm: </li>
+                                        <!-- <li>Loại sản phẩm: </li>
                                         <li>Hãng sản xuất: </li>
-                                        <li>Bảo hành: </li>
+                                        <li>Bảo hành: </li> -->
+                                        <br>
                                     </ul>
                                 </div>
                                 <div class="price">
@@ -168,25 +169,34 @@
                                 <button class="btnlinks" onclick="openTab('descriptive_details')">mô tả chi tiết</button>
                             </div>
                             <div id="table_desc" class="tab tabcontent" style="display:block">
+                                <?php
+                                    // https://stackoverflow.com/questions/3997336/explode-php-string-by-new-line
+                                    $specification = preg_split('/\r\n|\r|\n/', $product["specifications"]);
+                                    echo "<br>";
+                                    foreach($specification as $key => $value) {
+                                        $sp = explode(':', $value);
+                                        $specification[$key] = $sp;
+                                    }
+                                    // echo '<pre>' . var_export($specification, true) . '</pre>';
+                                ?>
+                                <h2>cấu hình sản phẩm</h2>
                                 <table class="table_description">
-                                    <tr>
-                                        <td>Nhà sản xuất</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Model</td>
-                                        <td>B</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Điện áp</td>
-                                        <td>C</td>
-                                    </tr>
+                                    <?php
+                                        foreach($specification as $value) {
+                                            if(isset($value[1]) && $value[1]!=null) {
+                                                echo '<tr>';
+                                                echo '<td>' . $value[0] . '</td>';
+                                                echo '<td>' . $value[1] . '</td>';
+                                                echo '</tr>';
+                                            } 
+                                        }
+                                    ?>
                                 </table>
                             </div>
 
                             <div id="descriptive_details" class="tab tabcontent" style="display:none">
                                 <h2>mô tả chi tiết</h2>
-                                <p>Ram Kingston DDR4 - đáp ứng mọi nhu cầu của mọi nền tảng máy tính. Tự động nhận dạng các nền tảng được cắm vào, không cần phải điều chỉnh bất kì thiết lập nào trong hệ thống BIOS. Vì vậy, bạn sẽ có được hiệu suất cực cao nhờ các công nghệ của các bộ xử lý AMD hoặc các công nghệ Intel CPU mới nhất một cách dễ dàng - ngay cả khi bạn là một Newbie. Ram Kingston DDR4 mang đến cho bạn trải nghiệm cực tốt khi chơi Games hay dùng những chương trình nặng mà vẫn giữ hệ thống của bạn mát mẻ. Được thiết kế với điện áp thấp ở 1.2V cho tiêu thụ điện năng ít hơn, giảm sinh nhiệt và hoạt động yên tĩnh. Kiểu dáng mỏng đẹp làm nổi bật hệ thống máy tính của bạn.Nổi trội hơn hết, Ram Kingston DDR4 mang lại hiệu năng cao với chi phí thấp. Được bảo hành 3 năm chính hãng và hỗ trợ kỹ thuật miễn phí với độ tin cậy huyền thoại.</p>
+                                <p><?php echo $product["description"] ?></p>
                             </div>
 
                             <script>
@@ -201,12 +211,12 @@
                             </script>
 
                         </div>
-                        <div class="rating">
+                        <!-- <div class="rating">
                             đánh giá
                         </div>
                         <div class="comment">
                             bình luận
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
