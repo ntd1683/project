@@ -27,13 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($mysqli, $insert);
     if(isset($result)) {
         if($result != null) {
-            // echo "<h1>mua hàng thành công</h1>";
-            // echo '<a href="../product_page/product_list/index.php">bấm vào đây để về trang chủ</a>';
             $query = "SELECT id FROM orders WHERE id_customers = '$id' ORDER BY id DESC LIMIT 1";
             $result = mysqli_query($mysqli, $query);
             if(isset($result)) {
                 if($result == null) {
-                    echo "<h1>hệ thống lỗi! mua hàng không thành công</h1>";
+                    echo 0;
                 }
             }
             $order = mysqli_fetch_array($result);
@@ -41,28 +39,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             foreach($card as $productID => $element) {
                 $quantity = $element[0];
-                // echo $productID . "<br>";
-                // echo $quantity . "<br>";
                 $insert = "INSERT INTO orders_products(id_orders, id_products, quantity)
                 value($id_order, '$productID', '$quantity')";
                 $result = mysqli_query($mysqli, $insert);
                 if(isset($result)) {
                     if($result == null) {
-                        echo "<h1>hệ thống lỗi! mua hàng không thành công</h1>";
+                        $status = 0;
                     }
                 }
             }
 
             _setCookie("card", "", time() - 60);
 
-            echo "<h1>mua hàng thành công</h1>";
-            echo '<a href="../product_page/product_list/index.php">bấm vào đây để về trang chủ</a>';
+            $status = 1;
         }
         else {
-            echo "<h1>hệ thống lỗi! mua hàng không thành công</h1>";
+            $status = 0;
         }
     }
     else {
-        echo "<h1>hệ thống lỗi! mua hàng không thành công</h1>";
+        $status = 0;
     }
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="purchase.css">
+    <title>purchase</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="status" style="margin-bottom:20px; margin-top:50px">
+                <?php if($status == 1): ?>
+                    <h3>mua hàng thành công </h3>
+                <?php elseif($status == 0): ?>
+                    <h3>mua hàng không thành công</h3>
+                <?php endif; ?>
+            </div>
+            <a href="../product_page/product_list/index.php">bấm vào đây để về trang chủ</a>
+        </div>
+    </div>
+</body>
+</html>
