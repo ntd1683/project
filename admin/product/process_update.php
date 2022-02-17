@@ -1,13 +1,14 @@
 <?php
 session_start();
-if(empty($_POST['name'])|empty($_POST['description'])|empty($_POST['price'])){
-    $_SESSION['error'] = "Bạn nhập thiếu thông tin nhà sản xuất rồi !!!";
-    header('location:update.php');
+$id = $_POST['id'];
+if(empty($_POST['name'])|empty($_POST['description'])|empty($_POST['specifications'])|empty($_POST['price'])){
+    $_SESSION['error'] = "Bạn nhập thiếu thông tin sản phẩm rồi !!!";
+    header("location:update.php?id=$id");
     exit;
 }
-$id = $_POST['id'];
 $name = addslashes($_POST['name']);
 $description = addslashes($_POST['description']);
+$specifications = addslashes($_POST['specifications']);
 $price = addslashes($_POST['price']);
 if(empty($_POST['discount'])){
     $discount = 0; 
@@ -35,6 +36,7 @@ $sql = "update products
 set name='$name',
 photos='$file_name',
 description = '$description',
+specifications = '$specifications',
 price = '$price',
 discount = '$discount',
 id_manufactors = '$id_manufactors',

@@ -66,12 +66,21 @@ $result_manufactors = mysqli_query($connect,$sql);
                         </div>
                     </span>
                     <br>
-                    <label for="input_description" class="body-text-header">mô tả sản phẩm</label>
+                    <label for="input_description" class="body-text-header">Mô tả sản phẩm</label>
                     <textarea name="description" id="input_description" class="input-text" rows="15"><?php echo $each['description'] ?></textarea>
                     <span id="span-error-description">
                         <i id="icon-description" class="ti-info-alt icon-size"></i>
                         <div id="error-description" class="error-hidden">Lưu ý khi nhập :
                             <br> nhập chi tiết sản phẩm
+                        </div>
+                    </span>
+                    <br>
+                    <label for="input_specifications" class="body-text-header">Thông số kỹ thuật</label>
+                    <textarea name="specifications" id="input_specifications" class="input-text" rows="15"><?php echo $each['specifications'] ?></textarea>
+                    <span id="span-error-specifications">
+                        <i id="icon-specifications" class="ti-info-alt icon-size"></i>
+                        <div id="error-specifications" class="error-hidden">Lưu ý khi nhập :
+                            <br> nhập chi tiết thông số kỹ thuật
                         </div>
                     </span>
                     <br>

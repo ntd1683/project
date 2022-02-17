@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../connect.php';
-if(empty($_POST['name'])|empty($_POST['description'])|empty($_POST['price'])|$_FILES['photos']['size']==0){
+if(empty($_POST['name'])|empty($_POST['description'])|empty($_POST['specifications'])|empty($_POST['price'])|$_FILES['photos']['size']==0){
     $_SESSION['error'] = "Bạn nhập thiếu thông tin nhà sản xuất rồi !!!";
     header('location:insert.php');
     exit;
@@ -16,6 +16,7 @@ if($check_name > 0){
     exit;
 }
 $description = addslashes($_POST['description']);
+$specifications = addslashes($_POST['specifications']);
 $price = addslashes($_POST['price']);
 if(empty($_POST['discount'])){
     $discount = 0; 
@@ -34,8 +35,8 @@ $file_name = 'img_'.time().'.'.$file_extention;
 $path_file = $folder.$file_name;
 move_uploaded_file($photos["tmp_name"],$path_file);
 
-$sql = "insert into products (name,description,price,discount,photos,id_manufactors,id_categorys)
-values ('$name','$description','$price',$discount,'$file_name','$id_manufactors','$id_categorys')";
+$sql = "insert into products (name,description,price,discount,photos,id_manufactors,id_categorys,specifications)
+values ('$name','$description','$price',$discount,'$file_name','$id_manufactors','$id_categorys','$specifications')";
 mysqli_query($connect,$sql);
 $error = mysqli_error($connect);
 if($error){

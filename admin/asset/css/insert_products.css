@@ -131,6 +131,7 @@ i.ti-pencil-alt{
 }
 
 #span-error-description,
+#span-error-specifications,
 #span-error-price,
 #span-error-discount,
 #span-error-picture,
@@ -140,6 +141,7 @@ i.ti-pencil-alt{
 
 #error-picture,
 #error-description,
+#error-specifications,
 #error-price,
 #error-discount,
 #error-picture,
@@ -163,8 +165,14 @@ i.ti-pencil-alt{
     top: 10px;
 }
 
+#error-specifications{
+    right: 25px;
+    top: 10px;
+}
+
 #span-error-picture:hover .error-hidden,
 #span-error-description:hover .error-hidden,
+#span-error-specifications:hover .error-hidden,
 #span-error-price:hover .error-hidden,
 #span-error-discount:hover .error-hidden,
 #span-error-picture:hover .error-hidden,

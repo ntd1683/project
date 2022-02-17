@@ -64,6 +64,15 @@ $result_manufactors = mysqli_query($connect,$sql);
                         </div>
                     </span>
                     <br>
+                    <label for="input_specifications" class="body-text-header">Thông Số Kỹ Thuật</label>
+                    <textarea name="specifications" id="input_specifications" class="input-text" rows="15"></textarea>
+                    <span id="span-error-specifications">
+                        <i id="icon-specifications" class="ti-info-alt icon-size"></i>
+                        <div id="error-specifications" class="error-hidden">Lưu ý khi nhập :
+                            <br> Nhập chi tiết thông số kỹ thuật
+                        </div>
+                    </span>
+                    <br>
                     <label for="input_price" class="body-text-header">Giá Gốc</label>
                     <input class="input-text" type="number" name="price" id="input_price">
                     <span id="span-error-price">

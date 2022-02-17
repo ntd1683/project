@@ -80,7 +80,7 @@ $result = mysqli_query($connect,$sql);
                             <tr>
                                 <th class="content-table-id">Mã</th>
                                 <th class="content-table-name">Tên</th>
-                                <th class="content-table-img">Sản phẩm</th>
+                                <th class="content-table-img">Số Sản phẩm</th>
                                 <th class="content-table-fix">Sửa</th>
                                 <th class="content-table-delete">Xoá</th>
                             </tr>
@@ -91,9 +91,9 @@ $result = mysqli_query($connect,$sql);
                                 <td>
                                     <?php
                                     $id_categorys = $each['id'];
-                                    $sql_check = "select count(*) from products where id_categorys = '$id_categorys'";
+                                    $sql_check = "SELECT categorys.id,categorys.name,ifnull(COUNT(id_products),0) as quantity FROM `classify_products` RIGHT JOIN categorys on categorys.id = id_category where categorys.id = $id_categorys GROUP BY categorys.id";
                                     $result = mysqli_query($connect,$sql_check);
-                                    $products = mysqli_fetch_array($result)['count(*)'];
+                                    $products = mysqli_fetch_array($result)['quantity'];
                                     echo $products;
                                     ?>
                                 </td>

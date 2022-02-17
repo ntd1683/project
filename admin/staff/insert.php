@@ -8,7 +8,7 @@ require '../connect.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Sản Phẩm</title>
+    <title>Thêm Nhân Viên</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,14 +30,14 @@ require '../connect.php';
         <a href="index.php">
             <img src="../asset/img/logo/logo.png" alt="logo" class="logo">
         </a>
-        <h2 class="header"><i class="ti-pencil-alt"></i>Sửa Nhân Viên</h2>
+        <h2 class="header"><i class="ti-pencil-alt"></i>Thêm Nhân Viên</h2>
     </div>
     <?php require '../asset/php/menu_sidebar.php'?>
     <div id="main">
         <div id="container">
             <div id="header">
                 <i class="ti-pencil-alt header-margin"></i>
-                Sửa Nhân Viên
+                Thêm Nhân Viên
             </div>
             <div id="body-container">
                 <form method="post" action="process_insert.php" onsubmit="return false" enctype="multipart/form-data">
@@ -98,7 +98,7 @@ require '../connect.php';
                         <option value="1">Quản Lý</option>
                     </select>
                     <div class="clear"></div>
-                    <button id="button-submit" onclick="return push_button_submit()">Thêm nhân viên</button>
+                    <button class="button-submit" onclick="return push_button_submit()">Thêm nhân viên</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
                             <i id="icon-name" class="ti-info-alt icon-size"></i>  Lỗi : <?php echo $_SESSION['error'] ?>
@@ -110,6 +110,6 @@ require '../connect.php';
                 </form>
             </div>
         </div>
-    </div> 
+    </div>
 </body>
 </html>

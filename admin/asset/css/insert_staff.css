@@ -183,6 +183,12 @@ i.ti-pencil-alt{
     margin: 10px 15px 0px 0px;
 }
 
+.option_province{
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    height: 35px;
+}
+
 .error{
     margin-left: 20%;
     margin-top: 10px;
