@@ -11,8 +11,16 @@ $sql = "select * from products where id = '$id'";
 $result = mysqli_query($connect,$sql);
 $each = mysqli_fetch_array($result);
 
-$sql = "select * from categorys";
+// category
+$sql = "SELECT categorys.name FROM `classify_products`
+JOIN categorys on id_category = categorys.id WHERE id_products = '$id'
+";
 $result_categorys = mysqli_query($connect,$sql);
+$arr_categorys = [];
+foreach ($result_categorys as $result_category){
+    $arr_categorys[] = $result_category['name'];
+}
+$categorys = implode(",",$arr_categorys);
 
 $sql = "select * from manufactors";
 $result_manufactors = mysqli_query($connect,$sql);
@@ -23,7 +31,7 @@ $result_manufactors = mysqli_query($connect,$sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Sản Phẩm</title>
+    <title>Sửa Sản Phẩm</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +45,11 @@ $result_manufactors = mysqli_query($connect,$sql);
     <!-- js -->
     <script defer src="../asset/js/menu_sidebar.js"></script>
     <script defer src="../asset/js/product_update.js"></script>
+    <!-- tag -->
+    <link rel="stylesheet" href="./category/dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
 </head>
 <body>
      <!-- nav -->
@@ -45,14 +58,14 @@ $result_manufactors = mysqli_query($connect,$sql);
         <a href="index.php">
             <img src="../asset/img/logo/logo.png" alt="logo" class="logo">
         </a>
-        <h2 class="header"><i class="ti-pencil-alt"></i>Thêm Sản Phẩm</h2>
+        <h2 class="header"><i class="ti-pencil-alt"></i>Sửa Sản Phẩm</h2>
     </div>
     <?php require '../asset/php/menu_sidebar.php' ?>
     <div id="main">
         <div id="container">
             <div id="header">
                 <i class="ti-pencil-alt header-margin"></i>
-                Thêm Sản Phẩm
+                Sửa Sản Phẩm
             </div>
             <div id="body-container">
                 <form method="post" action="process_update.php" onsubmit="return false" enctype="multipart/form-data">
@@ -127,15 +140,10 @@ $result_manufactors = mysqli_query($connect,$sql);
                     </select>
                     <div class="clear"></div>
                     <label for="id_category" class="body-text-header text-select">Tên Loại Mặt Hàng</label>
-                    <select name="id_categorys" id="id_category" class="input-text">
-                        <?php foreach($result_categorys as $each_category):?>
-                        <option value="<?php echo $each_category['id'] ?>"
-                        <?php if($each_manufactor['id']==$each['id_manufactors']){
-                            echo 'selected';    
-                        }
-                        ?>><?php echo $each_category['name'] ?></option>
-                        <?php endforeach ?>
-                    </select>
+                    <input type="text" name="name_categorys" id="id_category" class="input-text" value="<?php echo $categorys ?>">
+                    <div class="clear"></div>
+                    <br>
+                    <br>
                     <div class="clear"></div>
                     <button id="button-submit" onclick="return push_button_submit()">Cập nhập sản phẩm</button>
                     <?php if(isset($_SESSION['error'])) {?>
@@ -150,5 +158,35 @@ $result_manufactors = mysqli_query($connect,$sql);
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./category/dist/bootstrap-tagsinput.js"></script>    
+    <script src="./category/dist/typeahead.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").keypress(function(event){
+                if(event.keyCode === 13 ){
+                    event.preventDefault();
+                }
+            });
+            var types = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: 'list_type.php?q=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#id_category').tagsinput({
+            typeaheadjs: {
+                name: 'types',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: types
+            },
+            freeInput: true
+            });
+        });
+    </script>
 </body>
 </html>

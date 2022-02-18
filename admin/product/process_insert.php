@@ -26,7 +26,7 @@ else {
 }
 $photos = $_FILES['photos'];
 $id_manufactors = addslashes($_POST['id_manufactors']);
-$id_categorys = addslashes($_POST['id_categorys']);
+$name_categorys = explode(',',$_POST['name_categorys']);
 
 $photos = $_FILES['photos'];
 $folder = 'img/';
@@ -35,13 +35,23 @@ $file_name = 'img_'.time().'.'.$file_extention;
 $path_file = $folder.$file_name;
 move_uploaded_file($photos["tmp_name"],$path_file);
 
-$sql = "insert into products (name,description,price,discount,photos,id_manufactors,id_categorys,specifications)
-values ('$name','$description','$price',$discount,'$file_name','$id_manufactors','$id_categorys','$specifications')";
+$sql = "insert into products (name,description,price,discount,photos,id_manufactors,specifications)
+values ('$name','$description','$price',$discount,'$file_name','$id_manufactors','$specifications')";
 mysqli_query($connect,$sql);
-$error = mysqli_error($connect);
-if($error){
-    echo mysqli_error($connect);
-    die();
+$id_products = mysqli_insert_id($connect);
+foreach ($name_categorys as $name_category){
+    $sql ="select count(*) from categorys where name = '$name_category'";
+    $result = mysqli_query($connect,$sql);
+    $type = mysqli_fetch_array($result)['count(*)'];
+    if(empty($type)){
+        $sql = "insert into categorys(name) values ('$name_category')";
+        mysqli_query($connect,$sql);
+        $id_category = mysqli_insert_id($connect);
+    }else {
+        $id_category = $type['id'];
+    }
+    $sql = "insert into classify_products(id_products,id_category) values ('$id_products','$id_category')";
+    mysqli_query($connect,$sql);
 }
 $_SESSION['success'] = "Thêm sản phẩm thành công !!!";
 header('location:index.php');

@@ -12,7 +12,7 @@ if(isset($_GET['page'])){
 }
 require_once '../connect.php';
 $from_date = '2022-01-01';
-if(isset($_GET['from_date'])){
+if(!empty($_GET['from_date'])){
     $from_date = $_GET['from_date'];
 }
 $to_date = date('Y-m-d');
@@ -51,11 +51,11 @@ $result = mysqli_query($connect,$sql);
     <link rel="stylesheet" href="../asset/css/style_order.css">
     <!-- js -->
     <script defer src="../asset/js/notifi.js"></script>
-        <!-- css livesearch -->
-        <style>
-  .ui-autocomplete-loading {
-    background: white url("img/ui-anim_basic_16x16.gif") right center no-repeat;
-  }
+    <!-- css livesearch -->
+    <style>
+    .ui-autocomplete-loading {
+        background: white url("img/ui-anim_basic_16x16.gif") right center no-repeat;
+    }
   </style>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>

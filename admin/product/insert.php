@@ -1,9 +1,6 @@
 <?php session_start();
 require_once '../check_admin.php';
 require '../connect.php';
-$sql = "select * from categorys";
-$result_categorys = mysqli_query($connect,$sql);
-
 $sql = "select * from manufactors";
 $result_manufactors = mysqli_query($connect,$sql);
 ?>
@@ -27,6 +24,11 @@ $result_manufactors = mysqli_query($connect,$sql);
     <!-- js -->
     <script defer src="../asset/js/menu_sidebar.js"></script>
     <script defer src="../asset/js/insert_products.js"></script>
+    <!-- tag -->
+    <link rel="stylesheet" href="./category/dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
 </head>
 <body>
      <!-- nav -->
@@ -107,12 +109,10 @@ $result_manufactors = mysqli_query($connect,$sql);
                     </select>
                     <div class="clear"></div>
                     <label for="id_category" class="body-text-header text-select">Tên Loại Mặt Hàng</label>
-                    <select name="id_categorys" id="id_category" class="input-text">
-                        <?php foreach($result_categorys as $each_category):?>
-                        <option value="<?php echo $each_category['id'] ?>"><?php echo $each_category['name'] ?></option>
-                        <?php endforeach ?>
-                    </select>
+                    <input type="text" name="name_categorys" id="id_category" class="input-text">
                     <div class="clear"></div>
+                    <br>
+                    <br>
                     <button id="button-submit" onclick="return push_button_submit()">Thêm sản phẩm</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
@@ -126,5 +126,35 @@ $result_manufactors = mysqli_query($connect,$sql);
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./category/dist/bootstrap-tagsinput.js"></script>    
+    <script src="./category/dist/typeahead.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").keypress(function(event){
+                if(event.keyCode === 13 ){
+                    event.preventDefault();
+                }
+            });
+            var types = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: 'list_type.php?q=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#id_category').tagsinput({
+            typeaheadjs: {
+                name: 'types',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: types
+            },
+            freeInput: true
+            });
+        });
+    </script>
 </body>
 </html>

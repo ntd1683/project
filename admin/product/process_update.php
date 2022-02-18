@@ -17,7 +17,7 @@ else {
     $discount = addslashes($_POST['discount']);
 }
 $id_manufactors = addslashes($_POST['id_manufactors']);
-$id_categorys = addslashes($_POST['id_categorys']);
+$name_categorys = explode(',',$_POST['name_categorys']);
 
 $photos_new = $_FILES['photos_new'];
 if ($photos_new['size']<=0){
@@ -39,10 +39,29 @@ description = '$description',
 specifications = '$specifications',
 price = '$price',
 discount = '$discount',
-id_manufactors = '$id_manufactors',
-id_categorys = '$id_categorys'
+id_manufactors = '$id_manufactors'
 where id = '$id'";
 mysqli_query($connect,$sql);
+$id_products = $id;
+foreach ($name_categorys as $name_category){
+    $sql ="select count(*) from categorys where name = '$name_category'";
+    $result = mysqli_query($connect,$sql);
+    $type = mysqli_fetch_array($result)['count(*)'];
+    if(empty($type)){
+        $sql = "insert into categorys(name) values ('$name_category')";
+        mysqli_query($connect,$sql);
+        $id_category = mysqli_insert_id($connect);
+    }else {
+        $id_category = $type['id'];
+    }
+    $sql_check = "select * from classify_products where id_products = '$id' and id_category = '$id_category'";
+    $result = mysqli_query($connect,$sql);
+    $check = mysqli_num_rows($result);
+    if($check === 0 ){
+        $sql = "insert into classify_products(id_products,id_category) values ('$id','$id_category')";
+        mysqli_query($connect,$sql);
+    }
+}
 $error = mysqli_error($connect);
 if($error){
     echo mysqli_error($connect);
