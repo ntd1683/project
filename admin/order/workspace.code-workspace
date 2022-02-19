@@ -1,16 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "..\\..\\.."
+			"path": "..\\..\\..\\..\\..\\..\\..\\laragon\\www"
 		},
 		{
-			"path": "..\\..\\..\\..\\..\\Users\\Administrator\\Documents\\GitHub\\hocweb\\new_year_ mobile"
-		},
-		{
-			"path": "..\\..\\..\\..\\..\\Users\\Administrator\\Documents\\GitHub\\hocweb\\new_year"
+			"path": "..\\.."
 		}
 	],
-	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "www"
-	}
+	"settings": {}
 }
