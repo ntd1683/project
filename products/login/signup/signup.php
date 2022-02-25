@@ -25,7 +25,7 @@
                     <input type="radio" class="radio_input" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="2"> Khác  
                     <input type="password" name="password" id="" placeholder="Mật khẩu">
                     <input type="password" name="confirm_password" id="" placeholder="Nhập lại mật khẩu">
-                    <button type="submit" class="button login_button">signup</button>
+                    <button type="submit" class="button login_button">đăng kí</button>
                 </form>
             </div>
             <?php 

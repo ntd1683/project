@@ -58,7 +58,7 @@
                 <div class="content">
                     <div class="main-content";>
                         <div class="title">
-                            <h4> thể loại > ... > ... > tên sản phẩm </h4>
+                            <h4> thể loại > ... > ... > <?php echo $product["name"]; ?> </h4>
                         </div>
                         <div class="column_2">
                             <div class="left_column child_column_2 gallery">
