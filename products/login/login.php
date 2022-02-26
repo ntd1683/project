@@ -18,21 +18,21 @@
             <form method="post" action="button_submit.php" autocomplete="off">
                 <div class="login_form">
                     <div class="user_name">
-                        <h3>user name</h3>
+                        <h3>tên đăng nhập</h3>
                         <input type="text" name="user_name" id="input_user_name" class="input">
                     </div>
                     <div class="password">
-                        <h3>password</h3>
+                        <h3>mật khẩu</h3>
                         <input type="password" name="password" id="input_password" class="input">
                     </div>
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" name="checkbox" id="checkbox">  Remember me
+                    <input type="checkbox" name="checkbox" id="checkbox">  nhớ mật khẩu
                 </div>
                 <div class="wrap_button">
                     <div class="bar">
-                        <button name="login" type="submit" class="button login_button">login</button>
-                        <button name="register" class="button signup_button">signup</button>
+                        <button name="login" type="submit" class="button login_button">đăng nhập</button>
+                        <button name="register" class="button signup_button">đăng kí</button>
                     </div>
                 </div>
             </form>
