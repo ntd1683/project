@@ -16,7 +16,7 @@ $total_money = mysqli_fetch_array($result)['total_money'];
 if($total_money > 1000000){
     $money = round($total_money/1000000).'M';
 }
-else if($total_money >1000){
+else if($total_money > 1000){
     $money = round($total_money/1000).'K';
 }
 ?>
