@@ -9,7 +9,9 @@
 </head>
 <body>
     <?php 
-        session_start();
+        if(!isset($_SESSION)) { 
+            session_start();
+        }
         if(!isset($_SESSION["logged_in"])) {
             require_once ROOT_PATH . "products/common/set_login_session.php";
         }
@@ -31,9 +33,9 @@
                 <div class="right_column child_column_2">
                     <div class="right_menu_bar">
                         <div class="column_3">
-                            <a href="<?php echo ROOT_URL . "products/product_page/product_list/index.php"; ?>" class="first">
+                            <a href="<?php echo ROOT_URL . "products/profile/index.php"; ?>" class="first">
                                 <div class="left_column child_column_3">
-                                    <b>sản phẩm</b> 
+                                    <b>trang cá nhân</b> 
                                 </div>
                             </a>
                             <a href="<?php echo ROOT_URL . "products/card/index.php"; ?>">

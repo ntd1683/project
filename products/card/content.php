@@ -56,7 +56,7 @@
                         <?php foreach($card as $productID => $element): ?>
                             <div class="column_4">
                                 <div class="child_1 child_column_4">
-                                    <a href="product_image">
+                                    <a href="<?php echo ROOT_URL . "products/product_page/product_detail/index.php?product=" . $productID; ?>">
                                         <img width="80" height="80" src="<?php echo $element[3]; ?>" alt="">
                                     </a>
                                 </div>
