@@ -139,7 +139,7 @@ $result = mysqli_query($connect,$sql);
                     </div>
                     <div id="footer">
                         <?php for($i=1;$i<=$total_page;$i++){?>
-                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>"><div class="page color-text"><?php echo $i ?></div></a>
+                        <a href="index.php?page=<?php echo $i ?>&search=<?php echo $search ?>&from_date=<?php echo $from_date?>&to_date=<?php echo $to_date ?>"><div class="page color-text"><?php echo $i ?></div></a>
                         <?php } ?>
                     </div>
                 </div>
