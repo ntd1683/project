@@ -9,8 +9,11 @@ if(empty($_GET['id'])){
 $id = $_GET['id'];
 $sql = "SELECT customers.*,ifnull(sum(total_price),0) as total_paid,COUNT(orders.id_customers) as quantity_orders FROM customers LEFT JOIN orders on customers.id = orders.id_customers where customers.id = '$id' group by customers.id";
 $result = mysqli_query($connect,$sql);
-$each = mysqli_fetch_array($result);
-// die(mysqli_error($connect));
+$each_customer = mysqli_fetch_array($result);
+$sql = "SELECT customers.name,products.name as name_product,products.price,products.photos, sum(orders_products.quantity)quantity FROM `orders` RIGHT JOIN customers on customers.id = orders.id_customers INNER JOIN orders_products on orders_products.id_orders = orders.id LEFT JOIN products on products.id = orders_products.id_products where id_customers = '$id' GROUP BY orders_products.id_products";
+$result = mysqli_query($connect,$sql);
+
+//= die(mysqli_error($connect));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +30,7 @@ $each = mysqli_fetch_array($result);
     <link rel="stylesheet" href="../asset/font/themify-icons/themify-icons.css">
     <script src="https://kit.fontawesome.com/3e5386a9e5.js" crossorigin="anonymous"></script>
     <!-- css -->
+    <link rel="stylesheet" href="../asset/css/detail_customer.css">
     <link rel="stylesheet" href="../asset/css/detail.css">
     <link rel="stylesheet" href="../asset/css/menu_sidebar.css">
     <!-- js -->
@@ -46,27 +50,30 @@ $each = mysqli_fetch_array($result);
     <div id="main">
         <div id="container">
             <div id="avatar">
-                <img src="photos/<?php echo $each['photos'] ?>" alt="Ảnh khách hàng">
+                <img src="photos/<?php echo $each_customer['photos'] ?>" alt="Ảnh khách hàng">
             </div>
             <div id="body-container">
-                    <h1><?php echo $each['name'] ?></h1>
-                    <label class="body-text-header">Giới tính</label>
-                    <input class="input-text" type="text" value="<?php if($each['gender']==1){
-                                    echo 'Nam';
-                                }
-                                else{
-                                    echo 'Nữ';
-                                }?>" readonly>
-                    <label class="body-text-header">Ngày sinh</label>
-                    <input class="input-text" type="date" value="<?php echo date('d-m-Y',strtotime($each['date'])) ?>" readonly>
-                    <label class="body-text-header">Email</label>
-                    <input class="input-text" type="text" value="<?php echo $each['email'] ?>" readonly>
-                    <label class="body-text-header">Địa Chỉ</label>
-                    <input class="input-text" type="text" value="<?php echo $each['adress'] ?>" readonly>
-                    <label class="body-text-header">Số đơn đã đặt</label>
-                    <input class="input-text" type="text" value="<?php echo $each['quantity_orders'] ?>" readonly>
+            <h1><?php echo $each_customer['name'] ?></h1>
+                    <table width="100%" class="table_product">
+                        <tr>
+                            <th>Tên sản phẩm đã mua</th>
+                            <th>Giá</th>
+                            <th>Ảnh sản phẩm</th>
+                            <th>Số lượng</th>
+                        </tr>
+                        <?php foreach ($result as $each) {?>
+                        <tr>
+                            <td><?php echo $each['name_product'];?></td>
+                            <td><?php echo $each['price'];?></td>
+                            <td>
+                                <img src="../product/img/<?php echo $each['photos'] ?>" alt="Ảnh sản phẩm" style="height:150px">
+                            </td>
+                            <td><?php echo $each['quantity']?></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
                     <label class="body-text-header">Tổng số tiền đã mua</label>
-                    <input class="input-text" type="text" value="<?php echo number_format($each['total_paid'], 0, ',', '.') ?> đ" readonly="" style="font-size: 25px;text-align: center;color:red;">
+                    <input class="input-text" type="text" value="<?php echo number_format($each_customer['total_paid'], 0, ',', '.') ?> đ" readonly="" style="font-size: 25px;text-align: center;color:red;">
                     <button id="button-submit" onclick="return push_button_submit()">Xoá</button>
                     <?php if(isset($_SESSION['error'])) {?>
                         <h3 class="error">
@@ -88,7 +95,7 @@ $each = mysqli_fetch_array($result);
         function push_button_submit(){
             let text = "Bạn có chắc chắn muốn xoá khách hàng này không ???";
             if (confirm(text) == true) {
-                window.open("delete.php?id=<?php echo $each['id'] ?>","_self");
+                window.open("delete.php?id=<?php echo $each_customer['id'] ?>","_self");
             }
         }
     </script>

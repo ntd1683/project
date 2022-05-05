@@ -1,12 +1,5 @@
 {
-	"folders": [
-		{
-			"path": "..\\..\\..\\..\\..\\..\\..\\laragon\\www"
-		},
-		{
-			"path": "..\\.."
-		}
-	],
+	"folders": [],
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "www"
 	}
